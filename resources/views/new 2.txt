@@ -1,0 +1,1501 @@
+@extends('layouts.main')
+
+@section('content')
+
+        <!-- Banner Section -->
+
+        <section class="banner-section banner-one nnn">
+
+            <div class="banner-carousel owl-theme owl-carousel">
+                <!-- Slide Item -->
+ @foreach($slider as $slide)
+                <div class="slide-item">
+
+                    <div class="image-layer" style="background-image: url('{{ asset($slide->image) }}');"></div>
+
+                    <div class="auto-container">
+
+                        <div class="content-box">
+
+                            <div class="content clearfix">
+
+                                <div class="inner">
+
+                                    <h1>{{$slide->title }}</h1>
+
+                                    <div class="text">{{$slide->body}}</div>
+
+                                    <div class="links-box clearfix">
+
+                                        <a href="#" class="theme-btn btn-style-one"><span class="btn-title">About Us</span></a>
+
+                                        <a href="#" class="theme-btn btn-style-two lightbox-image"><span class="btn-title">Contact Us</span></a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="next-slide">
+
+                        <div class="inner">
+
+                            <div class="count">02</div>
+
+                            <div class="text">{{$slide->title }}</div>
+
+                            <div class="arrow"><span class="flaticon-next"></span></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+@endforeach
+
+
+                <!-- Slide Item -->
+
+                <!-- <div class="slide-item">
+
+                    <div class="image-layer" style="background-image: url(images/main-slider/2.jpg);"></div>
+
+                    <div class="auto-container">
+
+                        <div class="content-box">
+
+                            <div class="content clearfix">
+
+                                <div class="inner">
+
+                                    <h1>Lorem ipsum <br>dolor sit  <br>amet  </h1>
+
+                                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+
+                                    <div class="links-box clearfix">
+
+                                        <a href="#" class="theme-btn btn-style-one"><span class="btn-title">About Us</span></a>
+
+                                        <a href="#" class="theme-btn btn-style-two lightbox-image"><span class="btn-title">Contact Us</span></a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="next-slide">
+
+                        <div class="inner">
+
+                            <div class="count">03</div>
+
+                            <div class="text">Lorem ipsum dolor sit amet</div>
+
+                            <div class="arrow"><span class="flaticon-next"></span></div>
+
+                        </div>
+
+                    </div>
+                </div> -->
+
+
+
+                <!-- Slide Item -->
+
+                <!-- <div class="slide-item">
+
+                    <div class="image-layer" style="background-image: url(images/main-slider/3.jpg);"></div>
+
+                    <div class="auto-container">
+
+                        <div class="content-box">
+
+                            <div class="content clearfix">
+
+                                 <div class="inner">
+
+                                  <h1>Lorem ipsum <br>dolor sit  <br>amet  </h1>
+
+                                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+
+                                    <div class="links-box clearfix">
+
+                                        <a href="#" class="theme-btn btn-style-one"><span class="btn-title">About Us</span></a>
+
+                                        <a href="#" class="theme-btn btn-style-two lightbox-image"><span class="btn-title">Contact Us</span></a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="next-slide">
+
+                        <div class="inner">
+
+                            <div class="count">01</div>
+
+                            <div class="text">Lorem ipsum dolor sit amet</div>
+
+                            <div class="arrow"><span class="flaticon-next"></span></div>
+
+                        </div>
+
+                    </div>
+
+                </div> -->
+
+
+
+            </div>
+
+        </section>
+
+        <!--End Banner Section -->
+
+
+
+        <!--Welcome Section-->
+
+        <section class="welcome-section">
+
+            <div class="auto-container">
+
+                <div class="sec-title centered">
+
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit </h2>
+
+                    <div class="lower-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+
+                </div>
+
+                <div class="row clearfix">
+
+                    <!--Feature Block-->
+
+                   @foreach($Highlights as $high)
+<div class="featured-block col-lg-4 col-md-6 col-sm-12">
+    <div class="inner-box">
+
+        <div class="content-box">
+            <div class="icon-box">
+                <span class="flaticon-anchor"></span>
+            </div>
+
+            <div class="content">
+                <div class="subtitle">{{ $high->title }}</div>
+                <h4><a href="#">{{ $high->description }}</a></h4>
+            </div>
+        </div>
+
+        <div class="hover-box">
+            <div class="image-layer" style="background-image: url('{{ asset($high->image) }}');"></div>
+
+            <div class="inner">
+                <h4><a href="#">Lorem ipsum dolor sit amet.</a></h4>
+                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+            </div>
+        </div>
+
+        <div class="more-link">
+            <a href="#"><span class="flaticon-right-2"></span></a>
+        </div>
+
+    </div>
+</div>
+@endforeach
+
+
+
+
+                    <!--Feature Block-->
+
+                    <!-- <div class="featured-block col-lg-4 col-md-6 col-sm-12">
+
+                        <div class="inner-box">
+
+                            <div class="content-box">
+
+                                <div class="icon-box"><span class="flaticon-anchor"></span></div>
+
+                                <div class="content">
+
+                                     <div class="subtitle">Lorem ipsum </div>
+
+                                    <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
+
+                                </div>
+
+                            </div>
+
+                            <div class="hover-box">
+
+                                <div class="image-layer" style="background-image: url(images/background/featured-image-1.jpg);"></div>
+
+                                <div class="inner">
+  <h4><a href="#">Lorem ipsum dolor sit amet.</a></h4>
+
+                                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                  
+
+                                </div>
+
+                            </div>
+
+                            <div class="more-link">
+
+                                <a href="#"><span class="flaticon-right-2"></span></a>
+
+                            </div>
+
+                        </div>
+
+                    </div> -->
+
+
+
+                    <!--Feature Block-->
+
+                    <!-- <div class="featured-block col-lg-4 col-md-6 col-sm-12">
+
+                        <div class="inner-box">
+
+                            <div class="content-box">
+
+                                <div class="icon-box"><span class="flaticon-anchor"></span></div>
+
+                                <div class="content">
+
+                                   <div class="subtitle">Lorem ipsum </div>
+
+                                    <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
+
+                                </div>
+
+                            </div>
+
+                            <div class="hover-box">
+
+                                <div class="image-layer" style="background-image: url(images/background/featured-image-1.jpg);"></div>
+
+                                <div class="inner">
+
+                                      <h4><a href="#">Lorem ipsum dolor sit amet.</a></h4>
+
+                                    <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="more-link">
+
+                                <a href="#"><span class="flaticon-right-2"></span></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div> -->
+
+            </div>
+
+        </section>
+
+
+
+        <!--About Section-->
+
+        <section class="about-section">
+
+            <div class="image-layer" style="background-image: url(images/background/image-1.jpg);"></div>
+
+
+            <div class="auto-container">
+
+                <div class="content-box">
+
+                    <div class="content">
+
+                        <div class="sec-title light">
+
+                            <h2>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit</h2>
+
+                        </div>
+
+                        <div class="upper-text clearfix"><span class="big-letter">E</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+
+                        <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</div>
+
+
+                       
+
+                    </div>
+
+
+
+                    <!--Quote-->
+
+                    <div class="quote-box">
+
+                        <div class="round-point">+</div>
+
+                        <div class="inner">
+
+                            <div class="icon-one"><span class="flaticon-left-quote"></span></div>
+
+                            <div class="icon-two"><span class="flaticon-left-quote"></span></div>
+
+                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!--Services Section-->
+
+        <section class="services-section">
+
+            <div class="image-left">
+
+                <div class="image-layer" style="background-image: url(images/background/image-2.jpg);"></div>
+
+            </div>
+
+            <div class="auto-container">
+
+
+
+                <div class="row clearfix">
+
+                    <!--Featured Service Block-->
+
+                    <div class="featured-service-block col-xl-4 col-lg-12 col-md-12">
+
+                        <div class="inner-box">
+
+                            <figure class="image-box">
+                                <a href="#"><img src="images/resource/featured-image-1.jpg" alt=""></a>
+                            </figure>
+
+                            <div class="lower-box">
+
+                                <h3><a href="#">Lorem ipsum dolor sit amet</a></h3>
+
+                                <div class="more-link"><a href="#">Explore Us</a></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="column col-xl-8 col-lg-12 col-md-12">
+
+                        <div class="col-inner">
+
+                            <div class="row clearfix">
+
+                                <!--Feature Block-->
+
+                                <div class="featured-block-two col-lg-6 col-md-6 col-sm-12">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="icon-box"><span class="icon flaticon-sheriff-badge"></span></div>
+
+                                            <div class="content">
+
+                                                <h4><a href="#">Lorem ipsum<br/> dolor sit amet</a></h4>
+
+                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor liqua</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!--Feature Block-->
+
+                                <div class="featured-block-two col-lg-6 col-md-6 col-sm-12">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="icon-box"><span class="icon flaticon-traffic-light"></span></div>
+
+                                            <div class="content">
+
+                                                <h4><a href="#">Lorem ipsum<br/> dolor sit amet</a></h4>
+
+                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor liqua</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!--Feature Block-->
+
+                                <div class="featured-block-two col-lg-6 col-md-6 col-sm-12">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="icon-box"><span class="icon flaticon-statue"></span></div>
+
+                                           <div class="content">
+
+                                                <h4><a href="#">Lorem ipsum<br/> dolor sit amet</a></h4>
+
+                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor liqua</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!--Feature Block-->
+
+                                <div class="featured-block-two col-lg-6 col-md-6 col-sm-12">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="icon-box"><span class="icon flaticon-museum"></span></div>
+
+                                            <div class="content">
+
+                                                <h4><a href="#">Lorem ipsum<br/> dolor sit amet</a></h4>
+
+                                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor liqua</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </section>
+
+
+<!--from here -->
+
+
+<section>
+
+<div class="sidebar-page-container">
+
+            <div class="auto-container">
+
+                <div class="row clearfix">
+
+
+
+                    <!--Content Side-->
+
+                    <div class="content-side col-lg-12 col-md-12 col-sm-12">
+
+                        <div class="content-inner">
+
+                            <div class="blog-posts">
+
+                                <div class="row clearfix">
+
+                                    <!--News Block-->
+
+                                     @foreach($programs as $program)
+                                    <div class="news-block-five col-md-4 col-sm-6">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="{{ asset($program->image) }}" alt=""></figure>
+
+                                                <div class="date"><span>27.11.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Donate</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">{{$program->title }}</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Community Life</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">{{$program->description }}</div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    @endforeach
+                                    <!--News Block-->
+
+                                    <!-- <div class="news-block-five col-md-4 col-sm-6">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="images/resource/blog-image-13.jpg" alt=""></figure>
+
+                                                <div class="date"><span>25.11.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Read More</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">Last chance to get your tickets for christmas fireworks</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Public Information</a>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">By Edmud Caspar</div>
+
+                                                    </div>
+
+                                                    <div class="comments-info">
+
+                                                        <a href="#"><span class="fa fa-comment"></span> 05</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!--News Block-->
+
+                                    <!-- <div class="news-block-five col-md-4 col-sm-6">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="images/resource/blog-image-14.jpg" alt=""></figure>
+
+                                                <div class="date"><span>17.10.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Read More</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">Mayor announces london living wage £10.75 per hour</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Regeneration</a>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">By Julie Gordon</div>
+
+                                                    </div>
+
+                                                    <div class="comments-info">
+
+                                                        <a href="#"><span class="fa fa-comment"></span> 0</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!--News Block-->
+
+                                    <!-- <div class="news-block-five col-md-4 col-sm-12">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="images/resource/blog-image-15.jpg" alt=""></figure>
+
+                                                <div class="date"><span>15.10.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Read More</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">Asks tech sector to help tackle London’s challenges</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Public Information</a>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">By Julie Gordon</div>
+
+                                                    </div>
+
+                                                    <div class="comments-info">
+
+                                                        <a href="#"><span class="fa fa-comment"></span> 13</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!--News Block-->
+
+                                    <!-- <div class="news-block-five col-md-4 col-sm-12">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="images/resource/blog-image-16.jpg" alt=""></figure>
+
+                                                <div class="date"><span>20.11.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Read More</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">Get your tickets for christmas fireworks</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Regeneration</a>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">By Julie Gordon</div>
+
+                                                    </div>
+
+                                                    <div class="comments-info">
+
+                                                        <a href="#"><span class="fa fa-comment"></span> 21</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!--News Block-->
+
+                                    <!-- <div class="news-block-five col-md-4 col-sm-12">
+
+                                        <div class="inner-box">
+
+                                            <div class="image-box">
+
+                                                <figure class="image"><img src="images/resource/blog-image-17.jpg" alt=""></figure>
+
+                                                <div class="date"><span>13.10.2019</span></div>
+
+                                                <div class="hover-box">
+
+                                                    <div class="more-link"><a href="blog-single.html">Read More</a></div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="lower-box">
+
+                                                <div class="upper-info">
+
+                                                    <h4><a href="blog-single.html">Mayor announces london living wage £10.75 per hour</a></h4>
+
+                                                    <div class="cat-info">
+
+                                                        <a href="#"><span class="fa fa-folder"></span>Community Life</a>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="meta-info clearfix">
+
+                                                    <div class="author-info clearfix">
+
+                                                        <div class="author-icon"><span class="flaticon-user-3"></span></div>
+
+                                                        <div class="author-title">By Julie Gordon</div>
+
+                                                    </div>
+
+                                                    <div class="comments-info">
+
+                                                        <a href="#"><span class="fa fa-comment"></span> 35</a>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!--News Block-->
+
+                                    
+                                  
+
+                                 <div style="display: flex; justify-content: center; align-items: center; margin-top: 30px;">
+    <a href="#" 
+       style="background-color: #28a745; 
+              color: white;
+              padding: 12px 30px; 
+              border-radius: 6px; 
+              text-decoration: none; 
+              font-size: 16px; 
+              font-weight: 500; 
+              transition: background-color 0.3s ease;">
+        Explore
+    </a>
+</div>
+
+                            
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!--Sidebar Side-->
+
+                    
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+</section>
+
+
+
+
+
+
+
+
+
+        <!--Events Section-->
+
+        <section class="events-section">
+
+            <div class="auto-container">
+
+                <div class="row clearfix">
+
+
+
+                    <div class="left-column col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                        <div class="col-inner">
+
+                            <div class="sec-title with-separator">
+
+                                <h2>Upcoming Activities & Events</h2>
+
+                                <div class="separator"><span class="cir c-1"></span><span class="cir c-2"></span><span class="cir c-3"></span></div>
+
+                            </div>
+
+
+
+                            <div class="carousel-box">
+
+                                <!--Event Block-->
+
+                                <div class="event-block">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="date-box">
+                                                <div class="date"><span class="day">14</span><span class="month">December</span></div>
+                                            </div>
+
+                                            <div class="content">
+
+                                                <div class="cat-info"><a href="#">Lorem Ipsum</a></div>
+
+                                                <h3><a href="#">Lorem ipsum dolor sit amet</a></h3>
+
+                                                <div class="location">Lorem ipsum dolor sit amet, consectetur</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!--Event Block-->
+
+                                <div class="event-block">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="date-box">
+                                                <div class="date"><span class="day">22</span><span class="month">December</span></div>
+                                            </div>
+
+                                              <div class="content">
+
+                                                <div class="cat-info"><a href="#">Lorem Ipsum</a></div>
+
+                                                <h3><a href="#">Lorem ipsum dolor sit amet</a></h3>
+
+                                                <div class="location">Lorem ipsum dolor sit amet, consectetur</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!--Event Block-->
+
+                                <div class="event-block">
+
+                                    <div class="inner-box">
+
+                                        <div class="content-box">
+
+                                            <div class="date-box">
+                                                <div class="date"><span class="day">05</span><span class="month">January</span></div>
+                                            </div>
+
+                                              <div class="content">
+
+                                                <div class="cat-info"><a href="#">Lorem Ipsum</a></div>
+
+                                                <h3><a href="#">Lorem ipsum dolor sit amet</a></h3>
+
+                                                <div class="location">Lorem ipsum dolor sit amet, consectetur</div>
+
+                                                <div class="read-more"><a href="#">Read More</a></div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!--Services Section-->
+
+        <section class="services-section-two">
+
+            <div class="image-layer" style="background-image: url(images/background/image-4.jpg);"></div>
+
+            <div class="auto-container">
+
+                <div class="sec-title light with-separator centered">
+
+                    <h2>Lorem ipsum dolor sit </h2>
+
+                    <div class="separator"><span class="cir c-1"></span><span class="cir c-2"></span><span class="cir c-3"></span></div>
+
+                </div>
+
+
+
+                <div class="outer clearfix">
+
+                    <div class="column nav-column">
+
+                        <div class="inner">
+
+                            <ul>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="column image-column">
+
+                        <div class="inner">
+
+                            <div class="image-box">
+
+                                <figure class="image"><img src="images/resource/featured-image-2.jpg" alt=""></figure>
+
+                                <div class="over-box">
+
+                                    <div class="icon-box"><span class="flaticon-play"></span></div>
+
+                                    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+
+                                </div>
+
+                                <a href=#" class="over-link lightbox-image"></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="column nav-column">
+
+                        <div class="inner">
+
+                            <ul>
+
+                                 <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                                <li><a href="#">Lorem ipsum dolor</a></li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+       
+
+
+
+
+        <!--Contact Info Section-->
+
+        <section class="contact-info-section">
+
+            <div class="image-layer" style="background-image: url(images/background/image-5.jpg);"></div>
+
+            <div class="auto-container">
+
+                <div class="sec-title with-separator centered">
+
+                    <h2>Suggestion and Complaints</h2>
+
+                    <div class="separator"><span class="cir c-1"></span><span class="cir c-2"></span><span class="cir c-3"></span></div>
+
+                    <div class="lower-text">Denounce with righteous indignation and dislike men who are so beguiled & demoralized our power of choice.</div>
+
+                </div>
+
+                <div class="info-outer clearfix">
+
+                    <!--Info Box-->
+
+                    <div class="info-box">
+
+                        <div class="inner">
+
+                            <div class="icon"><span class="flaticon-password"></span></div>
+
+                            <strong>Call on</strong>
+
+                            <div class="info"><a href="tel:+4488812345">+91 888 12 345</a></div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Info Box-->
+
+                    <div class="info-box">
+
+                        <div class="inner">
+
+                            <div class="icon"><span class="flaticon-contact"></span></div>
+
+                            <strong>Mail at</strong>
+
+                            <div class="info"><a href="mailto:Mail@enved.com">Mail@enved.com</a></div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Info Box-->
+
+                    <div class="info-box">
+
+                        <div class="inner">
+
+                            <div class="icon"><span class="flaticon-circular-clock"></span></div>
+
+                            <strong>Off hrs</strong>
+
+                            <div class="info">10am to 6pm</div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Info Box-->
+
+                    <div class="info-box">
+
+                        <div class="inner">
+
+                            <div class="icon"><span class="flaticon-checklist"></span></div>
+
+                            <strong>LN 311</strong>
+
+                            <div class="info">Non Emergency</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+
+
+        <!--Testimonials Section-->
+
+        <section class="testimonials-section">
+
+            <div class="image-layer" style="background-image: url(images/background/image-2.jpg);"></div>
+
+
+
+            <div class="auto-container">
+
+                <div class="carousel-box">
+
+                    <div class="icon-box"><span>Q</span></div>
+
+                    <div class="testimonial-carousel owl-theme owl-carousel">
+
+                        <!--Slide-->
+
+                        <div class="slide-item">
+
+                            <div class="inner">
+
+                                <div class="info clearfix">
+
+                                    <div class="author-thumb"><img src="images/resource/author-thumb-1.jpg" alt=""></div>
+
+                                    <div class="name">Lucian manroe</div>
+
+                                    <div class="designation">Citizen</div>
+
+                                </div>
+
+                                <div class="text">“Loves or pursues desires to obtain pain of itself, because pain because occasionally circumstances occur in which toil and pain can procure him some great pleasure.”</div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!--Slide-->
+
+                        <div class="slide-item">
+
+                            <div class="inner">
+
+                                <div class="info clearfix">
+
+                                    <div class="author-thumb"><img src="images/resource/author-thumb-6.jpg" alt=""></div>
+
+                                    <div class="name">Bertram Irvin</div>
+
+                                    <div class="designation">Citizen</div>
+
+                                </div>
+
+                                <div class="text">“Loves or pursues desires to obtain pain of itself, because pain because occasionally circumstances occur in which toil and pain can procure him some great pleasure.”</div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!--Slide-->
+
+                        <div class="slide-item">
+
+                            <div class="inner">
+
+                                <div class="info clearfix">
+
+                                    <div class="author-thumb"><img src="images/resource/author-thumb-7.jpg" alt=""></div>
+
+                                    <div class="name">Marian Lenora</div>
+
+                                    <div class="designation">Speaker</div>
+
+                                </div>
+
+                                <div class="text">“Loves or pursues desires to obtain pain of itself, because pain because occasionally circumstances occur in which toil and pain can procure him some great pleasure.”</div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+
+
+
+        <!--Facts Section-->
+
+        <section class="facts-section">
+
+            <div class="auto-container">
+
+                <div class="row clearfix">
+
+                    <!--Fact Column-->
+
+                    <div class="fact-column col-lg-4 col-md-4 col-sm-12">
+
+                        <div class="inner">
+
+                            <div class="fact-box">
+
+                                <span class="count-box">850k</span>
+
+                            </div>
+
+                            <h4 class="fact-title">Lorem ipsum dolor sit amet sit amet</h4>
+
+                            <div class="text">Foresee the pain and trouble that are bound ensue equal blame belongs.</div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Fact Column-->
+
+                    <div class="fact-column col-lg-4 col-md-4 col-sm-12">
+
+                        <div class="inner">
+
+                            <div class="fact-box">
+
+                                <span class="count-box">1.5k</span>
+
+                            </div>
+
+                          <h4 class="fact-title">Lorem ipsum dolor sit amet sit amet</h4>
+
+                            <div class="text">Foresee the pain and trouble that are bound ensue equal blame belongs.</div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Fact Column-->
+
+                    <div class="fact-column col-lg-4 col-md-4 col-sm-12">
+
+                        <div class="inner">
+
+                            <div class="fact-box">
+
+                                <span class="count-box">24%</span>
+
+                            </div>
+
+                            <h4 class="fact-title">Lorem ipsum dolor sit amet sit amet</h4>
+
+                            <div class="text">Foresee the pain and trouble that are bound ensue equal blame belongs.</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+       
+
+
+
