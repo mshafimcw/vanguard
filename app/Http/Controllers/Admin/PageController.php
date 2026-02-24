@@ -52,7 +52,7 @@ class PageController extends Controller
                         'title'            => 'required|string|max:255',
                         'body'             => 'nullable|string',
                         'post_category_id' => 'required|exists:post_categories,id',
-                        'image'            => 'nullable|image|max:2048', // 2MB
+                        'image'            => 'nullable|image|max:10240',
                         'published' => 'sometimes', 
 						 'gallery_category_id' => 'nullable|exists:gallery_categories,id',
                     ]);
@@ -123,7 +123,7 @@ class PageController extends Controller
             'title'            => 'required|string|max:255',
             'body'             => 'nullable|string',
             'post_category_id' => 'required|exists:post_categories,id',
-            'image'            => 'nullable|image|max:2048',
+            'image'            => 'nullable|image|max:10240',
             'published'        => 'sometimes',
 			 'gallery_category_id' => 'nullable|exists:gallery_categories,id',
         ]);

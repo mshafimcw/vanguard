@@ -337,3 +337,6 @@ Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/services', function () {
+    return view('services');
+});

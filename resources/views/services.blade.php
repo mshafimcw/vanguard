@@ -1,49 +1,140 @@
+@extends('layouts.main')
 
- @include('includes.header')
+@section('content')
 
- 
- 
- 
-	<div class="breadcumb-wrapper background-image" style="background-image: url(public/uploads/{{ $banner->image}});">
-        <div class="container">
-            <div class="breadcumb-content">
-                <h1 class="breadcumb-title">Services</h1>
-                <ul class="breadcumb-menu">
-                    <li><a href="#">Home</a></li>
-                    <li>Services</li>
-                </ul>
-            </div>
-        </div>
+<!-- Hero Start -->
+<div class="container-fluid py-5 mb-5 hero-header wow fadeIn">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 text-center text-lg-start hero-text">
+        <h1 class="display-1 mb-4">OUR SERVICES</h1>
+        <p class="fs-4">
+              Fast, Reliable, Hassle-Free <br />
+             Services in UAE
+            </p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Hero End -->
+
+<div class="content-wrapper">
+<section class="material-services">
+    <div class="services-heading">
+  <h2>Our Scrap Services</h2>
+</div>
+  <div class="material-services-container">
+
+    <div class="material-card">
+      <img src="img/metal.png" alt="Metal Scrap">
+      <h3>Metal Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+     
     </div>
 
-   @foreach($services as $value) 
+    <div class="material-card">
+      <img src="img/cpper.png" alt="Copper Scrap">
+      <h3>Copper Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+    </div>
 
-<section class="space" id="{{$value->title}}">
-        <div class="container">
-        <div class="row align-items-center {{ $loop->iteration % 2 == 0 ? 'flex-row-reverse' : '' }}">
-                <div class="col-xl-6">
-                    <div class="pe-xl-4 mt-40 mt-xl-0">
-                        <div class="rounded-20"><img class="w-100" src="public/uploads/{{ $value->image}}"
-                                alt="Achive"></div>
-                    </div>
-                </div>
+    <div class="material-card">
+      <img src="img/aluminium.png" alt="Aluminium Scrap">
+      <h3>Aluminium Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+    </div>
 
-                <div class="col-xl-6">
-                    <div class="title-area mb-35 text-center text-xl-start"><span
-                            class="sub-title6 justify-content-xl-start justify-content-center"><span
-                                class="shape left d-xl-none"><span class="dots"></span></span>Service <span
-                                class="shape right"><span class="dots"></span></span></span>
-                        <h2 class="sec-title">{{$value->title}}</h2>
-                    </div>
-                    <p class="mt-n2 mb-35 text-center text-xl-start">{{$value->description}}</p>
-                    
-                </div>
-             
-            </div>
+    <div class="material-card">
+      <img src="img/construction.png" alt="Construction Scrap">
+      <h3>Construction Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+    </div>
+
+    <div class="material-card">
+      <img src="img/industrial2.png" alt="Industrial Scrap">
+      <h3>Industrial Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+    </div>
+
+    <div class="material-card">
+      <img src="img/industrial3.png" alt="Industrial Scrap">
+      <h3>Industrial Scrap</h3>
+      <a href="contact.html" class="material-btn">View Details</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= FEATURES SECTION (EXACT MATCH WITH ICONS) ================= -->
+<section class="features-exact">
+    <div class="services-heading">
+  <h2>What Makes Our Services Different</h2>
+</div>
+  <div class="container">
+    <div class="features-exact-grid">
+      
+      <div class="feature-exact-item">
+        <div class="feature-icon-exact">
+          <i class="fas fa-truck"></i>
         </div>
-    </section>
+        <h3>FREE SCRAP PICKUP</h3>
+        <p>Fast, hassle-free pickup of scrap metal from your location.</p>
+      </div>
+      
+      <div class="feature-exact-item">
+        <div class="feature-icon-exact">
+          <i class="fas fa-weight-scale"></i>
+        </div>
+        <h3>PRECISION WEIGHING</h3>
+        <p>Accurate weighing of your scrap with certified industrial scales.</p>
+      </div>
+      
+      <div class="feature-exact-item">
+        <div class="feature-icon-exact">
+          <i class="fas fa-medal"></i>
+        </div>
+        <h3>BEST MARKET PRICES</h3>
+        <p>Get the highest value for your scrap with our competitive torque titles.</p>
+      </div>
+      
+    </div>
+    
+    <div class="features-exact-cta">
+      <a href="#contact" class="btn-price-exact">Get My Price</a>
+    </div>
+  </div>
+</section>
 
- @endforeach
+<!-- ================= CTA RIBBON ================= -->
+<section class="scrap-cta">
+    <div class="scrap-cta-inner">
+        <h3>GET IN TOUCH WITH US FOR ALL YOUR SCRAP METAL NEEDS!</h3>
+        <a href="contact.html" class="scrap-cta-btn">CONTACT US</a>
+    </div>
+</section>
+</div>
 
-  
- @include('includes.footer') 
+<!-- ================= SERVICE AREA SECTION ================= -->
+<section class="service-area">
+  <div class="overlay"></div>
+
+  <div class="service-container">
+    <div class="service-content">
+      <h2>Service Areas Across the UAE</h2>
+      <p>
+        From Dubai to Fujairah, we cover every corner of the UAE with reliabilty
+      </p>
+
+      <div class="service-tags">
+        <span>Dubai</span>
+        <span>Sharjah</span>
+        <span>Abu Dhabi</span>
+        <span>Ajman</span>
+        <span>Ras Al Khaimah</span>
+        <span>Umm Al Quwain</span>
+      </div>
+    </div>
+  </div>
+
+@endsection

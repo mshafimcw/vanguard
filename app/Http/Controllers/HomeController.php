@@ -36,6 +36,10 @@ class HomeController extends Controller
 	public function index()
 	{
 
+		$category = PostCategory::where('slug', 'banner')->first();
+		$catid = $category->id;
+		$banner = Post::where('post_category_id', $catid)->get();
+
 		$category = PostCategory::where('slug', 'slider')->first();
 		$catid = $category->id;
 		$slider = Post::where('post_category_id', $catid)->get();
@@ -121,7 +125,8 @@ class HomeController extends Controller
 			'programs' => $programs,
 			'events' => $events,
 			'commondonation' => $commondonation,
-			'companies'=>$companies
+			'companies'=>$companies,
+			'banner' =>$banner
 		]);
 	}
 	public static function getphone()

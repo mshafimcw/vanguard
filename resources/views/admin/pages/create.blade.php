@@ -51,7 +51,7 @@
 </div>
 
 <!-- TinyMCE CDN with your API key -->
-<script src="https://cdn.tiny.cloud/1/jlcp1yma120hl71botabkzvij0018e797yseb7huh85fxyzw/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+{{-- <script src="https://cdn.tiny.cloud/1/jlcp1yma120hl71botabkzvij0018e797yseb7huh85fxyzw/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script> --}}
 <script>
 tinymce.init({
     selector: '#editor',
