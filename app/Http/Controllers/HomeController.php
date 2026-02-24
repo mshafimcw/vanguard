@@ -35,10 +35,14 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-
 		$category = PostCategory::where('slug', 'banner')->first();
-		$catid = $category->id;
-		$banner = Post::where('post_category_id', $catid)->get();
+
+		$banner = [];
+
+		if ($category) {
+			$banner = Post::where('post_category_id', $category->id)->get();
+		}
+
 
 		$category = PostCategory::where('slug', 'slider')->first();
 		$catid = $category->id;
@@ -47,7 +51,7 @@ class HomeController extends Controller
 		$category = PostCategory::where('slug', 'about-s')->first();
 		$catid = $category->id;
 		$abouts = Post::where('post_category_id', $catid)->first();
-		
+
 		$category = PostCategory::where('slug', 'about-us-home')->first();
 		$catid = $category->id;
 		$aboutushome = Post::where('post_category_id', $catid)->first();
@@ -101,8 +105,8 @@ class HomeController extends Controller
 		$category = PostCategory::where('slug', 'commondonation')->first();
 		$catid = $category->id;
 		$commondonation = Post::where('post_category_id', $catid)->get();
-        
-		
+
+
 		$category = PostCategory::where('slug', 'companies')->first();
 		$catid = $category->id;
 		$companies = Post::where('post_category_id', $catid)->get();
@@ -110,7 +114,7 @@ class HomeController extends Controller
 
 
 		return view('index', [
-		'aboutushome' => $aboutushome,		
+			'aboutushome' => $aboutushome,
 			'slider' => $slider,
 			'abouts' => $abouts,
 			'features' => $features,
@@ -125,8 +129,8 @@ class HomeController extends Controller
 			'programs' => $programs,
 			'events' => $events,
 			'commondonation' => $commondonation,
-			'companies'=>$companies,
-			'banner' =>$banner
+			'companies' => $companies,
+			'banner' => $banner
 		]);
 	}
 	public static function getphone()
@@ -137,7 +141,7 @@ class HomeController extends Controller
 		$phone = Post::where('post_category_id', $catid)->get();
 		return $phone;
 	}
-	
+
 	public static function getpbanner()
 	{
 
@@ -190,8 +194,8 @@ class HomeController extends Controller
 		$address = Post::where('post_category_id', $catid)->get();
 		return $address;
 	}
-	
-		public static function gettimings()
+
+	public static function gettimings()
 	{
 
 		$editpost = PostCategory::where('slug', 'timing')->first();
@@ -255,9 +259,9 @@ class HomeController extends Controller
 			//'quotes'=>$quotes
 		]);
 	}
-     public function donationtime()
+	public function donationtime()
 	{
-		
+
 		return view('donationtime');
 	}
 
@@ -281,30 +285,30 @@ class HomeController extends Controller
 			'programs' => $programs,
 		]);
 	}
-  
-  
-  public function blogDetails($id)
+
+
+	public function blogDetails($id)
 	{
-		
-		
+
+
 		$category = PostCategory::where('slug', 'blogs')->first();
 		$catid = $category->id;
 		$blog = Post::where('post_category_id', $catid)->first();
 
 		return view('blogdetails', compact('blog'));
 	}
-		public function blogs()
-		{
-			$category = PostCategory::where('slug', 'blogs')->first();
-			$catid = $category->id;
-			$blogs = Post::where('post_category_id', $catid)
-						->orderBy('created_at', 'desc') // Optional: order by latest
-						->paginate(6); // Show 6 blogs per page
+	public function blogs()
+	{
+		$category = PostCategory::where('slug', 'blogs')->first();
+		$catid = $category->id;
+		$blogs = Post::where('post_category_id', $catid)
+			->orderBy('created_at', 'desc') // Optional: order by latest
+			->paginate(6); // Show 6 blogs per page
 
-			return view('blogs', [
-				'blogs' => $blogs,
-			]);
-		}
+		return view('blogs', [
+			'blogs' => $blogs,
+		]);
+	}
 
 	public function showEvents()
 	{
@@ -388,13 +392,13 @@ class HomeController extends Controller
 		$products = Product::all();
 		$programs = Program::orderBy('id', 'desc')->get();
 		$events = event::all();
-		
-		
-			$gallerycategories = GalleryCategory::all();
-		
+
+
+		$gallerycategories = GalleryCategory::all();
+
 
 		return view('portfolio', [
-		'gallerycategories'=>$gallerycategories,
+			'gallerycategories' => $gallerycategories,
 			'slider' => $slider,
 			'abouts' => $abouts,
 			'features' => $features,
@@ -410,90 +414,89 @@ class HomeController extends Controller
 			'events' => $events,
 		]);
 	}
-	
-	
+
+
 	public function Contact()
-     {
-		
-		
-		$category=PostCategory::where('slug','logo')->first();
-		$catid=$category->id;
-$logo=Post::where('post_category_id',$catid)->first();
-        
-		$category=PostCategory::where('slug','phone')->first();
-		$catid=$category->id;
-		$phone=Post::where('post_category_id',$catid)->first();
+	{
 
-		
-         
-		$category=PostCategory::where('slug','email')->first();
-		$catid=$category->id;
-		$email=Post::where('post_category_id',$catid)->first();
-		
-		$category=PostCategory::where('slug','email')->first();
-		$catid=$category->id;
-		$allemails=Post::where('post_category_id',$catid)->get();
-	
-    	$editpost=PostCategory::where('slug','address')->first();
-		$catid=$editpost->id;
-		$address=Post::where('post_category_id',$catid)->first();
-		
-		
-		
-		$editpost=PostCategory::where('slug','social-icons')->first();
-		$catid=$editpost->id;
-		$socialicons=Post::where('post_category_id',$catid)->get();
-		
-		
-		
-		
-		
-        return view('contact',[
-		'address'=>$address,
-		'socialicons'=>$socialicons,
-		'email'=>$email,
-		'phone'=>$phone,
-		
-		'logo'=>$logo,
-		'allemails'=>$allemails,
+
+		$category = PostCategory::where('slug', 'logo')->first();
+		$catid = $category->id;
+		$logo = Post::where('post_category_id', $catid)->first();
+
+		$category = PostCategory::where('slug', 'phone')->first();
+		$catid = $category->id;
+		$phone = Post::where('post_category_id', $catid)->first();
+
+
+
+		$category = PostCategory::where('slug', 'email')->first();
+		$catid = $category->id;
+		$email = Post::where('post_category_id', $catid)->first();
+
+		$category = PostCategory::where('slug', 'email')->first();
+		$catid = $category->id;
+		$allemails = Post::where('post_category_id', $catid)->get();
+
+		$editpost = PostCategory::where('slug', 'address')->first();
+		$catid = $editpost->id;
+		$address = Post::where('post_category_id', $catid)->first();
+
+
+
+		$editpost = PostCategory::where('slug', 'social-icons')->first();
+		$catid = $editpost->id;
+		$socialicons = Post::where('post_category_id', $catid)->get();
+
+
+
+
+
+		return view('contact', [
+			'address' => $address,
+			'socialicons' => $socialicons,
+			'email' => $email,
+			'phone' => $phone,
+
+			'logo' => $logo,
+			'allemails' => $allemails,
 		]);
-    }
-	
+	}
+
 	public function contactSubmit(Request $request)
-    {
-		
-		
-        // Validate the form data
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string|min:10',
-        ]);
-         
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+	{
 
-        // Process the contact form
-        try {
-            // Save to database
-            $contact = ContactSubmission::create($request->all());
 
-            // Send email notification
-            Mail::to(env('ADMIN_EMAIL', 'admin@example.com'))->send(new ContactFormSubmitted($contact));
+		// Validate the form data
+		$validator = Validator::make($request->all(), [
+			'name' => 'required|string|max:255',
+			'email' => 'required|email|max:255',
+			'phone' => 'nullable|string|max:20',
+			'subject' => 'required|string|max:255',
+			'message' => 'required|string|min:10',
+		]);
 
-            return redirect()->back()->with('success', 'Thank you for your message! We will get back to you soon.');
+		if ($validator->fails()) {
+			return redirect()->back()
+				->withErrors($validator)
+				->withInput();
+		}
 
-        } catch (\Exception $e) {
-            \Log::error('Contact form error: ' . $e->getMessage());
-            
-            return redirect()->back()
-                ->with('error', 'Sorry, there was an error sending your message. Please try again.')
-                ->withInput();
-        }
-    }
+		// Process the contact form
+		try {
+			// Save to database
+			$contact = ContactSubmission::create($request->all());
+
+			// Send email notification
+			Mail::to(env('ADMIN_EMAIL', 'admin@example.com'))->send(new ContactFormSubmitted($contact));
+
+			return redirect()->back()->with('success', 'Thank you for your message! We will get back to you soon.');
+		} catch (\Exception $e) {
+			\Log::error('Contact form error: ' . $e->getMessage());
+
+			return redirect()->back()
+				->with('error', 'Sorry, there was an error sending your message. Please try again.')
+				->withInput();
+		}
+	}
 }

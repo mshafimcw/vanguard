@@ -300,9 +300,6 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 
 
 
-
-
-
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -339,4 +336,8 @@ Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/services', function () {
     return view('services');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
 });

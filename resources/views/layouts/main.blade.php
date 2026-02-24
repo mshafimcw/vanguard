@@ -94,7 +94,27 @@
 <!-- PAGE CONTENT -->
 @yield('content')
 
+<!-- ================= SERVICE AREA SECTION ================= -->
+<section class="service-area">
+  <div class="overlay"></div>
 
+  <div class="service-container">
+    <div class="service-content">
+      <h2>Service Areas Across the UAE</h2>
+      <p>
+        From Dubai to Fujairah, we cover every corner of the UAE with reliabilty
+      </p>
+
+      <div class="service-tags">
+        <span>Dubai</span>
+        <span>Sharjah</span>
+        <span>Abu Dhabi</span>
+        <span>Ajman</span>
+        <span>Ras Al Khaimah</span>
+        <span>Umm Al Quwain</span>
+      </div>
+    </div>
+  </div>
 
 <!-- Footer -->
 <footer class="footer">
@@ -192,6 +212,7 @@
 <script src="{{ asset('assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 
 <script src="{{ asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
 
 <script src="{{ asset('assets/js/main.js') }}"></script>
 
