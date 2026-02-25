@@ -46,13 +46,23 @@
     <section class="scrap-section">
         <div class="container">
             <!-- COMMON HEADING -->
-            <div class="section-header">
-                <h2 class="section-title">WHY CHOOSE <span>VANGUARD?</span></h2>
-                <p class="section-subtitle">
-                    We make scraps with the best experience — we never guarantee your
-                    igo, direct terms of printing or priority max cash.
-                </p>
-            </div>
+            @foreach ($whychoose as $item)
+                <div class="section-header">
+
+                    <h2 class="section-title">
+
+                        {{ $item->title }}
+
+                    </h2>
+
+                    <p class="section-subtitle">
+
+                        {!! $item->body !!}
+
+                    </p>
+
+                </div>
+            @endforeach
 
             <!-- TWO-COLUMN LAYOUT -->
             <div class="scrap-container">
@@ -128,5 +138,4 @@
             </div>
         </div>
     </section>
-    
-    @endsection
+@endsection
