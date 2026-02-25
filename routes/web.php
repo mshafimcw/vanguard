@@ -341,7 +341,7 @@ Route::get('/services', function () {
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
