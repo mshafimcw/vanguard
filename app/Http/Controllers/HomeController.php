@@ -43,6 +43,10 @@ class HomeController extends Controller
 			$banner = Post::where('post_category_id', $category->id)->get();
 		}
 
+		$category = PostCategory::where('slug', 'whychoose')->first();
+		$catid = $category->id;
+		$whychoose = Post::where('post_category_id', $catid)->get();
+
 
 		$category = PostCategory::where('slug', 'slider')->first();
 		$catid = $category->id;
@@ -130,7 +134,8 @@ class HomeController extends Controller
 			'events' => $events,
 			'commondonation' => $commondonation,
 			'companies' => $companies,
-			'banner' => $banner
+			'banner' => $banner,
+			'whychoose' => $whychoose
 		]);
 	}
 	public static function getphone()
