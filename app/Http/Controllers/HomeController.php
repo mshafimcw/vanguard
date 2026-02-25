@@ -483,7 +483,6 @@ class HomeController extends Controller
 	public function contactSubmit(Request $request)
 	{
 
-
 		// Validate the form data
 		$validator = Validator::make($request->all(), [
 			'name' => 'required|string|max:255',
@@ -517,3 +516,6 @@ class HomeController extends Controller
 		}
 	}
 }
+
+
+
