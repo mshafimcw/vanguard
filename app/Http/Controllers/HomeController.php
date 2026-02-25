@@ -463,7 +463,7 @@ class HomeController extends Controller
 	}
 
 
-public function contact()
+	public function contact()
 {
     $category = PostCategory::where('slug', 'contact')->first();
     
@@ -482,7 +482,6 @@ public function contact()
 
 	public function contactSubmit(Request $request)
 	{
-
 
 		// Validate the form data
 		$validator = Validator::make($request->all(), [
@@ -517,3 +516,6 @@ public function contact()
 		}
 	}
 }
+
+
+

@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6 text-center text-lg-start hero-text">
                 <h1 class="display-1 mb-4">
-                    About US
+                    About Us
                 </h1>
             </div>
         </div>
@@ -50,9 +50,9 @@
                 </div>
 
                 @endforeach
-                <a href="{{ route('contact') }}" class="price-btn">
-                    Get My Price
-                </a>
+                <a href="{{ route('home.index') }}" class="price-btn">
+    Get My Price
+</a>
             </div>
 
             <!-- RIGHT IMAGE -->
