@@ -14,23 +14,25 @@
 </div>
 
 <!-- Contact Info Cards Start -->
-@foreach($contact as $item)
-    <div class="col-lg-3 col-md-6">
-        <div class="info-card">
+<div class="row">
+    @foreach($contact as $item)
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+            <div class="info-card d-flex align-items-start">
 
-            <div class="info-icon">
-                <img src="{{ asset('storage/' . $item->image) }}" 
-                     alt="{{ $item->title }}" width="30">
+                <div class="info-icon me-3">
+                    <img src="{{ asset($item->image) }}" 
+                         alt="{{ $item->title }}" width="30">
+                </div>
+
+                <div>
+                    <h5>{{ $item->title }}</h5>
+                    <p>{!! $item->body !!}</p>
+                </div>
+
             </div>
-
-            <div>
-                <h5>{{ $item->title }}</h5>
-                <p>{!! $item->body !!}</p>
-            </div>
-
         </div>
-    </div>
-@endforeach
+    @endforeach
+</div>
 <!-- Contact Info Cards End -->
 <!-- ================= CONTACT SECTION ================= -->
 <section class="contact-section">

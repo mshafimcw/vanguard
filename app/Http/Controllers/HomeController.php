@@ -291,7 +291,7 @@ class HomeController extends Controller
 	{
 		$category = PostCategory::where('slug', 'diffservice')->first();
 
-		$diffservice = collect(); // empty collection (safe)
+		$diffservice = collect();
 
 		if ($category) {
 			$catid = $category->id;
@@ -464,15 +464,21 @@ class HomeController extends Controller
 
 
 	public function contact()
-	{
-		$category = PostCategory::where('slug', 'contact')->first();
-		$catid = $category->id;
-		$contact = Post::where('post_category_id', $catid)->get();
-
-		return view('contact', [
-			'contact' => $contact,
-		]);
-	}
+{
+    $category = PostCategory::where('slug', 'contact')->first();
+    
+    // Check if category exists
+    if($category) {
+        $catid = $category->id;
+        $contact = Post::where('post_category_id', $catid)->get();
+    } else {
+        // Handle case when category doesn't exist
+        $contact = collect(); // Empty collection
+    }
+    
+    // Return view with data
+    return view('contact', compact('contact'));
+}
 
 	public function contactSubmit(Request $request)
 	{
