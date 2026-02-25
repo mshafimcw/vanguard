@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\AllRegisterController;
 use App\Http\Controllers\EwasteDonationController;
 use App\Http\Controllers\MoneyDonationController;
+use App\Http\Controllers\ServiceController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
@@ -340,4 +341,11 @@ Route::get('/services', function () {
 
 Route::get('/contact', function () {
     return view('contact');
+});
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::resource('services', ServiceController::class);
+
 });

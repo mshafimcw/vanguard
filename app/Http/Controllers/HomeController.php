@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator; // Add this line
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormSubmitted;
 use App\Models\GalleryCategory;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
@@ -46,7 +47,6 @@ class HomeController extends Controller
 		$category = PostCategory::where('slug', 'whychoose')->first();
 		$catid = $category->id;
 		$whychoose = Post::where('post_category_id', $catid)->get();
-
 
 		$category = PostCategory::where('slug', 'slider')->first();
 		$catid = $category->id;
@@ -115,6 +115,8 @@ class HomeController extends Controller
 		$catid = $category->id;
 		$companies = Post::where('post_category_id', $catid)->get();
 
+		
+		$services = Service::latest()->get();
 
 
 		return view('index', [
@@ -135,7 +137,9 @@ class HomeController extends Controller
 			'commondonation' => $commondonation,
 			'companies' => $companies,
 			'banner' => $banner,
-			'whychoose' => $whychoose
+			'whychoose' => $whychoose,
+			'services' => $services,
+			
 		]);
 	}
 	public static function getphone()
@@ -264,6 +268,8 @@ class HomeController extends Controller
 			//'quotes'=>$quotes
 		]);
 	}
+
+
 	public function donationtime()
 	{
 
