@@ -464,19 +464,25 @@ class HomeController extends Controller
 
 
 	public function contact()
-	{
-		$category = PostCategory::where('slug', 'contact')->first();
-		$catid = $category->id;
-		$contact = Post::where('post_category_id', $catid)->get();
+{
+    $category = PostCategory::where('slug', 'contact')->first();
+    
+    // Check if category exists
+    if($category) {
+        $catid = $category->id;
+        $contact = Post::where('post_category_id', $catid)->get();
+    } else {
+        // Handle case when category doesn't exist
+        $contact = collect(); // Empty collection
+    }
+    
+    // Return view with data
+    return view('contact', compact('contact'));
+}
 
-		return view('contact', [
-			'contact' => $contact,
-		]);
-	}
 
 	public function contactSubmit(Request $request)
 	{
-
 
 		// Validate the form data
 		$validator = Validator::make($request->all(), [
@@ -511,3 +517,6 @@ class HomeController extends Controller
 		}
 	}
 }
+
+
+

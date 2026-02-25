@@ -54,7 +54,7 @@
                                 {{ Str::limit(strip_tags($blog->body), 150) }}
                             </p>
 
-                            <a href="#" class="recent-btn">
+                            <a href="" class="recent-btn">
                                 Read Article →
                             </a>
 
