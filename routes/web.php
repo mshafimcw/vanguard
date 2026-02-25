@@ -339,13 +339,12 @@ Route::get('/services', function () {
     return view('services');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('services', ServiceController::class);
 
 });
+
+Route::get('/services', [HomeController::class, 'services']);
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');

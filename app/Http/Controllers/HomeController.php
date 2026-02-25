@@ -63,13 +63,18 @@ class HomeController extends Controller
 
 
 		$category = PostCategory::where('slug', 'slider')->first();
-		$catid = $category->id;
-		$slider = Post::where('post_category_id', $catid)->get();
+		$slider = collect(); // default empty collection
+		if ($category) {
+			$slider = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'commitment')->first();
-		$catid = $category->id;
-		$commitment = Post::where('post_category_id', $catid)->get();
+		$commitment = collect();
+		if ($category) {
+			$commitment = Post::where('post_category_id', $category->id)->get();
+		}
 
+		// Repeat for other categories
 		$category = PostCategory::where('slug', 'about-s')->first();
 		$catid = $category->id;
 		$abouts = Post::where('post_category_id', $catid)->get();
@@ -265,45 +270,37 @@ class HomeController extends Controller
 
 	public function about()
 	{
-
+		// Abouts
 		$category = PostCategory::where('slug', 'about-s')->first();
-		$catid = $category->id;
-		$abouts = Post::where('post_category_id', $catid)->first();
+		$abouts = $category ? Post::where('post_category_id', $category->id)->first() : null;
 
+		// Features
 		$category = PostCategory::where('slug', 'features')->first();
-		$catid = $category->id;
-		$features = Post::where('post_category_id', $catid)->get();
+		$features = $category ? Post::where('post_category_id', $category->id)->get() : collect();
 
+		// Commitment
 		$category = PostCategory::where('slug', 'commitment')->first();
-		$catid = $category->id;
-		$commitment = Post::where('post_category_id', $catid)->get();
-
+		$commitment = $category ? Post::where('post_category_id', $category->id)->get() : collect();
 
 		return view('about', [
-
-			//'banner'=>$banner,
 			'abouts' => $abouts,
-			//	'email'=>$email,
-			//'phone'=>$phone,
 			'features' => $features,
-			//'quotes'=>$quotes
 			'commitment' => $commitment,
 		]);
 	}
 	public function services()
 	{
+		// Fetch the category with slug 'diffservice'
 		$category = PostCategory::where('slug', 'diffservice')->first();
 
-		$diffservice = collect(); // empty collection (safe)
+		// Fallback to empty collection
+		$diffservice = collect();
 
 		if ($category) {
-			$catid = $category->id;
-			$diffservice = Post::where('post_category_id', $catid)->get();
+			$diffservice = Post::where('post_category_id', $category->id)->get();
 		}
 
-		return view('services', [
-			'diffservice' => $diffservice
-		]);
+		return view('services', compact('diffservice'));
 	}
 	public function donationtime()
 	{
@@ -467,15 +464,19 @@ class HomeController extends Controller
 
 	public function contact()
 	{
+		// Try to get the 'contact' category
 		$category = PostCategory::where('slug', 'contact')->first();
-		$catid = $category->id;
-		$contact = Post::where('post_category_id', $catid)->get();
 
-		return view('contact', [
-			'contact' => $contact,
-		]);
+		// Fallback: empty collection if category doesn't exist
+		$contact = collect();
+
+		if ($category) {
+			$contact = Post::where('post_category_id', $category->id)->get();
+		}
+
+		return view('contact', compact('contact'));
 	}
-
+	
 	public function contactSubmit(Request $request)
 	{
 
