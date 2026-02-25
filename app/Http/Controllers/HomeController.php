@@ -43,6 +43,15 @@ class HomeController extends Controller
 			$banner = Post::where('post_category_id', $category->id)->get();
 		}
 
+		// $category = PostCategory::where('slug', 'whychoose')->first();
+
+		// $whychoose = [];
+
+		// if ($category) {
+		// 	$whychoose = Post::where('post_category_id', $category->id)->get();
+		// }
+
+
 		$category = PostCategory::where('slug', 'whychoose')->first();
 		$catid = $category->id;
 		$whychoose = Post::where('post_category_id', $catid)->get();

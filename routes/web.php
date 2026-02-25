@@ -35,15 +35,15 @@ use App\Http\Controllers\MoneyDonationController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
-Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
+// Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
+// Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-// routes/web.php
+// // routes/web.php
 
-// Frontend routes
-Route::get('/contact', [App\Http\Controllers\HomeController::class, 'Contact'])->name('home.contact');
-Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
+// // Frontend routes
+// Route::get('/contact', [App\Http\Controllers\HomeController::class, 'Contact'])->name('home.contact');
+// Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
 
 Route::get('/blog/{id}', [HomeController::class, 'blogDetails'])->name('blogs.details');
 
@@ -162,7 +162,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
-Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+// Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::get('/programs', [HomeController::class, 'programs'])->name('home.programs');
 
@@ -298,8 +298,6 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 });
 
 
-
-
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -340,4 +338,4 @@ Route::get('/services', function () {
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');

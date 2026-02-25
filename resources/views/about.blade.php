@@ -15,61 +15,58 @@
     </div>
     <!-- Hero End -->
 
+<!-- ABOUT SECTION -->
+<section class="about-main-section">
+    <div class="container">
+        <div class="row align-items-center">
 
-    <!-- ABOUT SECTION -->
-    <section class="about-main-section">
-        <div class="container">
-            <div class="row align-items-center">
+            <!-- LEFT CONTENT -->
+            <div class="col-lg-6">
+                <h2 class="section-title">
+                    {{ $abouts->title }}
+                </h2>
 
-                <div class="col-lg-6">
-                    <h2 class="section-title">TURNING SCRAP INTO VALUE</h2>
+                <p>
+                    {!! nl2br(e($abouts->body)) !!}
+                </p>
 
-                    <p>
-                        Vanguard Metal Scrap Trading LLC is one of the leading metal scrap
-                        trading companies in the UAE. We transform scrap metal into value by
-                        offering competitive prices, prompt payments, and exceptional service.
-                    </p>
+                @foreach ($features as $index => $feature)
 
-                    <p>
-                        With years of experience in the industry, we've earned a reputation
-                        for reliability, professionalism, and top-notch customer care.
-                    </p>
+    <div class="feature-item">
 
-                    <div class="feature-item">
-                        <i class="fa-solid fa-tag"></i>
-                        <div>
-                            <h6>COMPETITIVE PRICES</h6>
-                            <p>Best market rates with transparent pricing.</p>
-                        </div>
-                    </div>
+        @if ($index == 0)
+            <i class="fa-solid fa-tag"></i>
+        @elseif ($index == 1)
+            <i class="fa-solid fa-bolt"></i>
+        @elseif ($index == 2)
+            <i class="fa-solid fa-leaf"></i>
+        @endif
 
-                    <div class="feature-item">
-                        <i class="fa-solid fa-bolt"></i>
-                        <div>
-                            <h6>PROMPT PAYMENTS</h6>
-                            <p>Fast and immediate payments for scrap materials.</p>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <i class="fa-solid fa-leaf"></i>
-                        <div>
-                            <h6>ECO-FRIENDLY PRACTICES</h6>
-                            <p>Environmentally responsible recycling processes.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 text-center">
-                    <div class="image-box">
-                        <img src="img/banner.png" alt="">
-                        <a href="contact.html" class="price-btn">Get My Price</a>
-                    </div>
-                </div>
-
-            </div>
+        <div>
+            <h6>{{ strtoupper($feature->title) }}</h6>
+            <p>{{ $feature->body }}</p>
         </div>
-    </section>
+
+    </div>
+
+@endforeach
+                <a href="{{ route('contact') }}" class="price-btn">
+                        Get My Price
+                    </a>
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="col-lg-6 text-center">
+                <div class="image-box">
+                    <img src="{{ asset('storage/' . $abouts->image) }}"
+                         alt="{{ $abouts->title }}">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <!-- OUR MISSION & VISION -->
     <section class="mission-section">
@@ -114,6 +111,5 @@
 
         </div>
     </section>
-
 
     @endsection
