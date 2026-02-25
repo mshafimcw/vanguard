@@ -37,33 +37,19 @@ class HomeController extends Controller
 	public function index()
 	{
 		$category = PostCategory::where('slug', 'banner')->first();
-
 		$banner = [];
-
 		if ($category) {
 			$banner = Post::where('post_category_id', $category->id)->get();
 		}
 
-		// $category = PostCategory::where('slug', 'whychoose')->first();
-
-		// $whychoose = [];
-
-		// if ($category) {
-		// 	$whychoose = Post::where('post_category_id', $category->id)->get();
-		// }
-
-
 		$category = PostCategory::where('slug', 'whychoose')->first();
-
 		$whychoose = [];
-
 		if ($category) {
 			$whychoose = Post::where('post_category_id', $category->id)->get();
 		}
 
-
 		$category = PostCategory::where('slug', 'slider')->first();
-		$slider = collect(); // default empty collection
+		$slider = collect();
 		if ($category) {
 			$slider = Post::where('post_category_id', $category->id)->get();
 		}
@@ -74,71 +60,85 @@ class HomeController extends Controller
 			$commitment = Post::where('post_category_id', $category->id)->get();
 		}
 
-		// Repeat for other categories
 		$category = PostCategory::where('slug', 'about-s')->first();
-		$catid = $category->id;
-		$abouts = Post::where('post_category_id', $catid)->get();
+		$abouts = collect();
+		if ($category) {
+			$abouts = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'about-us-home')->first();
-		$catid = $category->id;
-		$aboutushome = Post::where('post_category_id', $catid)->first();
+		$aboutushome = null;
+		if ($category) {
+			$aboutushome = Post::where('post_category_id', $category->id)->first();
+		}
 
 		$category = PostCategory::where('slug', 'features')->first();
-		$catid = $category->id;
-		$features = Post::where('post_category_id', $catid)->get();
+		$features = collect();
+		if ($category) {
+			$features = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'counter')->first();
-		$catid = $category->id;
-		$counters = Post::where('post_category_id', $catid)->get();
+		$counters = collect();
+		if ($category) {
+			$counters = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'whychooseus')->first();
-		$catid = $category->id;
-		$whychooseus = Post::where('post_category_id', $catid)->get();
+		$whychooseus = collect();
+		if ($category) {
+			$whychooseus = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'facilities')->first();
-		$catid = $category->id;
-		$facilities = Post::where('post_category_id', $catid)->get();
+		$facilities = collect();
+		if ($category) {
+			$facilities = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'gallery')->first();
-		$catid = $category->id;
-		$gallery = Post::where('post_category_id', $catid)->get();
+		$gallery = collect();
+		if ($category) {
+			$gallery = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'testimonials')->first();
-		$catid = $category->id;
-		$testimonials = Post::where('post_category_id', $catid)->get();
+		$testimonials = collect();
+		if ($category) {
+			$testimonials = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'Highlights')->first();
-		$catid = $category->id;
-		$Highlights = Post::where('post_category_id', $catid)->get();
+		$Highlights = collect();
+		if ($category) {
+			$Highlights = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'faq')->first();
-		$catid = $category->id;
-		$faq = Post::where('post_category_id', $catid)->get();
+		$faq = collect();
+		if ($category) {
+			$faq = Post::where('post_category_id', $category->id)->get();
+		}
+
 		$products = Product::all();
-
-		$category = PostCategory::where('slug', 'faq')->first();
-		$catid = $category->id;
-		$faq = Post::where('post_category_id', $catid)->get();
 
 		$programs = Program::orderBy('id', 'desc')->get();
 
-		$category = PostCategory::where('slug', 'faq')->first();
-		$catid = $category->id;
-		$faq = Post::where('post_category_id', $catid)->get();
 		$events = Event::all();
 
 		$category = PostCategory::where('slug', 'commondonation')->first();
-		$catid = $category->id;
-		$commondonation = Post::where('post_category_id', $catid)->get();
-
+		$commondonation = collect();
+		if ($category) {
+			$commondonation = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$category = PostCategory::where('slug', 'companies')->first();
-		$catid = $category->id;
-		$companies = Post::where('post_category_id', $catid)->get();
-
+		$companies = collect();
+		if ($category) {
+			$companies = Post::where('post_category_id', $category->id)->get();
+		}
 
 		$services = Service::latest()->get();
-
 
 		return view('index', [
 			'aboutushome' => $aboutushome,
@@ -161,32 +161,29 @@ class HomeController extends Controller
 			'banner' => $banner,
 			'whychoose' => $whychoose,
 			'services' => $services,
-
 		]);
 	}
+
 	public static function getphone()
 	{
-
 		$editpost = PostCategory::where('slug', 'phone')->first();
-		$catid = $editpost->id;
-		$phone = Post::where('post_category_id', $catid)->get();
-		return $phone;
+		if (!$editpost) return collect();
+		return Post::where('post_category_id', $editpost->id)->get();
 	}
 
 	public static function getpbanner()
 	{
-
 		$editpost = PostCategory::where('slug', 'common-banner')->first();
-		$catid = $editpost->id;
-		$banner = Post::where('post_category_id', $catid)->first();
-		return $banner->image;
+		if (!$editpost) return null;
+		$banner = Post::where('post_category_id', $editpost->id)->first();
+		return $banner ? $banner->image : null;
 	}
+
 	public static function getphone1()
 	{
 		$editpost = PostCategory::where('slug', 'phone')->first();
 		if (!$editpost) return null;
-		$catid = $editpost->id;
-		$phone = Post::where('post_category_id', $catid)->first();
+		$phone = Post::where('post_category_id', $editpost->id)->first();
 		return $phone ? $phone->title : null;
 	}
 
@@ -194,91 +191,68 @@ class HomeController extends Controller
 	{
 		$editpost = PostCategory::where('slug', 'email')->first();
 		if (!$editpost) return null;
-		$catid = $editpost->id;
-		$email = Post::where('post_category_id', $catid)->first();
+		$email = Post::where('post_category_id', $editpost->id)->first();
 		return $email ? $email->title : null;
 	}
 
-
-	// public static function getemail()
-	// {
-
-	// 	$editpost = PostCategory::where('slug', 'email')->first();
-	// 	$catid = $editpost->id;
-	// 	$email = Post::where('post_category_id', $catid)->first();
-	// 	return $email->email1;
-	// } 
 	public static function getemail1()
 	{
-
 		$editpost = PostCategory::where('slug', 'email')->first();
-		$catid = $editpost->id;
-		$email = Post::where('post_category_id', $catid)->first();
-		return $email->title;
+		if (!$editpost) return null;
+		$email = Post::where('post_category_id', $editpost->id)->first();
+		return $email ? $email->title : null;
 	}
 
 	public static function getalladdress()
 	{
-
 		$editpost = PostCategory::where('slug', 'address')->first();
-		$catid = $editpost->id;
-		$address = Post::where('post_category_id', $catid)->get();
-		return $address;
+		if (!$editpost) return collect();
+		return Post::where('post_category_id', $editpost->id)->get();
 	}
 
 	public static function gettimings()
 	{
-
 		$editpost = PostCategory::where('slug', 'timing')->first();
-		$catid = $editpost->id;
-		$timing = Post::where('post_category_id', $catid)->get();
-		return $timing;
+		if (!$editpost) return collect();
+		return Post::where('post_category_id', $editpost->id)->get();
 	}
 
 	public static function getsocialicons()
 	{
 		$editpost = PostCategory::where('slug', 'social-icons')->first();
-		$catid = $editpost->id;
-		$socialicons = Post::where('post_category_id', $catid)->get();
-		return $socialicons;
+		if (!$editpost) return collect();
+		return Post::where('post_category_id', $editpost->id)->get();
 	}
 
 	public static function getaddress()
 	{
-
 		$editpost = PostCategory::where('slug', 'address')->first();
-		$catid = $editpost->id;
-		$address = Post::where('post_category_id', $catid)->first();
-		return $address;
+		if (!$editpost) return null;
+		return Post::where('post_category_id', $editpost->id)->first();
 	}
+
 	public static function getsecondlogo()
 	{
-
 		$editpost = PostCategory::where('slug', 'second-logo')->first();
-		$catid = $editpost->id;
-		$logo = Post::where('post_category_id', $catid)->first();
-		return $logo;
+		if (!$editpost) return null;
+		return Post::where('post_category_id', $editpost->id)->first();
 	}
+
 	public static function getlogo()
 	{
-
 		$editpost = PostCategory::where('slug', 'logo')->first();
-		$catid = $editpost->id;
-		$logo = Post::where('post_category_id', $catid)->first();
-		return $logo;
+		if (!$editpost) return null;
+		return Post::where('post_category_id', $editpost->id)->first();
 	}
 
 	public function about()
 	{
-		// Abouts
 		$category = PostCategory::where('slug', 'about-s')->first();
 		$abouts = $category ? Post::where('post_category_id', $category->id)->first() : null;
 
-		// Features
 		$category = PostCategory::where('slug', 'features')->first();
 		$features = $category ? Post::where('post_category_id', $category->id)->get() : collect();
 
-		// Commitment
 		$category = PostCategory::where('slug', 'commitment')->first();
 		$commitment = $category ? Post::where('post_category_id', $category->id)->get() : collect();
 
@@ -288,12 +262,10 @@ class HomeController extends Controller
 			'commitment' => $commitment,
 		]);
 	}
+
 	public function services()
 	{
-		// Fetch the category with slug 'diffservice'
 		$category = PostCategory::where('slug', 'diffservice')->first();
-
-		// Fallback to empty collection
 		$diffservice = collect();
 
 		if ($category) {
@@ -302,9 +274,9 @@ class HomeController extends Controller
 
 		return view('services', compact('diffservice'));
 	}
+
 	public function donationtime()
 	{
-
 		return view('donationtime');
 	}
 
@@ -313,6 +285,7 @@ class HomeController extends Controller
 		$projects = Project::orderBy('id', 'desc')->get();
 		return view('projects', compact('projects'));
 	}
+
 	public function projectDetails($id)
 	{
 		$project = Project::findOrFail($id);
@@ -322,21 +295,26 @@ class HomeController extends Controller
 	public function programs()
 	{
 		$programs = Program::orderBy('id', 'desc')->get();
-
 		return view('programs', [
-
 			'programs' => $programs,
 		]);
 	}
 
-
 	public function blogDetails($id)
 	{
-
-
 		$category = PostCategory::where('slug', 'blogs')->first();
-		$catid = $category->id;
-		$blog = Post::where('post_category_id', $catid)->first();
+
+		if (!$category) {
+			abort(404, 'Blog category not found');
+		}
+
+		$blog = Post::where('post_category_id', $category->id)
+			->where('id', $id)
+			->first();
+
+		if (!$blog) {
+			abort(404, 'Blog not found');
+		}
 
 		return view('blogdetails', compact('blog'));
 	}
@@ -365,23 +343,16 @@ class HomeController extends Controller
 	public function donate($id)
 	{
 		$program = Program::findOrFail($id);
-
 		return view('donate', [
-
 			'program' => $program,
 		]);
 	}
 
-
-
 	public function eventsdetails($id)
 	{
 		$event = Event::findOrFail($id);
-
 		return view('eventsdetails', compact('event'));
 	}
-
-
 
 	public function programsdetails($id)
 	{
@@ -389,59 +360,33 @@ class HomeController extends Controller
 		return view('programsdetails', compact('program'));
 	}
 
-
-
-
 	public function portfolio()
 	{
-		$category = PostCategory::where('slug', 'slider')->first();
-		$catid = $category->id;
-		$slider = Post::where('post_category_id', $catid)->get();
+		// Helper function to safely get posts
+		$getPosts = function ($slug, $single = false) {
+			$category = PostCategory::where('slug', $slug)->first();
+			if (!$category) {
+				return $single ? null : collect();
+			}
+			$query = Post::where('post_category_id', $category->id);
+			return $single ? $query->first() : $query->get();
+		};
 
-		$category = PostCategory::where('slug', 'about-s')->first();
-		$catid = $category->id;
-		$abouts = Post::where('post_category_id', $catid)->first();
-
-		$category = PostCategory::where('slug', 'features')->first();
-		$catid = $category->id;
-		$features = Post::where('post_category_id', $catid)->get();
-
-		$category = PostCategory::where('slug', 'counter')->first();
-		$catid = $category->id;
-		$counters = Post::where('post_category_id', $catid)->get();
-
-		$category = PostCategory::where('slug', 'whychooseus')->first();
-		$catid = $category->id;
-		$whychooseus = Post::where('post_category_id', $catid)->first();
-
-		$category = PostCategory::where('slug', 'facilities')->first();
-		$catid = $category->id;
-		$facilities = Post::where('post_category_id', $catid)->get();
-
-		// Only featured posts with images for the Gallery category
-		$category = PostCategory::where('slug', 'gallery')->first();
-		$catid = $category->id;
-		$gallery = Post::where('post_category_id', $catid)->get();
-
-		$category = PostCategory::where('slug', 'testimonials')->first();
-		$catid = $category->id;
-		$testimonials = Post::where('post_category_id', $catid)->get();
-
-		$category = PostCategory::where('slug', 'Highlights')->first();
-		$catid = $category->id;
-		$Highlights = Post::where('post_category_id', $catid)->get();
-
-		$category = PostCategory::where('slug', 'faq')->first();
-		$catid = $category->id;
-		$faq = Post::where('post_category_id', $catid)->get();
+		$slider = $getPosts('slider');
+		$abouts = $getPosts('about-s', true);
+		$features = $getPosts('features');
+		$counters = $getPosts('counter');
+		$whychooseus = $getPosts('whychooseus', true);
+		$facilities = $getPosts('facilities');
+		$gallery = $getPosts('gallery');
+		$testimonials = $getPosts('testimonials');
+		$Highlights = $getPosts('Highlights');
+		$faq = $getPosts('faq');
 
 		$products = Product::all();
 		$programs = Program::orderBy('id', 'desc')->get();
-		$events = event::all();
-
-
+		$events = Event::all();
 		$gallerycategories = GalleryCategory::all();
-
 
 		return view('portfolio', [
 			'gallerycategories' => $gallerycategories,
@@ -461,26 +406,21 @@ class HomeController extends Controller
 		]);
 	}
 
-
 	public function contact()
 	{
-		// Try to get the 'contact' category
 		$category = PostCategory::where('slug', 'contact')->first();
-
-		// Fallback: empty collection if category doesn't exist
-		$contact = collect();
 
 		if ($category) {
 			$contact = Post::where('post_category_id', $category->id)->get();
+		} else {
+			$contact = collect();
 		}
 
 		return view('contact', compact('contact'));
 	}
-	
+
 	public function contactSubmit(Request $request)
 	{
-
-
 		// Validate the form data
 		$validator = Validator::make($request->all(), [
 			'name' => 'required|string|max:255',

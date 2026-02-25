@@ -201,9 +201,6 @@ Route::get('/programsdetails/{id}', [HomeController::class, 'programsdetails'])-
 Route::post('/book-event', [EventBookingController::class, 'store'])->name('book.event');
 
 
-
-
-
 /*  Route::get('/services', 'App\Http\Controllers\HomeController@services')->name('home.services');
  Route::get('/gallery', 'App\Http\Controllers\HomeController@gallery')->name('home.gallery');
   Route::get('/offer', 'App\Http\Controllers\HomeController@offer')->name('home.offer');
@@ -255,9 +252,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 
 
-    
-
-    Route::resource('product-categories', ProductCategoryController::class);
+   Route::resource('product-categories', ProductCategoryController::class);
     Route::resource('products', ProductController::class);
 
     Route::get('page/{slug}', [PageController::class, 'create'])->name('page.create');

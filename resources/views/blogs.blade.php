@@ -54,7 +54,7 @@
                                 {{ Str::limit(strip_tags($blog->body), 150) }}
                             </p>
 
-                            <a href="#" class="recent-btn">
+                            <a href="" class="recent-btn">
                                 Read Article →
                             </a>
 
@@ -92,9 +92,6 @@
                 <div class="weekly-overlay">
                     <h4>{{ $blog->title }}</h4>
 
-                    <p>
-                        {{ Str::limit(strip_tags($blog->body), 80) }}
-                    </p>
                 </div>
 
             </div>
