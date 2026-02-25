@@ -61,14 +61,17 @@ class HomeController extends Controller
 		$catid = $category->id;
 		$slider = Post::where('post_category_id', $catid)->get();
 
+		$category = PostCategory::where('slug', 'commitment')->first();
+		$catid = $category->id;
+		$commitment = Post::where('post_category_id', $catid)->get();
+
 		$category = PostCategory::where('slug', 'about-s')->first();
 		$catid = $category->id;
-		$abouts = Post::where('post_category_id', $catid)->first();
+		$abouts = Post::where('post_category_id', $catid)->get();
 
 		$category = PostCategory::where('slug', 'about-us-home')->first();
 		$catid = $category->id;
 		$aboutushome = Post::where('post_category_id', $catid)->first();
-
 
 		$category = PostCategory::where('slug', 'features')->first();
 		$catid = $category->id;
@@ -114,7 +117,6 @@ class HomeController extends Controller
 		$faq = Post::where('post_category_id', $catid)->get();
 		$events = Event::all();
 
-
 		$category = PostCategory::where('slug', 'commondonation')->first();
 		$catid = $category->id;
 		$commondonation = Post::where('post_category_id', $catid)->get();
@@ -129,6 +131,7 @@ class HomeController extends Controller
 		return view('index', [
 			'aboutushome' => $aboutushome,
 			'slider' => $slider,
+			'commitment'=>$commitment,
 			'abouts' => $abouts,
 			'features' => $features,
 			'products' => $products,
@@ -262,6 +265,10 @@ class HomeController extends Controller
 		$catid = $category->id;
 		$features = Post::where('post_category_id', $catid)->get();
 
+		$category = PostCategory::where('slug', 'commitment')->first();
+		$catid = $category->id;
+		$commitment = Post::where('post_category_id', $catid)->get();
+
 
 		return view('about', [
 
@@ -271,6 +278,7 @@ class HomeController extends Controller
 			//'phone'=>$phone,
 			'features' => $features,
 			//'quotes'=>$quotes
+			'commitment'=>$commitment,
 		]);
 	}
 	public function donationtime()
