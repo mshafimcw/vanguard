@@ -10,6 +10,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!-- Icon Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
@@ -61,7 +62,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('/blog') }}">Blog</a>
+                    <a href="{{ url('/blogs') }}">Blog</a>
                 </li>
 
                 <li>
@@ -158,7 +159,7 @@
 </li>
 
 <li>
-<a href="{{ url('/blog') }}">Blog</a>
+<a href="{{ url('/blogs') }}">Blog</a>
 </li>
 
 <li>
@@ -215,6 +216,7 @@
 
 
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
 </body>

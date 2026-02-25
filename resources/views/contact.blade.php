@@ -14,65 +14,23 @@
 </div>
 
 <!-- Contact Info Cards Start -->
-<section class="contact-info-section">
-    <div class="container">
-        <div class="row g-4">
+@foreach($contact as $item)
+    <div class="col-lg-3 col-md-6">
+        <div class="info-card">
 
-            <!-- Call Us -->
-            <div class="col-lg-3 col-md-6">
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <div>
-                        <h5>Call Us</h5>
-                        <p>+971 52 149 1001</p>
-                    </div>
-                </div>
+            <div class="info-icon">
+                <img src="{{ asset('storage/' . $item->image) }}" 
+                     alt="{{ $item->title }}" width="30">
             </div>
 
-            <!-- Mail Us -->
-            <div class="col-lg-3 col-md-6">
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div>
-                        <h5>Mail Us</h5>
-                        <p>info@vanguarduae.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chat -->
-            <div class="col-lg-3 col-md-6">
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-comment"></i>
-                    </div>
-                    <div>
-                        <h5>Chat With Us</h5>
-                        <a href="#" class="chat-btn text-white">Let's Chat →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Address -->
-            <div class="col-lg-3 col-md-6">
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                    <div>
-                        <h5>Address</h5>
-                        <p>Dubai, UAE</p>
-                    </div>
-                </div>
+            <div>
+                <h5>{{ $item->title }}</h5>
+                <p>{!! $item->body !!}</p>
             </div>
 
         </div>
     </div>
-</section>
+@endforeach
 <!-- Contact Info Cards End -->
 <!-- ================= CONTACT SECTION ================= -->
 <section class="contact-section">

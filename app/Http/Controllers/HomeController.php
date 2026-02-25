@@ -44,8 +44,13 @@ class HomeController extends Controller
 		}
 
 		$category = PostCategory::where('slug', 'whychoose')->first();
-		$catid = $category->id;
-		$whychoose = Post::where('post_category_id', $catid)->get();
+
+		$whychoose = [];
+
+		if ($category) {
+			$whychoose = Post::where('post_category_id', $category->id)->get();
+		}
+
 
 
 		$category = PostCategory::where('slug', 'slider')->first();
@@ -264,6 +269,23 @@ class HomeController extends Controller
 			//'quotes'=>$quotes
 		]);
 	}
+
+	public function services()
+	{
+		$category = PostCategory::where('slug', 'diffservice')->first();
+
+		$diffservice = collect(); // empty collection (safe)
+
+		if ($category) {
+			$catid = $category->id;
+			$diffservice = Post::where('post_category_id', $catid)->get();
+		}
+
+		return view('services', [
+			'diffservice' => $diffservice
+		]);
+	}
+
 	public function donationtime()
 	{
 
@@ -302,17 +324,20 @@ class HomeController extends Controller
 
 		return view('blogdetails', compact('blog'));
 	}
+
 	public function blogs()
 	{
 		$category = PostCategory::where('slug', 'blogs')->first();
-		$catid = $category->id;
-		$blogs = Post::where('post_category_id', $catid)
-			->orderBy('created_at', 'desc') // Optional: order by latest
-			->paginate(6); // Show 6 blogs per page
 
-		return view('blogs', [
-			'blogs' => $blogs,
-		]);
+		if (!$category) {
+			abort(404);
+		}
+
+		$blogs = Post::where('post_category_id', $category->id)
+			->latest()
+			->get();
+
+		return view('blogs', compact('blogs'));
 	}
 
 	public function showEvents()
@@ -421,50 +446,14 @@ class HomeController extends Controller
 	}
 
 
-	public function Contact()
+	public function contact()
 	{
-
-
-		$category = PostCategory::where('slug', 'logo')->first();
+		$category = PostCategory::where('slug', 'contact')->first();
 		$catid = $category->id;
-		$logo = Post::where('post_category_id', $catid)->first();
-
-		$category = PostCategory::where('slug', 'phone')->first();
-		$catid = $category->id;
-		$phone = Post::where('post_category_id', $catid)->first();
-
-
-
-		$category = PostCategory::where('slug', 'email')->first();
-		$catid = $category->id;
-		$email = Post::where('post_category_id', $catid)->first();
-
-		$category = PostCategory::where('slug', 'email')->first();
-		$catid = $category->id;
-		$allemails = Post::where('post_category_id', $catid)->get();
-
-		$editpost = PostCategory::where('slug', 'address')->first();
-		$catid = $editpost->id;
-		$address = Post::where('post_category_id', $catid)->first();
-
-
-
-		$editpost = PostCategory::where('slug', 'social-icons')->first();
-		$catid = $editpost->id;
-		$socialicons = Post::where('post_category_id', $catid)->get();
-
-
-
-
+		$contact = Post::where('post_category_id', $catid)->get();
 
 		return view('contact', [
-			'address' => $address,
-			'socialicons' => $socialicons,
-			'email' => $email,
-			'phone' => $phone,
-
-			'logo' => $logo,
-			'allemails' => $allemails,
+			'contact' => $contact,
 		]);
 	}
 
