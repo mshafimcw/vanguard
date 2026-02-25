@@ -11,7 +11,7 @@ use App\Models\Program;
 use App\Models\Event;
 use App\Models\Project;
 use App\Models\ContactSubmission;
-use Illuminate\Support\Facades\Validator; // Add this line
+use Illuminate\Support\Facades\Validator; 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormSubmitted;
 use App\Models\GalleryCategory;
