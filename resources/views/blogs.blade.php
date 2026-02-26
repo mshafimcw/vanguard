@@ -45,7 +45,7 @@
 
                             <div class="recent-meta">
                                 <span>{{ $blog->created_at->format('d F Y') }}</span>
-                                
+
                             </div>
 
                             <h2>{{ $blog->title }}</h2>
@@ -54,7 +54,7 @@
                                 {{ Str::limit(strip_tags($blog->body), 150) }}
                             </p>
 
-                            <a href="" class="recent-btn">
+                            <a href="{{ route('blogs.details', $blog->id) }}" class="recent-btn">
                                 Read Article →
                             </a>
 
@@ -85,16 +85,15 @@
         <div class="weekly-grid">
 
             @foreach($blogs as $blog)
-            <div class="weekly-card">
+            <a href="{{ route('blogs.details', $blog->id) }}" class="weekly-card">
 
                 <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
 
                 <div class="weekly-overlay">
                     <h4>{{ $blog->title }}</h4>
-
                 </div>
 
-            </div>
+            </a>
             @endforeach
 
         </div>

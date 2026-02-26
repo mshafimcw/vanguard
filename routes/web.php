@@ -329,6 +329,6 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
- Route::get('/blogdetails', function () {
-    return view('blogdetails');
-    })->name('blogdetails');
+//  Route::get('/blogdetails', function () {
+//     return view('blogdetails');
+//     })->name('blogdetails');

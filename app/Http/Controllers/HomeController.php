@@ -11,10 +11,11 @@ use App\Models\Program;
 use App\Models\Event;
 use App\Models\Project;
 use App\Models\ContactSubmission;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormSubmitted;
 use App\Models\GalleryCategory;
+use App\Models\MultiplePostImage;
 
 class HomeController extends Controller
 {
@@ -136,7 +137,7 @@ class HomeController extends Controller
 		return view('index', [
 			'aboutushome' => $aboutushome,
 			'slider' => $slider,
-			'commitment'=>$commitment,
+			'commitment' => $commitment,
 			'abouts' => $abouts,
 			'features' => $features,
 			'products' => $products,
@@ -283,7 +284,7 @@ class HomeController extends Controller
 			//'phone'=>$phone,
 			'features' => $features,
 			//'quotes'=>$quotes
-			'commitment'=>$commitment,
+			'commitment' => $commitment,
 		]);
 	}
 
@@ -333,13 +334,19 @@ class HomeController extends Controller
 
 	public function blogDetails($id)
 	{
+		$blog = Post::findOrFail($id);
 
 
-		$category = PostCategory::where('slug', 'blogs')->first();
-		$catid = $category->id;
-		$blog = Post::where('post_category_id', $catid)->first();
+		$multiImages = MultiplePostImage::where('post_id', $blog->id)->get();
 
-		return view('blogdetails', compact('blog'));
+
+		$relatedBlogs = Post::where('post_category_id', $blog->post_category_id)
+			->where('id', '!=', $blog->id)
+			->latest()
+			->take(3)
+			->get();
+
+		return view('blogdetails', compact('blog', 'multiImages', 'relatedBlogs'));
 	}
 
 	public function blogs()
@@ -464,21 +471,21 @@ class HomeController extends Controller
 
 
 	public function contact()
-{
-    $category = PostCategory::where('slug', 'contact')->first();
-    
-    // Check if category exists
-    if($category) {
-        $catid = $category->id;
-        $contact = Post::where('post_category_id', $catid)->get();
-    } else {
-        // Handle case when category doesn't exist
-        $contact = collect(); // Empty collection
-    }
-    
-    // Return view with data
-    return view('contact', compact('contact'));
-}
+	{
+		$category = PostCategory::where('slug', 'contact')->first();
+
+		// Check if category exists
+		if ($category) {
+			$catid = $category->id;
+			$contact = Post::where('post_category_id', $catid)->get();
+		} else {
+			// Handle case when category doesn't exist
+			$contact = collect(); // Empty collection
+		}
+
+		// Return view with data
+		return view('contact', compact('contact'));
+	}
 
 	public function contactSubmit(Request $request)
 	{
@@ -516,6 +523,3 @@ class HomeController extends Controller
 		}
 	}
 }
-
-
-

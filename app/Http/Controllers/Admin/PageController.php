@@ -82,6 +82,20 @@ class PageController extends Controller
                   
                     $post=Post::create($validated);
                     $category_slug=$request->category_slug;
+
+                    // Multiple Images Upload
+if($request->hasFile('multiple_images')) {
+    foreach ($request->file('multiple_images') as $image) {
+
+        $imageName = time().'_'.$image->getClientOriginalName();
+        $image->move(public_path('posts'), $imageName);
+
+        \App\Models\MultiplePostImage::create([
+            'post_id' => $post->id,
+            'image_name' => $imageName
+        ]);
+    }
+}
                     return redirect() ->route('admin.page.show', $post->id) 
                                     ->with('success', 'Post created successfully.');
                          
