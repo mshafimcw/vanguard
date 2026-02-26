@@ -66,31 +66,7 @@
 
 
         <!-- ================= FEATURES SECTION (EXACT MATCH WITH ICONS) ================= -->
-        <section class="features-exact">
-            <div class="services-heading">
-                <h2>What Makes Our Services Different</h2>
-            </div>
-            <div class="container">
-                <div class="features-exact-grid">
-                    @forelse ($diffservice as $diffser)
-                        <div class="feature-exact-item">
-                            <div class="feature-icon-exact">
-                                <img src="{{ asset($diffser->image) }}" alt="{{ $diffser->title }}" width="60">
-                            </div>
-                            <h3>{{ $diffser->title }}</h3>
-                            <p>{{ $diffser->body }}</p>
-                        </div>
-                    @empty
-                        <p>No services found.</p>
-                    @endforelse
-                </div>
-
-                <div class="features-exact-cta">
-                    <a href="#contact" class="btn-price-exact">Get My Price</a>
-                </div>
-            </div>
-        </section>
-
+        
         <!-- ================= CTA RIBBON ================= -->
         <section class="scrap-cta">
             <div class="scrap-cta-inner">

@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
+    @if (session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
     @foreach ($banner as $banners)
         <div class="container-fluid py-5 mb-5 hero-header wow fadeIn"
             style="background-image: url('{{ asset($banners->image) }}');
@@ -73,7 +78,7 @@
                         @foreach ($services as $service)
                             <div class="scrap-card">
 
-                                <img src="{{ asset('uploads/services/'.$service->image) }}">
+                                <img src="{{ asset('uploads/services/' . $service->image) }}">
 
                                 <h3>{{ $service->title }}</h3>
 
@@ -94,29 +99,55 @@
                             Get Your <span class="orange-text">Scrap's</span> <br />Value
                             <span class="orange-text">Instantly</span>
                         </h3>
-                        <form>
-                            <input type="text" name="name" placeholder="Full Name *" required />
-                            <input type="tel" name="phone" placeholder="Phone Number *" required />
-                            <input type="email" name="email" placeholder="Email (optional)" />
-                            <select name="location">
-                                <option>Dubai - Sharjah - Ajman</option>
+                        <form action="{{ route('scrap-request.store') }}" method="POST">
+
+                            @csrf
+
+                            <input type="text" name="full_name" placeholder="Full Name *" required>
+
+
+                            <input type="tel" name="phone" placeholder="Phone Number *" required>
+
+
+                            <input type="email" name="email" placeholder="Email">
+
+
+                            <select name="location" required>
+
+                                <option value="">Select Location</option>
+
+                                <option value="Dubai">Dubai</option>
+
+                                <option value="Sharjah">Sharjah</option>
+
+                                <option value="Ajman">Ajman</option>
+
                             </select>
-                            <select name="scrap-type">
-                                <option>Metal Scrap, E-Waste, etc.</option>
+
+
+                            {{-- Dynamic scrap type --}}
+                            <select name="scrap_type[]" multiple required>
+
+                                @foreach ($services as $service)
+                                    <option value="{{ $service->title }}">
+
+                                        {{ $service->title }}
+
+                                    </option>
+                                @endforeach
+
                             </select>
-                            <textarea name="details" placeholder="Details of Your Scrap (optional)"></textarea>
-                            <div class="captcha">
-                                <div class="captcha-left">
-                                    <input type="checkbox" id="robot-check" required />
-                                    <label for="robot-check">I'm not a robot</label>
-                                </div>
-                                <div class="captcha-logo">
-                                    <img src="img/recaptcha.png" alt="reCAPTCHA" width="32" height="32" />
-                                </div>
-                            </div>
+
+
+                            <textarea name="details"></textarea>
+
+
                             <button type="submit" class="btn-get-price">
+
                                 Get My Price
+
                             </button>
+
                         </form>
                     </div>
                 </div>
