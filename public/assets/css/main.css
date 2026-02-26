@@ -4455,3 +4455,188 @@ body {
     }
 }
 
+
+/* ================= SERVICE DETAIL ================= */
+.service-detail {
+  position: relative;
+  background: url("../img/cpper.png") center/cover no-repeat;
+  padding: 120px 20px;
+  color: #ffffff;
+}
+
+.service-detail-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.service-detail-wrapper {
+  position: relative;
+  display: flex;
+  gap: 60px;
+  max-width: 1200px;
+  margin: auto;
+  z-index: 2;
+}
+
+/* LEFT CONTENT */
+.service-detail-content {
+  flex: 2;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #cccccc;
+}
+
+.breadcrumb a {
+  color: #ffb347;
+  text-decoration: none;
+}
+
+.service-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ffb347;
+}
+
+.service-subtitle {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #eeeeee;
+}
+
+.service-description {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 35px;
+  color: #dddddd;
+}
+
+/* BLOCK */
+.service-block h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #ffb347;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+}
+
+.service-list li {
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.service-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #ffb347;
+}
+
+/* BENEFITS */
+.service-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.benefit-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.benefit-card i {
+  font-size: 28px;
+  color: #ffb347;
+  margin-bottom: 10px;
+}
+
+.benefit-card h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #ffb347;
+}
+
+.benefit-card p {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+/* RIGHT FORM */
+.service-quote {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.service-quote h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffb347;
+}
+
+.service-quote input,
+.service-quote select,
+.service-quote textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  border: none;
+  background: #1f1f1f;
+  color: #ffffff;
+}
+
+.service-quote textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(to bottom, #ffb347, #ff8c1a);
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .service-detail-wrapper {
+    flex-direction: column;
+  }
+
+  .service-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .service-title {
+    font-size: 34px;
+  }
+}
+
+.hero-detailpage  {
+  background: url(../img/copper.png) center center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  min-height: 60vh;
+  width: 100%;
+}
+

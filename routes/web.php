@@ -375,3 +375,7 @@ Route::delete(
 Route::get('/admin/scrap-requests/{id}',
 [AdminScrapRequestController::class, 'show'])
 ->name('admin.scrap_requests.show');
+
+Route::get('/servicedetails', function () {
+    return view('servicedetails');
+});
