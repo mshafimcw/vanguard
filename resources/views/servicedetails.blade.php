@@ -79,11 +79,15 @@
         <input type="text" placeholder="Full Name" required>
         <input type="tel" placeholder="Phone Number" required>
 
-        <select>
-          <option>Dubai - Sharjah - Ajman</option>
-          <option>Abu Dhabi</option>
-          <option>Ras Al Khaimah</option>
-        </select>
+        <select name="location" required>
+                            <option value="">Select Location</option>
+
+                            @foreach ($locations as $location)
+                            <option value="{{ $location->location }}">
+                                {{ $location->location }}
+                            </option>
+                            @endforeach
+                        </select>
 
         <select>
           <option>Copper Scrap</option>

@@ -141,6 +141,7 @@ class HomeController extends Controller
 		}
 
 		$services = Service::latest()->get();
+		$locations = Location::orderBy('location')->get();
 
 		return view('index', [
 			'aboutushome' => $aboutushome,
@@ -163,8 +164,16 @@ class HomeController extends Controller
 			'banner' => $banner,
 			'whychoose' => $whychoose,
 			'services' => $services,
+			'location' =>$locations,
 		]);
 	}
+
+	public function servicedetails()
+    {
+        $locations = Location::orderBy('location')->get();
+
+        return view('servicedetails', compact('locations'));
+    }
 
 	public static function getphone()
 	{
