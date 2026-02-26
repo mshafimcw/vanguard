@@ -31,11 +31,19 @@
       <p>
         {!! $blog->body !!}
       </p>
-      @foreach ($multiImages as $image)
-      <img src="{{ asset('posts/' . $image->image_name) }}" />
-      {{ $image->image_name }}
-      @endforeach
-      
+      @if($multiImages->count() > 0)
+      <div class="container mt-4">
+        <h4 class="mb-3">Gallery</h4>
+        <div class="row">
+          @foreach($multiImages as $image)
+          <div class="col-md-4 mb-3">
+            <img src="{{ asset('posts/' . $image->image_name) }}" class="img-fluid rounded shadow" style="height:250px; object-fit:cover; width:100%;">
+          </div>
+          @endforeach
+        </div>
+      </div>
+      @endif
+
 
     </article>
 
