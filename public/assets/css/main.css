@@ -718,24 +718,6 @@ body {
 }
 
 /* Background image for each card */
-.scrap-card:nth-child(1) {
-    background-image: url("../img/metal.png");
-}
-.scrap-card:nth-child(2) {
-    background-image: url("../img/copper.png");
-}
-.scrap-card:nth-child(3) {
-    background-image: url("../img/aluminium.png");
-}
-.scrap-card:nth-child(4) {
-    background-image: url("../img/construction.png");
-}
-.scrap-card:nth-child(5) {
-    background-image: url("../img/industrial2.png");
-}
-.scrap-card:nth-child(6) {
-    background-image: url("../img/industrial3.png");
-}
 
 .scrap-card {
     background-size: cover;
