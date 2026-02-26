@@ -1,83 +1,107 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+<div class="container">
 
-        <h1>Edit Service</h1>
-
-
-        <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
-
-            @csrf
-
-            @method('PUT')
+    <h1>Edit Service</h1>
 
 
-            <div class="form-group">
+    <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data">
 
-                <label>Title</label>
+        @csrf
 
-                <input type="text" name="title" value="{{ old('title', $service->title) }}" class="form-control" required>
-
-            </div>
+        @method('PUT')
 
 
+        <div class="form-group">
 
-            <div class="form-group mt-3">
+            <label>Title</label>
 
-                <label>Description</label>
+            <input type="text" name="title" value="{{ old('title', $service->title) }}" class="form-control" required>
 
-                <textarea name="description" class="form-control" rows="5" required>{{ old('description', $service->description) }}</textarea>
-
-            </div>
+        </div>
 
 
 
-            <div class="form-group mt-3">
+        <div class="form-group mt-3">
 
-                <label>Current Image</label>
+            <label>Description</label>
 
-                <br>
+            <textarea name="description" class="form-control" rows="5" required>{{ old('description', $service->description) }}</textarea>
 
-                @if ($service->image)
-                    <img src="{{ asset('services/' . $service->image) }}" width="120" style="border-radius:8px">
-                @else
-                    <p>No image uploaded</p>
-                @endif
+        </div>
 
-            </div>
+        {{-- TEXT 1 --}}
+        <div class="form-group mt-3">
+            <label>Text 1</label>
+            <textarea name="text1" class="form-control" rows="3">
+            {{ old('text1', $service->text1) }}
+            </textarea>
+        </div>
+
+        {{-- TEXT 2 --}}
+        <div class="form-group mt-3">
+            <label>Text 2</label>
+            <textarea name="text2" class="form-control" rows="3">
+            {{ old('text2', $service->text2) }}
+            </textarea>
+        </div>
+
+        {{-- TEXT 3 --}}
+        <div class="form-group mt-3">
+            <label>Text 3</label>
+            <textarea name="text3" class="form-control" rows="3">
+            {{ old('text3', $service->text3) }}
+            </textarea>
+        </div>
 
 
 
-            <div class="form-group mt-3">
+        <div class="form-group mt-3">
 
-                <label>Change Image</label>
-
-                <input type="file" name="image" class="form-control">
-
-            </div>
-
-
+            <label>Current Image</label>
 
             <br>
 
+            @if ($service->image)
+            <img src="{{ asset('services/' . $service->image) }}" width="120" style="border-radius:8px">
+            @else
+            <p>No image uploaded</p>
+            @endif
 
-            <button class="btn btn-success">
-
-                Update
-
-            </button>
-
-
-            <a href="{{ route('admin.services.index') }}" class="btn btn-secondary">
-
-                Cancel
-
-            </a>
+        </div>
 
 
-        </form>
+
+        <div class="form-group mt-3">
+
+            <label>Change Image</label>
+
+            <input type="file" name="image" class="form-control">
+
+        </div>
 
 
-    </div>
+
+        <br>
+
+
+        <button class="btn btn-success">
+
+            Update
+
+        </button>
+
+
+        <a href="{{ route('admin.services.index') }}" class="btn btn-secondary">
+
+            Cancel
+
+        </a>
+
+
+    </form>
+
+
+</div>
 @endsection
