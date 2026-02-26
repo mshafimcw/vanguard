@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\AllRegisterController;
 use App\Http\Controllers\EwasteDonationController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MoneyDonationController;
 use App\Http\Controllers\ServiceController;
 
@@ -296,6 +297,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 
 
 
+
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -343,3 +345,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::get('/services', [HomeController::class, 'services']);
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('locations', LocationController::class);
+});
