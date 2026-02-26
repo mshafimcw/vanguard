@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Vanguard Website</title>
@@ -34,186 +35,172 @@
 
 <body>
 
-<!-- Spinner -->
-<div id="spinner"
-    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-primary"></div>
-</div>
-
+    <!-- Spinner -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary"></div>
+    </div>
 
 <!-- Navbar -->
 <div class="branding d-flex align-items-center">
-
     <div class="container d-flex align-items-center justify-content-between">
-
         <a href="{{ url('/') }}" class="logo d-flex align-items-center">
             <h1 class="sitename">Vanguard</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
-
             <ul>
-
                 <li>
                     <a href="{{ url('/') }}" class="active">Home</a>
                 </li>
-
                 <li>
                     <a href="{{ url('/about') }}">About</a>
                 </li>
-
                 <li>
                     <a href="{{ url('/blogs') }}">Blog</a>
                 </li>
-
                 <li>
                     <a href="{{ url('/services') }}">Services</a>
                 </li>
-
                 <li>
                     <a href="{{ url('/contact') }}">Contact Us</a>
                 </li>
+            </ul>
+            <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
+            <div class="navbar-call d-lg-none mobile-call">
+                <i class="bi bi-telephone-fill"></i>
+                <a href="tel:+971521491001">+971 52 149 1001</a>
+            </div>
+        </nav>
 
-                <div class="navbar-call d-none d-lg-flex align-items-center">
+        <!-- Desktop call button (visible on large screens) -->
+        
 
-                    <i class="bi bi-telephone-fill"></i>
+        <button class="mobile-nav-toggle d-lg-none">
+            <i class="bi bi-list"></i>
+        </button>
+    </div>
+</div>
 
-                    <a href="tel:+971521491001">
-                        +971 52 149 1001
-                    </a>
+
+    <!-- PAGE CONTENT -->
+    @yield('content')
+
+    <!-- ================= SERVICE AREA SECTION ================= -->
+    <section class="service-area">
+        <div class="overlay"></div>
+
+        <div class="service-container">
+            <div class="service-content">
+                <h2>Service Areas Across the UAE</h2>
+                <p>
+                    From Dubai to Fujairah, we cover every corner of the UAE with reliabilty
+                </p>
+
+                <div class="service-tags">
+                    @foreach($locations as $location)
+                    <span>{{ $location->location }}</span>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+
+            <div class="footer-container">
+
+                <div class="footer-col">
+
+                    <h3 class="brand">VANGUARD</h3>
+
+                    <p>1-2873 52 104 - 1001</p>
+
+                    <p>Dubai - UAE</p>
 
                 </div>
 
-            </ul>
 
-        </nav>
+                <div class="footer-col">
 
-    </div>
+                    <h4>CONTACT US</h4>
 
-</div>
+                    <p>info@vanguarduae.com</p>
 
+                    <p>Rawda Bus Service - Dubai</p>
 
-<!-- PAGE CONTENT -->
-@yield('content')
-
-<!-- ================= SERVICE AREA SECTION ================= -->
-<section class="service-area">
-  <div class="overlay"></div>
-
-  <div class="service-container">
-    <div class="service-content">
-      <h2>Service Areas Across the UAE</h2>
-      <p>
-        From Dubai to Fujairah, we cover every corner of the UAE with reliabilty
-      </p>
-
-      <div class="service-tags">
-        <span>Dubai</span>
-        <span>Sharjah</span>
-        <span>Abu Dhabi</span>
-        <span>Ajman</span>
-        <span>Ras Al Khaimah</span>
-        <span>Umm Al Quwain</span>
-      </div>
-    </div>
-  </div>
-
-<!-- Footer -->
-<footer class="footer">
-
-<div class="footer-container">
-
-<div class="footer-col">
-
-<h3 class="brand">VANGUARD</h3>
-
-<p>1-2873 52 104 - 1001</p>
-
-<p>Dubai - UAE</p>
-
-</div>
+                </div>
 
 
-<div class="footer-col">
+                <div class="footer-col">
 
-<h4>CONTACT US</h4>
+                    <h4>QUICK LINKS</h4>
 
-<p>info@vanguarduae.com</p>
+                    <ul class="quick-links">
 
-<p>Rawda Bus Service - Dubai</p>
+                        <li>
+                            <a href="{{ url('/') }}">Home</a>
+                        </li>
 
-</div>
+                        <li>
+                            <a href="{{ url('/services') }}">Services</a>
+                        </li>
 
+                        <li>
+                            <a href="{{ url('/blogs') }}">Blog</a>
+                        </li>
 
-<div class="footer-col">
+                        <li>
+                            <a href="{{ url('/contact') }}">Contact</a>
+                        </li>
 
-<h4>QUICK LINKS</h4>
+                    </ul>
 
-<ul class="quick-links">
-
-<li>
-<a href="{{ url('/') }}">Home</a>
-</li>
-
-<li>
-<a href="{{ url('/services') }}">Services</a>
-</li>
-
-<li>
-<a href="{{ url('/blogs') }}">Blog</a>
-</li>
-
-<li>
-<a href="{{ url('/contact') }}">Contact</a>
-</li>
-
-</ul>
-
-</div>
+                </div>
 
 
-<div class="footer-col">
+                <div class="footer-col">
 
-<h4>NEWSLETTER</h4>
+                    <h4>NEWSLETTER</h4>
 
-<div class="newsletter">
+                    <div class="newsletter">
 
-<input type="email" placeholder="Email address">
+                        <input type="email" placeholder="Email address">
 
-<button>SUBSCRIBE</button>
+                        <button>SUBSCRIBE</button>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
 
-</div>
+            </div>
 
-</footer>
+        </footer>
 
 
 
-<!-- JS -->
+        <!-- JS -->
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/wow/wow.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/easing/easing.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/waypoints/waypoints.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/counterup/counterup.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/tempusdominus/js/moment.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/tempusdominus/js/moment.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 
-<script src="{{ asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -222,4 +209,5 @@
 
 
 </body>
+
 </html>

@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\AllRegisterController;
 use App\Http\Controllers\EwasteDonationController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MoneyDonationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactRequestController;
@@ -287,6 +288,9 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 });
 
 
+
+
+
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -338,6 +342,9 @@ Route::get('/services', [HomeController::class, 'services']);
 // Use HomeController to display the page (it has the contact data from posts)
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('locations', LocationController::class);
+});
 // Use ContactRequestController to save form data to contact_requests table
 Route::post('/contact', [ContactRequestController::class, 'store'])->name('contact.store');
 
@@ -368,3 +375,7 @@ Route::delete(
 Route::get('/admin/scrap-requests/{id}',
 [AdminScrapRequestController::class, 'show'])
 ->name('admin.scrap_requests.show');
+
+Route::get('/servicedetails', function () {
+    return view('servicedetails');
+});

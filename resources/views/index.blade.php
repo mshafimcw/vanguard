@@ -76,9 +76,9 @@
                     <div class="scrap-items">
 
                         @foreach ($services as $service)
-                            <div class="scrap-card">
+                            <div class="scrap-card" style="background-image: url('{{ asset('uploads/services/'.$service->image) }}');">
 
-                                <img src="{{ asset('uploads/services/' . $service->image) }}">
+                                
 
                                 <h3>{{ $service->title }}</h3>
 

@@ -27,7 +27,7 @@
                 <div class="material-card">
                     <img src="img/metal.png" alt="Metal Scrap">
                     <h3>Metal Scrap</h3>
-                    <a href="contact.html" class="material-btn">View Details</a>
+                    <a href="/servicedetails" class="material-btn">View Details</a>
 
                 </div>
 

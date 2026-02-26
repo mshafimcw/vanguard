@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormSubmitted;
 use App\Models\GalleryCategory;
+use App\Models\Location;
 use App\Models\Service;
+use App\Models\MultiplePostImage;
 
 class HomeController extends Controller
 {
@@ -300,23 +302,30 @@ class HomeController extends Controller
 		]);
 	}
 
+	public function locations()
+{
+    $locations = Location::orderBy('id', 'desc')->get();
+
+    return view('main', [
+        'locations' => $locations,
+    ]);
+}
+
 	public function blogDetails($id)
 	{
-		$category = PostCategory::where('slug', 'blogs')->first();
+		$blog = Post::findOrFail($id);
 
-		if (!$category) {
-			abort(404, 'Blog category not found');
-		}
 
-		$blog = Post::where('post_category_id', $category->id)
-			->where('id', $id)
-			->first();
+		$multiImages = MultiplePostImage::where('post_id', $blog->id)->get();
 
-		if (!$blog) {
-			abort(404, 'Blog not found');
-		}
 
-		return view('blogdetails', compact('blog'));
+		$relatedBlogs = Post::where('post_category_id', $blog->post_category_id)
+			->where('id', '!=', $blog->id)
+			->latest()
+			->take(3)
+			->get();
+
+		return view('blogdetails', compact('blog', 'multiImages', 'relatedBlogs'));
 	}
 
 	public function blogs()
@@ -333,6 +342,7 @@ class HomeController extends Controller
 
 		return view('blogs', compact('blogs'));
 	}
+
 
 	public function showEvents()
 	{
