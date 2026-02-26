@@ -34,15 +34,16 @@ use App\Http\Controllers\EwasteDonationController;
 use App\Http\Controllers\MoneyDonationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\ScrapRequestController;
+use App\Http\Controllers\Admin\AdminScrapRequestController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
 
 
-// routes/web.php
+// // routes/web.php
 
 // Frontend routes
-
 Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
 
 Route::get('/blog/{id}', [HomeController::class, 'blogDetails'])->name('blogs.details');
@@ -63,11 +64,11 @@ Route::post('/donate-money/verify-payment', [MoneyDonationController::class, 've
 //Route::post('/contact', [App\Http\Controllers\SupportController::class, 'store'])->name('contact.submit');
 
 Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-	 Route::get('/money-donations', [MoneyDonationController::class, 'index'])->name('money-donations.index');
+    Route::get('/money-donations', [MoneyDonationController::class, 'index'])->name('money-donations.index');
     Route::get('/money-donations/{order}', [MoneyDonationController::class, 'show'])->name('money-donations.show');
     Route::get('/money-donations/export', [MoneyDonationController::class, 'exportDonations'])->name('money-donations.export');
     Route::get('/money-donations/statistics', [MoneyDonationController::class, 'getStatistics'])->name('money-donations.statistics');
-	
+
     Route::resource('gallery-categories', GalleryCategoryController::class);
 	
 	 
@@ -78,8 +79,8 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::get('/volunteers/export', [AllRegisterController::class, 'exportVolunteers'])->name('volunteers.export');
     Route::get('/volunteers/statistics', [AllRegisterController::class, 'getStatistics'])->name('volunteers.statistics');
     Route::delete('/volunteers/{volunteer}', [AllRegisterController::class, 'destroy'])->name('volunteers.destroy');
-	
-	// E-Waste Donation Management Routes
+
+    // E-Waste Donation Management Routes
     Route::get('/ewaste-donations', [EwasteDonationController::class, 'index'])->name('ewaste-donations.index');
     Route::get('/ewaste-donations/{ewasteDonation}', [EwasteDonationController::class, 'show'])->name('ewaste-donations.show');
     Route::put('/ewaste-donations/{ewasteDonation}/status', [EwasteDonationController::class, 'updateStatus'])->name('ewaste-donations.status');
@@ -96,14 +97,14 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::put('/support/{support}', [App\Http\Controllers\Admin\SupportController::class, 'update'])->name('support.update');
     Route::delete('/support/{support}', [App\Http\Controllers\Admin\SupportController::class, 'destroy'])->name('support.destroy');
     Route::get('/support-stats', [App\Http\Controllers\Admin\SupportController::class, 'stats'])->name('support.stats');
-	
-	Route::get('users/create', [UserController::class, 'create'])->name('users.create'); // Show create form
-Route::post('users', [UserController::class, 'store'])->name('users.store'); // Handle create form submission
 
-     Route::get('users',       [UserController::class, 'index'])->name('users.index');
-    Route::get('users/{user}',[UserController::class, 'show'])->name('users.show');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create'); // Show create form
+    Route::post('users', [UserController::class, 'store'])->name('users.store'); // Handle create form submission
+
+    Route::get('users',       [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{user}',[UserController::class, 'update'])->name('users.update');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
 
@@ -117,18 +118,17 @@ Route::get('/api/support-messages', [SupportController::class, 'getMessages']);
 
 
 Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-	
-      Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
     Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
 
     // Assign route names to roles
     Route::get('roles/{role}/routes', [RoleController::class, 'editRoutes'])->name('roles.edit_routes');
     Route::post('roles/{role}/routes', [RoleController::class, 'updateRoutes'])->name('roles.update_routes');
-    
-   Route::put('roles/{role}/update-name', [RoleController::class, 'updateName'])->name('admin.roles.update_name');
 
-    });
+    Route::put('roles/{role}/update-name', [RoleController::class, 'updateName'])->name('admin.roles.update_name');
+});
 Route::get('/projects', [HomeController::class, 'projects'])->name('projects.list');
 Route::get('/projects/{id}/details', [HomeController::class, 'projectDetails'])->name('projects.details');
 
@@ -155,8 +155,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+//Route::get('/services', [HomeController::class, 'services'])->name('home.services');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
-
 
 Route::get('/programs', [HomeController::class, 'programs'])->name('home.programs');
 
@@ -176,7 +176,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/donations/{id}', [App\Http\Controllers\Admin\DonationReportController::class, 'show'])->name('admin.donations.show');
 });
 // routes/web.php (temporary test route)
-Route::get('/test-razorpay', function() {
+Route::get('/test-razorpay', function () {
     if (class_exists('Razorpay\Api\Api')) {
         return "Razorpay class found!";
     } else {
@@ -217,12 +217,12 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     //Route::get('/maintenance/{maintenance}', [MaintenanceController::class, 'show'])->name('maintenance.show');
     Route::get('/', [DashboardController::class, 'index'])
         ->name('dashboard');
-		
-		 
+
+
     Route::get('/dashboard/stats', [DashboardController::class, 'getStats'])->name('dashboard.stats');
     Route::get('/dashboard/activity', [DashboardController::class, 'getRecentActivity'])->name('dashboard.activity');
     Route::get('/dashboard/status-distribution', [DashboardController::class, 'getDonationStatusDistribution'])->name('dashboard.status-distribution');
-    
+
 
     // you can keep adding more admin routes here
     // Route::get('/users', [UserController::class, 'index']);
@@ -245,7 +245,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 
 
-   Route::resource('product-categories', ProductCategoryController::class);
+    Route::resource('product-categories', ProductCategoryController::class);
     Route::resource('products', ProductController::class);
 
     Route::get('page/{slug}', [PageController::class, 'create'])->name('page.create');
@@ -256,7 +256,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::get('pageedit/{id}', [PageController::class, 'edit'])->name('page.edit');
     Route::put('pageupdate/{id}', [PageController::class, 'update'])->name('page.update');
     Route::post('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
-	  Route::delete('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
+    Route::delete('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
 });
 
 Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
@@ -287,8 +287,6 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 });
 
 
-
-
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -300,7 +298,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 });
 
 // Add this route for image uploads
-Route::post('/admin/upload-image', function(Request $request) {
+Route::post('/admin/upload-image', function (Request $request) {
     $request->validate([
         'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
@@ -331,7 +329,6 @@ Route::get('/services', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('services', ServiceController::class);
-
 });
 
 Route::get('/services', [HomeController::class, 'services']);
@@ -349,3 +346,25 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/contact-requests', [ContactRequestController::class, 'index'])->name('contact-requests.index');
     Route::delete('/contact-requests/{id}', [ContactRequestController::class, 'destroy'])->name('contact-requests.destroy');
 });
+
+Route::post('/scrap-request', [ScrapRequestController::class, 'store'])
+    ->name('scrap-request.store');
+
+
+Route::get(
+    '/admin/scrap-requests',
+    [AdminScrapRequestController::class, 'index']
+)
+    ->name('admin.scrap_requests.index');
+
+
+Route::delete(
+    '/admin/scrap-requests/{id}',
+    [AdminScrapRequestController::class, 'destroy']
+)
+    ->name('admin.scrap_requests.destroy');
+
+    
+Route::get('/admin/scrap-requests/{id}',
+[AdminScrapRequestController::class, 'show'])
+->name('admin.scrap_requests.show');
