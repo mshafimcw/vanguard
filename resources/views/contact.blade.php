@@ -66,6 +66,53 @@
         </div>
     </div>
 
-</section>
+    <div class="row">
+        <!-- Contact Info Cards Start -->
+        @forelse($contact as $item)
+            <div class="col-lg-3 col-md-6">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" width="30">
+                    </div>
+                    <div>
+                        <h5>{{ $item->title }}</h5>
+                        <p>{!! $item->body !!}</p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p>No contact information available at the moment.</p>
+        @endforelse
+    </div>
+    <!-- Contact Info Cards End -->
+    <!-- ================= CONTACT SECTION ================= -->
+    <section class="contact-section">
 
+        <!-- FULL WIDTH MAP -->
+        <div class="map-background">
+            <iframe src="https://www.google.com/maps?q=Dubai,UAE&output=embed" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+
+        <!-- FORM OVERLAY -->
+        <div class="contact-overlay">
+            <div class="container">
+                <div class="contact-card">
+
+                    <h2 class="section-title">Get In Touch</h2>
+
+                    <form class="contact-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea rows="5" placeholder="Message"></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
 @endsection

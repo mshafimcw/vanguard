@@ -32,17 +32,18 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\AllRegisterController;
 use App\Http\Controllers\EwasteDonationController;
 use App\Http\Controllers\MoneyDonationController;
+use App\Http\Controllers\ServiceController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
-//Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-//Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
+Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-// // routes/web.php
+// routes/web.php
 
 // Frontend routes
-Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('home.contact');
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'Contact'])->name('home.contact');
 Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
 
 Route::get('/blog/{id}', [HomeController::class, 'blogDetails'])->name('blogs.details');
@@ -161,9 +162,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
-Route::get('/services', [HomeController::class, 'services'])->name('home.services');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
-// Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::get('/programs', [HomeController::class, 'programs'])->name('home.programs');
 
@@ -294,6 +294,8 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 });
 
 
+
+
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
 
 // Route::get('/events', [EventController::class, 'index'])->name('events.index');
@@ -328,6 +330,9 @@ Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/services', function () {
+    return view('services');
+});
 
 //  Route::get('/blogdetails', function () {
 //     return view('blogdetails');
