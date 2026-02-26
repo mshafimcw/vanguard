@@ -325,9 +325,9 @@ Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/services', function () {
-    return view('services');
-});
+// Route::get('/services', function () {
+//     return view('services');
+// });
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -376,6 +376,5 @@ Route::get('/admin/scrap-requests/{id}',
 [AdminScrapRequestController::class, 'show'])
 ->name('admin.scrap_requests.show');
 
-Route::get('/servicedetails', function () {
-    return view('servicedetails');
-});
+Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
+    ->name('servicedetails');

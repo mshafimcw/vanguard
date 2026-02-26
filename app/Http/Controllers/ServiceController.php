@@ -35,6 +35,9 @@ class ServiceController extends Controller
             'description' => 'nullable',
 
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'text1' => 'nullable',
+            'text2' => 'nullable',
+            'text3' => 'nullable',
 
         ]);
 
@@ -58,7 +61,10 @@ class ServiceController extends Controller
 
             'description' => $request->description,
 
-            'image' => $imageName
+            'image' => $imageName,
+            'text1' => $request->text1,
+            'text2' => $request->text2,
+            'text3' => $request->text3
 
         ]);
 
@@ -96,6 +102,9 @@ class ServiceController extends Controller
             'description' => 'nullable',
 
             'image' => 'nullable|image',
+            'text1' => 'nullable',
+            'text2' => 'nullable',
+            'text3' => 'nullable',
 
         ]);
 
@@ -109,7 +118,7 @@ class ServiceController extends Controller
 
             $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-           $image->move(public_path('uploads/services'), $imageName);
+            $image->move(public_path('uploads/services'), $imageName);
         }
 
 
@@ -119,7 +128,10 @@ class ServiceController extends Controller
 
             'description' => $request->description,
 
-            'image' => $imageName
+            'image' => $imageName,
+            'text1' => $request->text1,
+            'text2' => $request->text2,
+            'text3' => $request->text3,
 
         ]);
 
@@ -134,9 +146,9 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
 
-        if ($service->image && file_exists(public_path('uploads/services/'.$service->image))) {
+        if ($service->image && file_exists(public_path('uploads/services/' . $service->image))) {
 
-            unlink(public_path('uploads/services/'.$service->image));
+            unlink(public_path('uploads/services/' . $service->image));
         }
 
 

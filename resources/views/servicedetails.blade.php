@@ -1,12 +1,12 @@
 @extends('layouts.main')
 @section('content')
     <!-- Hero Start -->
-    <div class="container-fluid py-5 mb-5 hero-detailpage wow fadeIn">
+    <div class="container-fluid py-5 mb-5 hero-detailpage wow fadeIn" style="background-image: url('{{ asset('uploads/services/'.$service->image) }}');>
       <div class="container py-5">
         <div class="row align-items-center">
           <div class="col-lg-6 text-center text-lg-start hero-text">
             <h1 class="display-1 mb-4">
-              Copper Service Details<br />
+            {{ $service->title }}<br />
             </h1>
           </div>
         </div>
@@ -24,16 +24,9 @@
     <!-- LEFT CONTENT -->
     <div class="service-detail-content">
 
-      <h1 class="service-title">Copper Scrap Recycling</h1>
+      <h1 class="service-title">{{ $service->title }}</h1>
       <p class="service-subtitle">
-        Fast, Reliable & Hassle-Free Scrap Services Across the UAE
-      </p>
-
-      <p class="service-description">
-        We specialize in professional copper scrap collection and recycling for
-        individuals, businesses, construction sites, and industries across the UAE.
-        Our transparent pricing, certified weighing, and instant payments ensure
-        a smooth and trustworthy experience.
+      {{ $service->description }}
       </p>
 
       <!-- TYPES COVERED -->

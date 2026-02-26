@@ -7,8 +7,7 @@
 </script>
 @endif
 @foreach ($banner as $banners)
-<div class="container-fluid py-5 mb-5 hero-header wow fadeIn"
-    style="background-image: url('{{ asset($banners->image) }}');
+<div class="container-fluid py-5 mb-5 hero-header wow fadeIn" style="background-image: url('{{ asset($banners->image) }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;">
@@ -84,7 +83,8 @@
 
                         <p>{{ $service->description }}</p>
 
-                        <button class="btn-sell">Sell Scrap Now</button>
+                        <a href="{{ route('servicedetails', $service->id) }}" class="btn-sell">View Details</button>
+                        </a>
 
                     </div>
                     @endforeach
