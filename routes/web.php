@@ -376,6 +376,5 @@ Route::get('/admin/scrap-requests/{id}',
 [AdminScrapRequestController::class, 'show'])
 ->name('admin.scrap_requests.show');
 
-Route::get('/servicedetails', function () {
-    return view('servicedetails');
-});
+Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
+    ->name('servicedetails');

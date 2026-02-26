@@ -272,6 +272,13 @@ class HomeController extends Controller
 		return view('services', compact('services'));
 	}
 
+	public function serviceDetails($id)
+	{
+		$service = Service::findOrFail($id);
+
+		return view('servicedetails', compact('service'));
+	}
+
 	public function donationtime()
 	{
 		return view('donationtime');
