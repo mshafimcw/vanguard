@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Location;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        View::share('locations', Location::orderBy('id', 'desc')->get());
+        if (Schema::hasTable('locations')) {
+            View::share('locations', Location::orderBy('id', 'desc')->get());
+        }
     }
 }
