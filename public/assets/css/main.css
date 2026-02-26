@@ -3348,6 +3348,7 @@ body {
 
 }
 
+
 /* =====================================================
    CONTACT PAGE – VANGUARD THEME
 ===================================================== */
@@ -3510,55 +3511,108 @@ body {
 }
 
 /* ================= RESPONSIVE ================= */
-
-/* Tablet */
-@media (max-width: 992px) {
-
-    .hero-text h1 {
-        font-size: 45px;
-        text-align: center;
-    }
-
-    .map-box {
-        margin-top: 40px;
-        min-height: 350px;
-    }
-}
-
-
-/* Mobile */
-@media (max-width: 768px) {
-
-    .hero-header {
-        padding: 90px 0;
-    }
-
-    .hero-text h1 {
-        font-size: 36px;
-        text-align: center;
-    }
+/* ==============================
+   TABLET (≤1024px)
+============================== */
+@media (max-width: 1024px) {
 
     .contact-section {
-        padding: 60px 0;
+        padding: 100px 0;
     }
 
-    .contact-form-box {
-        padding: 30px;
+    .section-title {
+        font-size: 30px;
+        text-align: center;
     }
 
-    .contact-form-box button {
-        width: 100%;
+    .contact-card {
+        max-width: 90%;
+        margin: auto;
+        padding: 40px;
+    }
+
+    .info-card {
+        padding: 25px;
+    }
+
+    .info-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
     }
 }
-@media (max-width: 992px) {
-    .map-box {
-        height: 350px;
+
+
+/* ==============================
+   MOBILE (≤768px)
+============================== */
+/* ==============================
+   MOBILE MAP VISIBILITY FIX
+============================== */
+@media (max-width: 768px) {
+
+    .contact-section {
+        padding: 60px 0; /* reduce section height */
+    }
+
+    .contact-card {
+        max-width: 92%;
+        padding: 22px 20px;   /* smaller padding */
+        border-radius: 14px;
+    }
+
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px 12px;   /* smaller fields */
+        margin-bottom: 14px;
+        font-size: 14px;
+    }
+
+    .contact-form textarea {
+        height: 90px;  /* reduce textarea height */
+    }
+
+    .contact-form button {
+        padding: 10px;
+        font-size: 14px;
     }
 }
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+
+/* ==============================
+   SMALL MOBILE (≤480px)
+============================== */
+@media (max-width: 480px) {
+
+    .contact-section {
+        padding: 110px 0;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .contact-card {
+        padding: 25px 18px;
+    }
+
+    .info-card {
+        padding: 20px 15px;
+    }
+
+    .chat-btn {
+        font-size: 13px;
+        padding: 5px 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 13px;
+    }
 }
 /* ================= BLOG WRAPPER BACKGROUND ================= */
 
@@ -4320,4 +4374,3 @@ html, body {
         padding: 0 15px;
     }
 }
-

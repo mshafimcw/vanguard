@@ -33,17 +33,16 @@ use App\Http\Controllers\AllRegisterController;
 use App\Http\Controllers\EwasteDonationController;
 use App\Http\Controllers\MoneyDonationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ContactRequestController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
-Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-Route::post('/contact', [App\Http\Controllers\HomeController::class, 'contactSubmit'])->name('contact.submit');
 
 // routes/web.php
 
 // Frontend routes
-Route::get('/contact', [App\Http\Controllers\HomeController::class, 'Contact'])->name('home.contact');
+
 Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
 
 Route::get('/blog/{id}', [HomeController::class, 'blogDetails'])->name('blogs.details');
@@ -71,13 +70,7 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
 	
     Route::resource('gallery-categories', GalleryCategoryController::class);
 	
-	  Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-    Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
-    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
-    Route::post('/contacts/{contact}/mark-read', [ContactController::class, 'markAsRead'])->name('contacts.mark-read');
-    Route::post('/contacts/{contact}/mark-unread', [ContactController::class, 'markAsUnread'])->name('contacts.mark-unread');
-	   Route::post('/bulk-action', [ContactController::class, 'bulkAction'])->name('contacts.bulk-action'); 
-	   
+	 
 	   
 	    Route::get('/volunteers', [AllRegisterController::class, 'index'])->name('volunteers.index');
     Route::get('/volunteers/{volunteer}', [AllRegisterController::class, 'show'])->name('volunteers.show');
@@ -163,7 +156,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
-Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+
 
 Route::get('/programs', [HomeController::class, 'programs'])->name('home.programs');
 
@@ -342,4 +335,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/services', [HomeController::class, 'services']);
+
+
+
+// Use HomeController to display the page (it has the contact data from posts)
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+// Use ContactRequestController to save form data to contact_requests table
+Route::post('/contact', [ContactRequestController::class, 'store'])->name('contact.store');
+
+// Admin routes for contact requests
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contact-requests', [ContactRequestController::class, 'index'])->name('contact-requests.index');
+    Route::delete('/contact-requests/{id}', [ContactRequestController::class, 'destroy'])->name('contact-requests.destroy');
+});

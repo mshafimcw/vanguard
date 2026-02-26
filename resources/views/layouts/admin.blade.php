@@ -1224,6 +1224,24 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-box-arrow-in-right"></i>
                                 <p>
+                                    Contact Request
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.contact-requests.index', ['slug' => ' contact-request']) }}"
+                                        class="nav-link">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                                <p>
                                     Facilities
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
@@ -1678,26 +1696,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-header">Submissions</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-box-arrow-in-right"></i>
-                                <p>
-                                    Contact form
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.contacts.index', ['slug' => 'social-icons']) }}"
-                                        class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>List</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
+                       
 
 
                         <li class="nav-header">Forms</li>
