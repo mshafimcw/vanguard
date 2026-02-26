@@ -267,14 +267,9 @@ class HomeController extends Controller
 
 	public function services()
 	{
-		$category = PostCategory::where('slug', 'diffservice')->first();
-		$diffservice = collect();
+		$services = Service::latest()->get();
 
-		if ($category) {
-			$diffservice = Post::where('post_category_id', $category->id)->get();
-		}
-
-		return view('services', compact('diffservice'));
+		return view('services', compact('services'));
 	}
 
 	public function donationtime()
@@ -303,13 +298,13 @@ class HomeController extends Controller
 	}
 
 	public function locations()
-{
-    $locations = Location::orderBy('id', 'desc')->get();
+	{
+		$locations = Location::orderBy('id', 'desc')->get();
 
-    return view('main', [
-        'locations' => $locations,
-    ]);
-}
+		return view('main', [
+			'locations' => $locations,
+		]);
+	}
 
 	public function blogDetails($id)
 	{
