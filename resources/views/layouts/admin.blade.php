@@ -890,6 +890,24 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                                <p>
+                                    Get Price
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.scrap_requests.index', ['slug' => 'scrap_requests']) }}" class="nav-link">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                          <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-box-arrow-in-right"></i>
