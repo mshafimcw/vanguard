@@ -34,7 +34,7 @@
 
                     <p>{{ Str::limit($service->description, 100) }}</p>
 
-                    <a href="{{ route('services.details', $service->id) }}"
+                    <a href="{{ route('/servicedetails', $service->id) }}"
                        class="btn-sell">
                         View Details
                     </a>
