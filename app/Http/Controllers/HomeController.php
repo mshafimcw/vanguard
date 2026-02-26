@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormSubmitted;
 use App\Models\GalleryCategory;
+use App\Models\Location;
 use App\Models\Service;
 use App\Models\MultiplePostImage;
 
@@ -300,6 +301,15 @@ class HomeController extends Controller
 			'programs' => $programs,
 		]);
 	}
+
+	public function locations()
+{
+    $locations = Location::orderBy('id', 'desc')->get();
+
+    return view('main', [
+        'locations' => $locations,
+    ]);
+}
 
 	public function blogDetails($id)
 	{
