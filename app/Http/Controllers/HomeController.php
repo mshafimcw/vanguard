@@ -169,16 +169,15 @@ class HomeController extends Controller
 	}
 public function serviceDetails($id)
 {
-    $service   = Service::findOrFail($id);          // current service
+    $service   = Service::findOrFail($id);          // current serviceF$servi
     $services  = Service::orderBy('title')->get();  // dropdown loop
     $locations = Location::orderBy('location')->get();
 
-    $benefitCategory = PostCategory::where('slug', 'service-benefits')->first();
-    $benefits = collect();
-
-    if ($benefitCategory) {
-        $benefits = Post::where('post_category_id', $benefitCategory->id)->get();
-    }
+    $category = PostCategory::where('slug', 'service-benefits')->first();
+		$benefits = collect();
+		if ($category) {
+			$benefits = Post::where('post_category_id', $category->id)->get();
+		}
 
     return view('servicedetails', compact(
         'service',
