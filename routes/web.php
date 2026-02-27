@@ -37,6 +37,8 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\ScrapRequestController;
 use App\Http\Controllers\Admin\AdminScrapRequestController;
+use App\Models\Post;
+
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
@@ -71,10 +73,10 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::get('/money-donations/statistics', [MoneyDonationController::class, 'getStatistics'])->name('money-donations.statistics');
 
     Route::resource('gallery-categories', GalleryCategoryController::class);
-	
-	 
-	   
-	    Route::get('/volunteers', [AllRegisterController::class, 'index'])->name('volunteers.index');
+
+
+
+    Route::get('/volunteers', [AllRegisterController::class, 'index'])->name('volunteers.index');
     Route::get('/volunteers/{volunteer}', [AllRegisterController::class, 'show'])->name('volunteers.show');
     Route::put('/volunteers/{volunteer}/status', [AllRegisterController::class, 'updateStatus'])->name('volunteers.status');
     Route::get('/volunteers/export', [AllRegisterController::class, 'exportVolunteers'])->name('volunteers.export');
@@ -371,10 +373,12 @@ Route::delete(
 )
     ->name('admin.scrap_requests.destroy');
 
-    
-Route::get('/admin/scrap-requests/{id}',
-[AdminScrapRequestController::class, 'show'])
-->name('admin.scrap_requests.show');
+
+Route::get(
+    '/admin/scrap-requests/{id}',
+    [AdminScrapRequestController::class, 'show']
+)
+    ->name('admin.scrap_requests.show');
 
 Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
     ->name('servicedetails');

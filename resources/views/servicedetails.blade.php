@@ -31,8 +31,9 @@
 
       <h1 class="service-title">{{ $service->title }}</h1>
       <p class="service-subtitle">
-      {{ $service->description }}
+      Fast, Reliable & Hassle-Free Scrap Services Across the UAE
       </p>
+      <p>{{ $service->description }}</p>
 
       <!-- TYPES COVERED -->
       <div class="service-block">

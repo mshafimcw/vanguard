@@ -10,8 +10,7 @@
     <link href="{{ asset('assets/img/favicon.ico') }}" rel="icon" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 
@@ -37,8 +36,7 @@
 <body>
 
     <!-- Spinner -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary"></div>
     </div>
 
@@ -113,7 +111,7 @@
 
                 <div class="service-tags">
                     @foreach ($locations as $location)
-                        <span>{{ $location->location }}</span>
+                    <span>{{ $location->location }}</span>
                     @endforeach
                 </div>
             </div>
@@ -151,7 +149,6 @@
                     <h4>QUICK LINKS</h4>
 
                     <ul class="quick-links">
-
                         <li>
                             <a href="{{ url('/') }}">Home</a>
                         </li>
@@ -168,6 +165,13 @@
                             <a href="{{ url('/contact') }}">Contact</a>
                         </li>
 
+                        <li>
+                            <a href="{{ url('/privacy') }}">Privacy Policy</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/termsandconditions') }}">Terms & Conditions</a>
+                        </li>
                     </ul>
 
                 </div>
