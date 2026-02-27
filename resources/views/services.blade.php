@@ -53,7 +53,7 @@
         <section class="scrap-cta">
             <div class="scrap-cta-inner">
                 <h3>GET IN TOUCH WITH US FOR ALL YOUR SCRAP METAL NEEDS!</h3>
-                <a href="contact.html" class="scrap-cta-btn">CONTACT US</a>
+                <a href="{{ route('contact') }}" class="scrap-cta-btn">CONTACT US</a>
             </div>
         </section>
     </div>
