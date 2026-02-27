@@ -141,6 +141,7 @@ class HomeController extends Controller
 		}
 
 		$services = Service::latest()->get();
+		$locations = Location::orderBy('location')->get();
 
 		return view('index', [
 			'aboutushome' => $aboutushome,
@@ -163,8 +164,36 @@ class HomeController extends Controller
 			'banner' => $banner,
 			'whychoose' => $whychoose,
 			'services' => $services,
+			'location' => $locations,
 		]);
 	}
+public function serviceDetails($id)
+{
+    $service   = Service::findOrFail($id);          // current service
+    $services  = Service::orderBy('title')->get();  // dropdown loop
+    $locations = Location::orderBy('location')->get();
+
+    $benefitCategory = PostCategory::where('slug', 'service-benefits')->first();
+    $benefits = collect();
+
+    if ($benefitCategory) {
+        $benefits = Post::where('post_category_id', $benefitCategory->id)->get();
+    }
+
+    return view('servicedetails', compact(
+        'service',
+        'services',
+        'locations',
+        'benefits'
+    ));
+}
+
+	// public function servicedetails()
+	// {
+	//     $locations = Location::orderBy('location')->get();
+
+	//     return view('servicedetails', compact('locations'));
+	// }
 
 	public static function getphone()
 	{
@@ -272,12 +301,12 @@ class HomeController extends Controller
 		return view('services', compact('services'));
 	}
 
-	public function serviceDetails($id)
-	{
-		$service = Service::findOrFail($id);
+	// public function serviceDetails($id)
+	// {
+	// 	$service = Service::findOrFail($id);
 
-		return view('servicedetails', compact('service'));
-	}
+	// 	return view('servicedetails', compact('service'));
+	// }
 
 	public function donationtime()
 	{

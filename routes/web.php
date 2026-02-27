@@ -378,3 +378,4 @@ Route::get('/admin/scrap-requests/{id}',
 
 Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
     ->name('servicedetails');
+

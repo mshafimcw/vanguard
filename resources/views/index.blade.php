@@ -112,15 +112,13 @@
 
 
                         <select name="location" required>
-
                             <option value="">Select Location</option>
 
-                            <option value="Dubai">Dubai</option>
-
-                            <option value="Sharjah">Sharjah</option>
-
-                            <option value="Ajman">Ajman</option>
-
+                            @foreach ($locations as $location)
+                            <option value="{{ $location->location }}">
+                                {{ $location->location }}
+                            </option>
+                            @endforeach
                         </select>
 
 
