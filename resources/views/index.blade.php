@@ -81,7 +81,6 @@
 
                         <h3>{{ $service->title }}</h3>
 
-                        <p>{{ $service->description }}</p>
 
                         <a href="{{ route('servicedetails', $service->id) }}" class="btn-sell">View Details</button>
                         </a>

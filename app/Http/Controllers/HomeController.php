@@ -330,21 +330,27 @@ class HomeController extends Controller
 		return view('blogdetails', compact('blog', 'multiImages', 'relatedBlogs'));
 	}
 
-	public function blogs()
-	{
-		$category = PostCategory::where('slug', 'blogs')->first();
+	public function blogs(Request $request)
+{
+    $category = PostCategory::where('slug', 'blogs')->first();
 
-		if (!$category) {
-			abort(404);
-		}
+    if (!$category) {
+        abort(404);
+    }
 
-		$blogs = Post::where('post_category_id', $category->id)
-			->latest()
-			->get();
+    $query = Post::where('post_category_id', $category->id);
 
-		return view('blogs', compact('blogs'));
-	}
+    if ($request->search) {
+        $query->where(function($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search . '%')
+              ->orWhere('body', 'like', '%' . $request->search . '%');
+        });
+    }
 
+    $blogs = $query->latest()->paginate(3)->withQueryString();
+
+    return view('blogs', compact('blogs'));
+}
 
 	public function showEvents()
 	{
