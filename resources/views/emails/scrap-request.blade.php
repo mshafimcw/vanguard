@@ -4,62 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Scrap Request</title>
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="email-container">
-        <div class="email-header">
-            <h1>New Scrap Request</h1>
-        </div>
+<body class="bg-light p-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow mt-5">
+                    
+                    <!-- Header -->
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h1 class="h3 mb-0">New Scrap Request</h1>
+                    </div>
 
-        <div class="email-content">
-            <div class="email-field">
-                <div class="email-label">Full Name</div>
-                <div class="email-value">{{ $scrapRequest->full_name }}</div>
-            </div>
+                    <!-- Body -->
+                    <div class="card-body p-4">
+                        
+                        <!-- Full Name -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Full Name</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->full_name }}</p>
+                        </div>
 
-            <div class="email-field">
-                <div class="email-label">Phone Number</div>
-                <div class="email-value">{{ $scrapRequest->phone }}</div>
-            </div>
+                        <!-- Phone -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Phone Number</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->phone }}</p>
+                        </div>
 
-            @if($scrapRequest->email)
-            <div class="email-field">
-                <div class="email-label">Email</div>
-                <div class="email-value">{{ $scrapRequest->email }}</div>
-            </div>
-            @endif
+                        <!-- Email -->
+                        @if($scrapRequest->email)
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Email</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->email }}</p>
+                        </div>
+                        @endif
 
-            <div class="email-field">
-                <div class="email-label">Location</div>
-                <div class="email-value">{{ $scrapRequest->location }}</div>
-            </div>
+                        <!-- Location -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Location</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->location }}</p>
+                        </div>
 
-            <div class="email-field">
-                <div class="email-label">Scrap Types</div>
-                <div class="email-scrap-items">
-                    @foreach(json_decode($scrapRequest->scrap_type) as $scrap)
-                        <span class="email-scrap-item">{{ $scrap }}</span>
-                    @endforeach
+                        <!-- Scrap Types -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Scrap Types</small>
+                            <div class="mt-2">
+                                @foreach(json_decode($scrapRequest->scrap_type) as $scrap)
+                                    <span class="badge bg-primary me-1 mb-1 p-2">{{ $scrap }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        @if($scrapRequest->details)
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Additional Details</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->details }}</p>
+                        </div>
+                        @endif
+
+                        <!-- Submitted On -->
+                        <div class="mb-4 pb-3 border-bottom">
+                            <small class="text-uppercase text-muted fw-bold">Submitted On</small>
+                            <p class="mb-0 fs-5">{{ $scrapRequest->created_at->format('F j, Y, g:i a') }}</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="card-footer text-center py-3 text-muted bg-light">
+                        <p class="mb-1 small">This is an automated message from Vanguard Scrap Management System.</p>
+                        <p class="mb-0 small">© {{ date('Y') }} Vanguard. All rights reserved.</p>
+                    </div>
+
                 </div>
             </div>
-
-            @if($scrapRequest->details)
-            <div class="email-field">
-                <div class="email-label">Additional Details</div>
-                <div class="email-value">{{ $scrapRequest->details }}</div>
-            </div>
-            @endif
-
-            <div class="email-field">
-                <div class="email-label">Submitted On</div>
-                <div class="email-value">{{ $scrapRequest->created_at->format('F j, Y, g:i a') }}</div>
-            </div>
-        </div>
-
-        <div class="email-footer">
-            <p>This is an automated message from Vanguard Scrap Management System.</p>
-            <p>© {{ date('Y') }} Vanguard. All rights reserved.</p>
         </div>
     </div>
 </body>
