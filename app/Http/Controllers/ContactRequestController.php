@@ -31,7 +31,16 @@ class ContactRequestController extends Controller
             'email'   => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'captcha' => 'required',
         ]);
+
+        if ($request->captcha !== session('scrap_captcha')) {
+
+            return back()->withErrors([
+                'captcha' => 'Invalid captcha'
+            ])->withInput();
+        }
+        session()->forget('scrap_captcha');
 
         // 2️⃣ Save to Database
         $contactRequest = ContactRequest::create($validated);

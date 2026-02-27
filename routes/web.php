@@ -37,6 +37,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\ScrapRequestController;
 use App\Http\Controllers\Admin\AdminScrapRequestController;
+use App\Http\Controllers\CaptchaController;
 
 
 Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
@@ -384,3 +385,6 @@ Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
 Route::get('/cookie-policy', function () {
     return view('cookie-policy');
 })->name('cookie.policy');
+
+Route::get('/scrap-captcha', [CaptchaController::class, 'generate'])
+    ->name('scrap.captcha');

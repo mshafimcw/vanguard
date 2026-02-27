@@ -39,8 +39,7 @@
 <body>
 
     <!-- Spinner -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary"></div>
     </div>
 
@@ -153,7 +152,6 @@
                     <h4>QUICK LINKS</h4>
 
                     <ul class="quick-links">
-
                         <li>
                             <a href="{{ url('/') }}">Home</a>
                         </li>
@@ -170,6 +168,13 @@
                             <a href="{{ url('/contact') }}">Contact</a>
                         </li>
 
+                        <li>
+                            <a href="{{ url('/privacy') }}">Privacy Policy</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/termsandconditions') }}">Terms & Conditions</a>
+                        </li>
                     </ul>
 
                 </div>
