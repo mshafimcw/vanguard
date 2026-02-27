@@ -167,15 +167,27 @@ class HomeController extends Controller
 			'location' => $locations,
 		]);
 	}
+public function serviceDetails($id)
+{
+    $service   = Service::findOrFail($id);          // current service
+    $services  = Service::orderBy('title')->get();  // dropdown loop
+    $locations = Location::orderBy('location')->get();
 
-	public function serviceDetails($id)
-	{
-		$service = Service::findOrFail($id);
+    $benefitCategory = PostCategory::where('slug', 'service-benefits')->first();
+    $benefits = collect();
 
-		$locations = Location::orderBy('location')->get();
+    if ($benefitCategory) {
+        $benefits = Post::where('post_category_id', $benefitCategory->id)->get();
+    }
 
-		return view('servicedetails', compact('service', 'locations'));
-	}
+    return view('servicedetails', compact(
+        'service',
+        'services',
+        'locations',
+        'benefits'
+    ));
+}
+
 	// public function servicedetails()
 	// {
 	//     $locations = Location::orderBy('location')->get();
@@ -347,21 +359,27 @@ class HomeController extends Controller
 		return view('blogdetails', compact('blog', 'multiImages', 'relatedBlogs'));
 	}
 
-	public function blogs()
-	{
-		$category = PostCategory::where('slug', 'blogs')->first();
+	public function blogs(Request $request)
+{
+    $category = PostCategory::where('slug', 'blogs')->first();
 
-		if (!$category) {
-			abort(404);
-		}
+    if (!$category) {
+        abort(404);
+    }
 
-		$blogs = Post::where('post_category_id', $category->id)
-			->latest()
-			->get();
+    $query = Post::where('post_category_id', $category->id);
 
-		return view('blogs', compact('blogs'));
-	}
+    if ($request->search) {
+        $query->where(function($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search . '%')
+              ->orWhere('body', 'like', '%' . $request->search . '%');
+        });
+    }
 
+    $blogs = $query->latest()->paginate(3)->withQueryString();
+
+    return view('blogs', compact('blogs'));
+}
 
 	public function showEvents()
 	{

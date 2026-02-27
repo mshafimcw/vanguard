@@ -54,22 +54,35 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li>
-                        <a href="{{ url('/') }}" class="active">Home</a>
+                        <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                            Home
+                        </a>
                     </li>
+
                     <li>
-                        <a href="{{ url('/about') }}">About</a>
+                        <a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">
+                            About
+                        </a>
                     </li>
+
                     <li>
-                        <a href="{{ url('/blogs') }}">Blog</a>
+                        <a href="{{ url('/blogs') }}" class="{{ request()->is('blogs*') ? 'active' : '' }}">
+                            Blog
+                        </a>
                     </li>
+
                     <li>
-                        <a href="{{ url('/services') }}">Services</a>
+                        <a href="{{ url('/services') }}" class="{{ request()->is('services*') ? 'active' : '' }}">
+                            Services
+                        </a>
                     </li>
+
                     <li>
-                        <a href="{{ url('/contact') }}">Contact Us</a>
+                        <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">
+                            Contact Us
+                        </a>
                     </li>
-                </ul>
-                <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
+                </ul> <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
                 <div class="navbar-call d-lg-none mobile-call">
                     <i class="bi bi-telephone-fill"></i>
                     <a href="tel:+971521491001">+971 52 149 1001</a>
@@ -101,8 +114,8 @@
                 </p>
 
                 <div class="service-tags">
-                    @foreach($locations as $location)
-                    <span>{{ $location->location }}</span>
+                    @foreach ($locations as $location)
+                        <span>{{ $location->location }}</span>
                     @endforeach
                 </div>
             </div>

@@ -25,6 +25,23 @@
 <section class="blog-section">
     <div class="blog-container">
 
+    <!-- ================= BLOG SEARCH ================= -->
+    <div class="blog-search-wrapper mb-5">
+    <form action="{{ route('home.blogs') }}" method="GET" class="blog-search-form">
+
+        <input 
+            type="text" 
+            name="search" 
+            placeholder="Search blog articles..."
+            value="{{ request('search') }}"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+</div>
         <h2 class="blog-heading">
             Recent <span>Posts</span>
         </h2>
@@ -100,6 +117,43 @@
         </div>
 
     </div>
+    <div class="d-flex justify-content-center mt-5">
+    <nav aria-label="Blog pagination">
+        <ul class="pagination custom-pagination">
+            @if ($blogs->onFirstPage())
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $blogs->previousPageUrl() }}" rel="prev" aria-label="Previous">&laquo;</a>
+                </li>
+            @endif
+
+            @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+                @if ($page == $blogs->currentPage())
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ $page }}</span>
+                    </li>
+                @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                @endif
+            @endforeach
+
+            @if ($blogs->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $blogs->nextPageUrl() }}" rel="next" aria-label="Next">&raquo;</a>
+                </li>
+            @else
+                <li class="page-item disabled">
+                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
+</div>
 </section>
 
 @endsection

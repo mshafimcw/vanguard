@@ -20,4 +20,6 @@ class AppServiceProvider extends ServiceProvider
             View::share('locations', Location::orderBy('id', 'desc')->get());
         }
     }
+
+    
 }
