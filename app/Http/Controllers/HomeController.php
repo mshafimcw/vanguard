@@ -168,13 +168,6 @@ class HomeController extends Controller
 		]);
 	}
 
-	public function servicedetails()
-    {
-        $locations = Location::orderBy('location')->get();
-
-        return view('servicedetails', compact('locations'));
-    }
-
 	public static function getphone()
 	{
 		$editpost = PostCategory::where('slug', 'phone')->first();
