@@ -164,9 +164,24 @@ class HomeController extends Controller
 			'banner' => $banner,
 			'whychoose' => $whychoose,
 			'services' => $services,
-			'location' =>$locations,
+			'location' => $locations,
 		]);
 	}
+
+	public function serviceDetails($id)
+	{
+		$service = Service::findOrFail($id);
+
+		$locations = Location::orderBy('location')->get();
+
+		return view('servicedetails', compact('service', 'locations'));
+	}
+	// public function servicedetails()
+	// {
+	//     $locations = Location::orderBy('location')->get();
+
+	//     return view('servicedetails', compact('locations'));
+	// }
 
 	public static function getphone()
 	{
@@ -274,12 +289,12 @@ class HomeController extends Controller
 		return view('services', compact('services'));
 	}
 
-	public function serviceDetails($id)
-	{
-		$service = Service::findOrFail($id);
+	// public function serviceDetails($id)
+	// {
+	// 	$service = Service::findOrFail($id);
 
-		return view('servicedetails', compact('service'));
-	}
+	// 	return view('servicedetails', compact('service'));
+	// }
 
 	public function donationtime()
 	{
