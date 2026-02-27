@@ -46,17 +46,8 @@
         </ul>
       </div>
 
-      <!-- BENEFITS -->
-      <div class="service-benefits">
-        @foreach ($benefits as $benefit)
-        <div class="benefit-card">
-          <i class="bi bi-cash-stack"></i>
-          <h4>{{ $benefit->title }}</h4>
-          <p>{{ $benefit->body }}</p>
-        </div>
-        @endforeach
-       
-      </div>
+   
+      
     </div>
     <!-- RIGHT FORM -->
    <aside class="service-quote">

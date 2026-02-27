@@ -909,7 +909,7 @@
                             </ul>
                         </li>
 
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-box-arrow-in-right"></i>
                                 <p>
@@ -958,7 +958,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -1042,15 +1042,17 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.page.index', ['slug' => 'service-benefits']) }}" class="nav-link">
+                                    <a href="{{ route('admin.page.create', ['slug' => 'service-benefits']) }}"
+                                        class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
-                                        <p>List</p>
+                                        <p>Create</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.page.create', ['slug' => 'service-benefits']) }}" class="nav-link">
+                                    <a href="{{ route('admin.page.index', ['slug' => 'service-benefits']) }}"
+                                        class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
-                                        <p>Create</p>
+                                        <p>List</p>
                                     </a>
                                 </li>
                             </ul>
@@ -1271,13 +1273,13 @@
                                     <i class="nav-arrow bi bi-chevron-right"></i>
                                 </p>
                             </a>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.contact-requests.index', ['slug' => ' contact-request']) }}"
-                                        class="nav-link">
-                                        <i class="nav-icon bi bi-circle"></i>
-                                        <p>List</p>
-                                    </a>
-                                </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.contact-requests.index', ['slug' => ' contact-request']) }}"
+                                class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>List</p>
+                            </a>
+                        </li>
                         </li>
 
 
@@ -1739,7 +1741,7 @@
                             </ul>
                         </li>
 
-                       
+
 
 
                         <li class="nav-header">Forms</li>
