@@ -41,12 +41,8 @@
           <li>{{ $service->text1 }}</li>
           <li>{{ $service->text2 }}</li>
           <li>{{ $service->text3 }}</li>
-          
         </ul>
       </div>
-
-   
-      
     </div>
     <!-- RIGHT FORM -->
    <aside class="service-quote">

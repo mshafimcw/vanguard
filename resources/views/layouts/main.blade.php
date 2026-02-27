@@ -10,7 +10,7 @@
     <link href="{{ asset('assets/img/favicon.ico') }}" rel="icon" />
 
     <!-- Google Fonts -->
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@
 
                 <div class="service-tags">
                     @foreach ($locations as $location)
-                        <span>{{ $location->location }}</span>
+                    <span>{{ $location->location }}</span>
                     @endforeach
                 </div>
             </div>
@@ -221,6 +221,71 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
         <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        <!-- @if(!request()->hasCookie('cookie_consent'))
+<div class="cookie-banner" id="cookie-banner">
+            <div class="container d-flex justify-content-between align-items-center flex-wrap">
+                <p class="mb-2 mb-md-0">
+                    We use cookies that are necessary to make our site work.
+                    You can manage preferences using the
+                    <a href="#" onclick="openCookieSettings()">Cookie settings</a>
+                    link. For more information, see our
+                    <a href="{{ route('cookie.policy') }}">Cookie Policy</a>.
+                </p>
+
+                <div>
+                    <div class="cookie-actions">
+                   <button onclick="acceptCookies('{{ route('cookie.policy') }}')" class="btn-cookie btn-accept">
+    Accept all cookies
+</button>
+                    <button onclick="acceptNecessary()" class="btn-cookie btn-necessary">
+                        Accept only necessary cookies
+                    </button>
+                </div>
+            </div>
+        </div>
+        @endif -->
+
+        <div class="cookie-banner" style="display:none">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+
+        <div class="cookie-text">
+            <h5>Your privacy, your choice</h5>
+
+            <p>
+                We use essential cookies to make sure the site can function.
+                We also use optional cookies for advertising, personalisation of content,
+                usage analysis, and social media, as well as to allow video information
+                to be shared for both marketing, analytics and editorial purposes.
+            </p>
+
+            <p>
+                By accepting optional cookies, you consent to the processing of your
+                personal data – including transfers to third parties. Some third parties
+                are outside of the European Economic Area, with varying standards of
+                data protection.
+            </p>
+
+            <p>
+                See our
+                <a href="#" onclick="openCookieSettings()">privacy policy</a>
+                for more information on the use of your personal data.
+            </p>
+        </div>
+
+        <div class="cookie-actions">
+            <button onclick="acceptCookies()" class="btn-accept">
+                Accept all cookies
+            </button>
+            <button onclick="acceptNecessary()" class="btn-necessary">
+                Reject optional cookies
+            </button>
+        </div>
+
+    </div>
+</div>
+        </div>
+
 
 
 

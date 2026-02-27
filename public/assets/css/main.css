@@ -4819,3 +4819,241 @@ body {
     box-shadow:0 8px 20px rgba(255,122,0,0.45);
 }
 
+.cookie-banner
+{
+position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 2px solid #f28c1c;
+    padding: 20px;
+    z-index: 999999;
+}
+
+/* ================= COOKIE POLICY ALERT ================= */
+
+.cookie-alert {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-left: 6px solid #f28c1c;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.cookie-alert h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #212529;
+}
+
+.cookie-alert h4 {
+    margin-top: 25px;
+    font-size: 18px;
+    color: #f28c1c;
+}
+
+.cookie-alert p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.cookie-actions .btn-accept {
+    background: #f28c1c;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cookie-actions .btn-customize {
+    background: transparent;
+    color: #192214;
+    border: 1px solid #f28c1c;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cookie-actions .btn-customize:hover {
+    background: #fd9d0d;
+    color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .cookie-alert {
+        padding: 20px;
+    }
+}
+
+/* Cookie button container */
+.cookie-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Base button style */
+.btn-cookie {
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+/* Accept all cookies (Primary) */
+.btn-accept {
+    background-color: #ff9f2d;
+    color: #fff;
+}
+
+.btn-accept:hover {
+    background-color: #f28c1c;
+}
+
+/* Accept necessary cookies (Secondary) */
+.btn-necessary {
+    background-color: transparent;
+    color: #ff9f2d;
+    border: 1.5px solid #ff9f2d;
+}
+
+.btn-necessary:hover {
+    background-color: #fff5e8;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .btn-cookie {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ================= COOKIE BANNER ================= */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    padding: 20px 24px;
+    font-family: inherit;
+}
+
+/* Text area */
+.cookie-text {
+    max-width: 760px;
+}
+
+.cookie-text h5 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #111;
+}
+
+.cookie-text p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.cookie-text a {
+    color: #ff9f2d;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cookie-text a:hover {
+    text-decoration: underline;
+}
+
+/* Actions */
+.cookie-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 220px;
+}
+
+/* Buttons */
+.btn-accept {
+    background: #ff9f2d;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-accept:hover {
+    background: #ff9f2d;
+}
+
+.btn-necessary {
+    background: transparent;
+    color: #ff9f2d;
+    border: 1px solid #ff9f2d;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-necessary:hover {
+    background: #e7f1ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cookie-banner {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .cookie-actions {
+        width: 100%;
+    }
+
+    .btn-accept,
+    .btn-necessary {
+        width: 100%;
+    }
+}
