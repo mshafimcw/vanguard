@@ -1,3 +1,26 @@
+html, body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+     letter-spacing: 0.2px;
+}
+
+h1, h2, h3, h4, h5, h6,
+p,
+a,
+span,
+button,
+input,
+textarea,
+li {
+    font-family: 'Inter', sans-serif;
+
+}
+h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
 html,
 body {
     margin: 0;
@@ -390,9 +413,7 @@ body {
     color: #ffffff;
     font-size: 50px;
     line-height: 1.1;
-    letter-spacing: 2px;
     margin-top: 20vh;
-    font-family: "Oswald", "Bebas Neue", "Anton", "Montserrat", sans-serif;
     font-weight: 550;
     max-width: 100%;
     word-wrap: break-word;
@@ -402,8 +423,6 @@ body {
     color: #ffffff;
     font-size: 40px;
     line-height: 1.6;
-    letter-spacing: 2px;
-    font-family: "Montserrat", "Poppins", "Roboto", sans-serif;
     margin-top: 40px;
     max-width: 100%;
     word-wrap: break-word;
@@ -704,7 +723,6 @@ body {
     background-repeat: no-repeat;
     color: #fff;
     padding: 80px 20px;
-    font-family: "Poppins", "Montserrat", sans-serif;
     width: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -745,11 +763,9 @@ body {
 }
 
 .section-title {
-    font-family: "Oswald", "Montserrat", sans-serif;
     font-size: 42px;
     font-weight: 700;
     margin-bottom: 15px;
-    letter-spacing: 1px;
     color: #fff;
     max-width: 100%;
     word-wrap: break-word;
@@ -760,7 +776,6 @@ body {
 }
 
 .section-subtitle {
-    font-family: "Poppins", "Montserrat", sans-serif;
     font-weight: 300;
     color: #ccc;
     font-size: 16px;
@@ -909,7 +924,6 @@ body {
 }
 
 .scrap-form h3 {
-    font-family: "Oswald", "Montserrat", sans-serif;
     font-size: 45px;
     font-weight: 700;
     margin-bottom: 25px;
@@ -1212,7 +1226,6 @@ body {
 }
 
 .service-content h2 {
-    font-family: "Oswald", sans-serif;
     font-size: 45px;
     font-weight: 700;
     margin-bottom: 15px;
@@ -1284,7 +1297,6 @@ body {
 /* Footer typography */
 .footer h3,
 .footer h4 {
-    font-family: "Oswald", sans-serif;
     font-weight: 500;
     line-height: 1;
     word-wrap: break-word;
@@ -1567,7 +1579,6 @@ body {
 }
 
 .services-hero h1 {
-    font-family: "Oswald", sans-serif;
     font-size: 60px;
     font-weight: 700;
     color: #ffb347;
@@ -1576,7 +1587,6 @@ body {
 }
 
 .services-hero h2 {
-    font-family: "Oswald", sans-serif;
     font-size: 32px;
     font-weight: 600;
     max-width: 800px;
@@ -1600,7 +1610,6 @@ body {
 }
 
 .expertise-section h2 {
-    font-family: "Oswald", sans-serif;
     font-size: 42px;
     color: #fff;
     margin-bottom: 15px;
@@ -1640,7 +1649,6 @@ body {
 }
 
 .expertise-card h4 {
-    font-family: "Oswald", sans-serif;
     font-size: 22px;
     color: #fff;
     margin-bottom: 15px;
@@ -1774,7 +1782,6 @@ body {
     margin: 0;
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: 1px;
     text-transform: uppercase;
     color: #0f0c0c;
 
@@ -1840,7 +1847,6 @@ body {
     padding: 0 35px;
     font-size: 28px;
     font-weight: 700;
-    letter-spacing: 2px;
     text-transform: uppercase;
     color: #ffb347;
 }
@@ -1942,7 +1948,6 @@ body {
     width: 100%;
     font-size: 18px;
     font-weight: 700;
-    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #ffffff;
 }
@@ -1952,7 +1957,6 @@ body {
     bottom: 55px;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 1px;
     text-transform: uppercase;
     color: #ffb347;
     text-decoration: none;
@@ -1977,7 +1981,6 @@ body {
 .material-view-btn {
     bottom: 25px;
     font-size: 13px;
-    letter-spacing: 1px;
     text-transform: uppercase;
     color: #ffb347;
     opacity: 0.85;
@@ -2044,7 +2047,6 @@ body {
     font-size: 22px;
     font-weight: 700;
     color: #1b1b1b;
-    letter-spacing: 1px;
 }
 
 /* CTA BUTTON */
@@ -2053,7 +2055,6 @@ body {
     background: #1b1b1b;
     color: #ffb347;
     font-weight: 700;
-    letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 4px;
@@ -2137,12 +2138,10 @@ body {
 }
 
 .feature-card h3 {
-    font-family: "Oswald", sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
     margin-bottom: 8px;
-    letter-spacing: 0.5px;
 }
 
 .feature-card p {
@@ -2169,7 +2168,6 @@ body {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    letter-spacing: 0.5px;
     box-shadow: 0 4px 12px rgba(255, 180, 70, 0.2);
 }
 
@@ -2233,12 +2231,10 @@ body {
 
 .scrap-cta-inner h3 {
     margin: 0;
-    font-family: "Oswald", sans-serif;
     font-size: 24px;
     font-weight: 700;
     color: #000;
     text-transform: uppercase;
-    letter-spacing: 1px;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -2247,11 +2243,9 @@ body {
     color: #ffb347;
     padding: 12px 32px;
     text-decoration: none;
-    font-family: "Oswald", sans-serif;
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     border-radius: 4px;
     transition: all 0.3s ease;
     border: 2px solid #000;
@@ -2391,18 +2385,15 @@ body {
 }
 
 .feature-exact-item h3 {
-    font-family: "Oswald", sans-serif;
     font-size: 22px;
     font-weight: 700;
     color: #ffb347;
     margin-bottom: 12px;
-    letter-spacing: 1px;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .feature-exact-item p {
-    font-family: "Poppins", sans-serif;
     font-size: 15px;
     color: #ffffff;
     line-height: 1.6;
@@ -2424,7 +2415,6 @@ body {
     color: #000000;
     padding: 10px 20px;
     border-radius: 40px;
-    font-family: "Oswald", sans-serif;
     font-weight: 700;
     font-size: 20px;
     text-decoration: none;
@@ -2432,7 +2422,6 @@ body {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    letter-spacing: 1.5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -3156,7 +3145,6 @@ body {
 
 /* ================= ABOUT PAGE ================= */
 body {
-    font-family: "Roboto", sans-serif;
     background: #1a0f0b;
     color: #fff;
 }
@@ -3436,25 +3424,25 @@ body {
 ===================================================== */
 
 /* ================= CONTACT INFO CARDS ================= */
-.contact-info-section {
-    background: #1a0f0b;
-    padding: 80px 0;
+
+
+.contact-info-wrapper {
+    position: relative;
+    margin-top: -80px; /* pulls it up into hero area */
+    z-index: 10;
 }
 
 .info-card {
-    background: #2a1712;
-    padding: 35px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-radius: 15px;
+    background: #312727;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: 0.3s ease;
     height: 100%;
 }
 
 .info-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(255, 140, 50, 0.15);
 }
 
 .info-icon {
@@ -3502,7 +3490,7 @@ body {
 
 .contact-section {
     position: relative;
-    padding: 150px 0;
+    padding: 250px 0 50px;
 }
 
 /* Make map stretch fully but not affect height */

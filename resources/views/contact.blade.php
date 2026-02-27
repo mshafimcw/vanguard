@@ -17,24 +17,29 @@
     </div>
 </div>
 
-<div class="row">
-    @foreach($contact as $item)
-    <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-        <div class="info-card d-flex align-items-start">
+<!-- ================= CONTACT INFO CARDS ================= -->
+<div class="contact-info-wrapper">
+    <div class="container">
+        <div class="row">
+            @foreach($contact as $item)
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                <div class="info-card d-flex align-items-start">
 
-            <div class="info-icon me-3">
-                <img src="{{ asset($item->image) }}"
-                    alt="{{ $item->title }}" width="30">
+                    <div class="info-icon me-3">
+                        <img src="{{ asset($item->image) }}"
+                             alt="{{ $item->title }}" width="30">
+                    </div>
+
+                    <div>
+                        <h5>{{ $item->title }}</h5>
+                        <p>{!! $item->body !!}</p>
+                    </div>
+
+                </div>
             </div>
-
-            <div>
-                <h5>{{ $item->title }}</h5>
-                <p>{!! $item->body !!}</p>
-            </div>
-
+            @endforeach
         </div>
     </div>
-    @endforeach
 </div>
 
 <!-- ================= CONTACT SECTION ================= -->
