@@ -33,11 +33,10 @@
       <div class="service-block">
         <h3>Types of Copper Scrap We Accept</h3>
         <ul class="service-list">
-          <li>Bare Bright Copper Wire</li>
-          <li>Insulated Copper Cables</li>
-          <li>Copper Pipes & Tubes</li>
-          <li>Industrial Copper Scrap</li>
-          <li>Mixed Copper Scrap</li>
+          <li>{{ $service->text1 }}</li>
+          <li>{{ $service->text2 }}</li>
+          <li>{{ $service->text3 }}</li>
+          
         </ul>
       </div>
 
@@ -63,34 +62,44 @@
       </div>
     </div>
     <!-- RIGHT FORM -->
-    <aside class="service-quote">
-      <h3>Get A Quote</h3>
+   <aside class="service-quote">
+    <h3>Get A Quote</h3>
 
-      <form>
-        <input type="text" placeholder="Full Name" required>
-        <input type="tel" placeholder="Phone Number" required>
+    <form action="{{ route('scrap-request.store') }}" method="POST">
+        @csrf
 
-        <select>
-          <option>Dubai - Sharjah - Ajman</option>
-          <option>Abu Dhabi</option>
-          <option>Ras Al Khaimah</option>
+        <input type="text" name="full_name" placeholder="Full Name *" required>
+
+        <input type="tel" name="phone" placeholder="Phone Number *" required>
+
+        {{-- Location --}}
+        <select name="location" required>
+            <option value="">Select Location</option>
+            @foreach ($locations as $location)
+                <option value="{{ $location->location }}">
+                    {{ $location->location }}
+                </option>
+            @endforeach
         </select>
 
-        <select>
-          <option>Copper Scrap</option>
-          <option>Metal Scrap</option>
-          <option>Aluminium Scrap</option>
-          <option>Industrial Scrap</option>
-          <option>Construction Scrap</option>
+        {{-- Scrap Type (auto-selected current service) --}}
+        <select name="scrap_type[]" multiple required>
+            @foreach ($services as $srv)
+                <option value="{{ $srv->title }}"
+                    {{ $srv->id === $service->id ? 'selected' : '' }}>
+                    {{ $srv->title }}
+                </option>
+            @endforeach
         </select>
 
-        <textarea placeholder="Details of Your Scrap (optional)"></textarea>
+        <textarea name="details"
+            placeholder="Details of Your Scrap (optional)"></textarea>
 
         <button type="submit" class="btn-primary">
-          Get My Price
+            Get My Price
         </button>
-      </form>
-    </aside>
+    </form>
+</aside>
 
   </div>
 </section>

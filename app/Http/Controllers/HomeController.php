@@ -167,15 +167,18 @@ class HomeController extends Controller
 			'location' => $locations,
 		]);
 	}
+public function serviceDetails($id)
+{
+    $service   = Service::findOrFail($id);          // current service
+    $services  = Service::orderBy('title')->get();  // dropdown loop
+    $locations = Location::orderBy('location')->get();
 
-	public function serviceDetails($id)
-	{
-		$service = Service::findOrFail($id);
-
-		$locations = Location::orderBy('location')->get();
-
-		return view('servicedetails', compact('service', 'locations'));
-	}
+    return view('servicedetails', compact(
+        'service',
+        'services',
+        'locations'
+    ));
+}
 	// public function servicedetails()
 	// {
 	//     $locations = Location::orderBy('location')->get();
