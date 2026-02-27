@@ -6,6 +6,9 @@
             alert("{{ session('success') }}");
         </script>
     @endif
+    @php
+        $captcha_id = uniqid();
+    @endphp
     @foreach ($banner as $banners)
         <div class="container-fluid py-5 mb-5 hero-header wow fadeIn"
             style="background-image: url('{{ asset($banners->image) }}');
@@ -130,7 +133,29 @@
 
                             <textarea name="details"></textarea>
 
+                            <div style="margin-top:15px;">
 
+                                <label>Enter Captcha *</label>
+
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+
+                                    <img id="captchaImage" src="{{ route('scrap.captcha') }}"
+                                        style="height:45px; border-radius:6px; border:1px solid #ccc;">
+
+                                    <button type="button" onclick="refreshCaptcha()"
+                                        style="height:45px; width:45px; border:none; cursor:pointer;">
+                                        ↻
+                                    </button>
+
+                                </div>
+
+                                <input type="text" name="captcha" placeholder="Enter Captcha *" required>
+
+                                @error('captcha')
+                                    <div style="color:red;">{{ $message }}</div>
+                                @enderror
+
+                            </div>
                             <button type="submit" class="btn-get-price">
 
                                 Get My Price
@@ -143,4 +168,11 @@
             </div>
         </div>
     </section>
+    <script>
+        function refreshCaptcha() {
+            let id = "{{ $captcha_id }}";
+            document.getElementById('captchaImage').src =
+                "{{ route('scrap.captcha') }}?id=" + id + "&" + new Date().getTime();
+        }
+    </script>
 @endsection

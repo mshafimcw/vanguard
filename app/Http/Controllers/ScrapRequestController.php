@@ -26,7 +26,16 @@ class ScrapRequestController extends Controller
 
             'details'     => 'nullable|string',
 
+            'captcha' => 'required',
+
         ]);
+
+        if ($request->captcha !== session('scrap_captcha')) {
+
+            return back()->withErrors([
+                'captcha' => 'Invalid captcha'
+            ])->withInput();
+        }
 
         if ($validator->fails()) {
 
@@ -52,6 +61,8 @@ class ScrapRequestController extends Controller
             'details'    => $request->details,
 
         ]);
+
+        session()->forget('scrap_captcha');
 
         return redirect()->back()->with('success', 'We will contact you soon!');
     }
