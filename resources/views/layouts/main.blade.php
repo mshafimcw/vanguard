@@ -10,9 +10,10 @@
     <link href="{{ asset('assets/img/favicon.ico') }}" rel="icon" />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    
+
 
     <!-- Icon Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
@@ -41,46 +42,59 @@
         <div class="spinner-grow text-primary"></div>
     </div>
 
-<!-- Navbar -->
-<div class="branding d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-        <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-            <h1 class="sitename">Vanguard</h1>
-        </a>
+    <!-- Navbar -->
+    <div class="branding d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                <h1 class="sitename">Vanguard</h1>
+            </a>
 
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li>
-                    <a href="{{ url('/') }}" class="active">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url('/about') }}">About</a>
-                </li>
-                <li>
-                    <a href="{{ url('/blogs') }}">Blog</a>
-                </li>
-                <li>
-                    <a href="{{ url('/services') }}">Services</a>
-                </li>
-                <li>
-                    <a href="{{ url('/contact') }}">Contact Us</a>
-                </li>
-            </ul>
-            <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
-            <div class="navbar-call d-lg-none mobile-call">
-                <i class="bi bi-telephone-fill"></i>
-                <a href="tel:+971521491001">+971 52 149 1001</a>
-            </div>
-        </nav>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li>
+                        <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                            Home
+                        </a>
+                    </li>
 
-        <!-- Desktop call button (visible on large screens) -->
-        
+                    <li>
+                        <a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">
+                            About
+                        </a>
+                    </li>
 
-        <button class="mobile-nav-toggle d-lg-none">
-            <i class="bi bi-list"></i>
-        </button>
+                    <li>
+                        <a href="{{ url('/blogs') }}" class="{{ request()->is('blogs*') ? 'active' : '' }}">
+                            Blog
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url('/services') }}" class="{{ request()->is('services*') ? 'active' : '' }}">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul> <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
+                <div class="navbar-call d-lg-none mobile-call">
+                    <i class="bi bi-telephone-fill"></i>
+                    <a href="tel:+971521491001">+971 52 149 1001</a>
+                </div>
+            </nav>
+
+            <!-- Desktop call button (visible on large screens) -->
+
+
+            <button class="mobile-nav-toggle d-lg-none">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
     </div>
-</div>
 
 
     <!-- PAGE CONTENT -->
@@ -98,8 +112,8 @@
                 </p>
 
                 <div class="service-tags">
-                    @foreach($locations as $location)
-                    <span>{{ $location->location }}</span>
+                    @foreach ($locations as $location)
+                        <span>{{ $location->location }}</span>
                     @endforeach
                 </div>
             </div>
@@ -202,9 +216,9 @@
 
         <script src="{{ asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
 
