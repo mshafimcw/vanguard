@@ -173,12 +173,21 @@ public function serviceDetails($id)
     $services  = Service::orderBy('title')->get();  // dropdown loop
     $locations = Location::orderBy('location')->get();
 
+    $benefitCategory = PostCategory::where('slug', 'service-benefits')->first();
+    $benefits = collect();
+
+    if ($benefitCategory) {
+        $benefits = Post::where('post_category_id', $benefitCategory->id)->get();
+    }
+
     return view('servicedetails', compact(
         'service',
         'services',
-        'locations'
+        'locations',
+        'benefits'
     ));
 }
+
 	// public function servicedetails()
 	// {
 	//     $locations = Location::orderBy('location')->get();

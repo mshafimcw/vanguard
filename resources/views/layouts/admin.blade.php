@@ -876,13 +876,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.services.index', ['slug' => 'services']) }}" class="nav-link">
+                                    <a href="{{ route('admin.services.index') }}" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.services.create', ['slug' => 'services']) }}" class="nav-link">
+                                    <a href="{{ route('admin.services.create') }}" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Create</p>
                                     </a>
@@ -1018,13 +1018,37 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.locations.index', ['slug' => 'location']) }}" class="nav-link">
+                                    <a href="{{ route('admin.locations.index') }}" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.locations.create', ['slug' => 'location']) }}" class="nav-link">
+                                    <a href="{{ route('admin.locations.create') }}" class="nav-link">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                                <p>
+                                    Service benefits
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.page.index', ['slug' => 'service-benefits']) }}" class="nav-link">
+                                        <i class="nav-icon bi bi-circle"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.page.create', ['slug' => 'service-benefits']) }}" class="nav-link">
                                         <i class="nav-icon bi bi-circle"></i>
                                         <p>Create</p>
                                     </a>
