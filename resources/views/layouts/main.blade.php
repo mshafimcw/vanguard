@@ -33,7 +33,17 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/service-footer.css') }}" rel="stylesheet">
-
+     @php
+    $phone1 = App\Http\Controllers\HomeController::getphone1();
+    $email1 = App\Http\Controllers\HomeController::getemail1();
+    $getaddress = App\Http\Controllers\HomeController::getaddress();
+    $logo = App\Http\Controllers\HomeController::getlogo();
+	$secondlogo = App\Http\Controllers\HomeController::getsecondlogo();
+	
+    $socialicons = App\Http\Controllers\HomeController::getsocialicons();
+    $timings = App\Http\Controllers\HomeController::gettimings();
+    @endphp
+    @yield('styles')
 </head>
 
 <body>
@@ -47,7 +57,7 @@
     <div class="branding d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
             <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                <h1 class="sitename">Vanguard</h1>
+               <img src="{{ asset($logo->image) }}" width="250px" alt="Vanguard Metal Scrap Trading LLC Transforming Scrap into Sustainable Value" title="Enved Foundation">
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -84,7 +94,7 @@
                 </ul> <!-- MOVE THIS OUTSIDE THE UL BUT INSIDE NAV -->
                 <div class="navbar-call d-lg-none mobile-call">
                     <i class="bi bi-telephone-fill"></i>
-                    <a href="tel:+971521491001">+971 52 149 1001</a>
+                    <a href="tel:{{$phone1}}">{{$phone1}}</a>
                 </div>
             </nav>
 
@@ -127,9 +137,9 @@
 
                 <div class="footer-col">
 
-                    <h3 class="brand">VANGUARD</h3>
+                    <h3 class="brand">Vanguard Metal Scrap Trading LLC</h3>
 
-                    <p>1-2873 52 104 - 1001</p>
+                    <p>{{$phone1}}</p>
 
                     <p>Dubai - UAE</p>
 
@@ -140,7 +150,7 @@
 
                     <h4>CONTACT US</h4>
 
-                    <p>info@vanguarduae.com</p>
+                    <p>{{$email1}}</p>
 
                     <p>Rawda Bus Service - Dubai</p>
 
