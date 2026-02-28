@@ -1,44 +1,48 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
+<div class="container py-5">
     <div class="cookie-alert">
 
-        <h1>Cookie Policy</h1>
+        <h1>Cookie Preferences</h1>
 
         <p>
-            We use cookies that are necessary to make our site work.
-            We may also use additional cookies to analyze, improve,
-            and personalize our content and your digital experience.
+            We use cookies to ensure basic website functionality.
+            You can choose whether to allow optional cookies.
         </p>
 
-        <h4>Necessary Cookies</h4>
-        <p>
-            These cookies are essential for website functionality
-            and cannot be disabled.
-        </p>
+        <!-- Necessary Cookies -->
+        <div class="cookie-option">
+            <label>
+                <input type="checkbox" checked disabled>
+                <strong>Necessary Cookies</strong>
+            </label>
+            <p>
+                These cookies are required for core site functionality and
+                cannot be disabled.
+            </p>
+        </div>
 
-        <h4>Analytics Cookies</h4>
-        <p>
-            These cookies help us understand how visitors interact
-            with our website so we can improve performance.
-        </p>
+        <!-- Optional / Analytics Cookies -->
+        <div class="cookie-option">
+            <label>
+                <input type="checkbox" id="analyticsCookies">
+                <strong>Analytics & Optional Cookies</strong>
+            </label>
+            <p>
+                These cookies help us understand how visitors interact with
+                the website and improve performance.
+            </p>
+        </div>
 
-        <h4>Managing Cookies</h4>
-        <p>
-            You can change your cookie preferences at any time.
-        </p>
-
-        <div class="cookie-actions">
-            <button class="btn-accept" onclick="acceptCookies('/')">
-                Accept All Cookies
-            </button>
-
-            <button class="btn-customize" onclick="openCookieSettings()">
-                Customize Cookies
+        <!-- Actions -->
+        <div class="cookie-actions mt-4">
+            <button class="btn-accept" onclick="saveCookiePreferences()">
+                Accept selected cookies
             </button>
         </div>
 
     </div>
 </div>
+
 @endsection

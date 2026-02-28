@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 window.acceptCookies = function () {
     let d = new Date();
-    d.setTime(d.getTime() + (1 * 60 * 1000));
+    d.setTime(d.getTime() + (5 * 24 * 60 * 60 * 1000));  //5 days
 
     document.cookie =
         "cookie_consent=all;path=/;expires=" + d.toUTCString() + ";SameSite=Lax";
@@ -262,49 +262,17 @@ window.acceptCookies = function () {
     document.querySelector(".cookie-banner").style.display = "none";
 };
 
-window.acceptNecessary = function () {
-    let d = new Date();
-    d.setTime(d.getTime() + (1 * 60 * 1000));
-
+window.acceptNecessary = function (redirectUrl) {
     document.cookie =
-        "cookie_consent=necessary;path=/;expires=" + d.toUTCString() + ";SameSite=Lax";
+        "cookie_consent=necessary;path=/;Max-Age=432000;SameSite=Lax"; //5 days
 
-    document.querySelector(".cookie-banner").style.display = "none";
+    const banner = document.querySelector(".cookie-banner");
+    if (banner) banner.style.display = "none";
+
+    if (redirectUrl) {
+        window.location.href = redirectUrl;
+    }
 };
-
-// window.acceptCookies = function () {
-//     // 1 year expiry
-//     let d = new Date();
-//     d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-
-//     // Set consent = all
-//     document.cookie =
-//         "cookie_consent=all;path=/;expires=" + d.toUTCString() + ";SameSite=Lax";
-
-//     // Hide banner
-//     const banner = document.querySelector(".cookie-banner");
-//     if (banner) {
-//         banner.style.display = "none";
-//     }
-// };
-
-
-// window.acceptNecessary = function () {
-//     // 1 year expiry
-//     let d = new Date();
-//     d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-
-//     // Set consent = necessary
-//     document.cookie =
-//         "cookie_consent=necessary;path=/;expires=" + d.toUTCString() + ";SameSite=Lax";
-
-//     // Hide banner
-//     const banner = document.querySelector(".cookie-banner");
-//     if (banner) {
-//         banner.style.display = "none";
-//     }
-// };
-
 
 document.addEventListener("DOMContentLoaded", function () {
     function getCookie(name) {
@@ -319,3 +287,21 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".cookie-banner").style.display = "block";
     }
 });
+
+
+function saveCookiePreferences() {
+    const analyticsAllowed = document.getElementById('analyticsCookies').checked;
+
+    if (analyticsAllowed) {
+        document.cookie =
+            "cookie_consent=all;path=/;Max-Age=432000;SameSite=Lax"; // 5 days
+    } else {
+        document.cookie =
+            "cookie_consent=necessary;path=/;Max-Age=2592000;SameSite=Lax";
+    }
+
+    alert('Your cookie preferences have been saved.');
+
+    // Optional: redirect back or reload
+    window.location.href = "/";
+}

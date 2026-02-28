@@ -212,8 +212,6 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->group(function () 
 });
 
 
-
-
 Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
 
     //Route::get('/maintenance/{maintenance}', [MaintenanceController::class, 'show'])->name('maintenance.show');

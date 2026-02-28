@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 24, 2026 at 12:39 PM
--- Server version: 8.4.7
--- PHP Version: 8.3.28
+-- Generation Time: Feb 27, 2026 at 04:52 PM
+-- Server version: 9.1.0
+-- PHP Version: 8.3.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `cache`;
 CREATE TABLE IF NOT EXISTS `cache` (
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -55,11 +55,38 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 
 DROP TABLE IF EXISTS `cache_locks`;
 CREATE TABLE IF NOT EXISTS `cache_locks` (
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_requests`
+--
+
+DROP TABLE IF EXISTS `contact_requests`;
+CREATE TABLE IF NOT EXISTS `contact_requests` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_requests`
+--
+
+INSERT INTO `contact_requests` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'Milga Tomy', 'milgatomy@gmail.com', 'nothing much', 'nothing', '2026-02-26 05:08:58', '2026-02-26 05:08:58'),
+(2, 'Milga Tomy', 'milgatomy@gmail.com', 'nothing', 'hyuygsgyh', '2026-02-26 05:10:23', '2026-02-26 05:10:23'),
+(3, 'Sona', 'amruthaksmdigitz@gmail.com', 'nothing', 'bhhjh', '2026-02-26 05:14:02', '2026-02-26 05:14:02');
 
 -- --------------------------------------------------------
 
@@ -70,11 +97,11 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 DROP TABLE IF EXISTS `contact_submissions`;
 CREATE TABLE IF NOT EXISTS `contact_submissions` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -112,10 +139,10 @@ INSERT INTO `contact_submissions` (`id`, `name`, `email`, `phone`, `subject`, `m
 DROP TABLE IF EXISTS `events`;
 CREATE TABLE IF NOT EXISTS `events` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `location` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `location` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -140,10 +167,10 @@ INSERT INTO `events` (`id`, `name`, `image`, `description`, `location`, `created
 DROP TABLE IF EXISTS `event_bookings`;
 CREATE TABLE IF NOT EXISTS `event_bookings` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci,
+  `username` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -158,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `event_bookings` (
 DROP TABLE IF EXISTS `event_multiple_images`;
 CREATE TABLE IF NOT EXISTS `event_multiple_images` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -175,15 +202,15 @@ CREATE TABLE IF NOT EXISTS `event_multiple_images` (
 DROP TABLE IF EXISTS `ewaste_donations`;
 CREATE TABLE IF NOT EXISTS `ewaste_donations` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `donor_type` enum('Individual/Residential','Association/Education','Institution/Corporate/Commercial','Establishment') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pickup_location` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `waste_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `donor_type` enum('Individual/Residential','Association/Education','Institution/Corporate/Commercial','Establishment') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pickup_location` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `waste_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `gdpr_consent` tinyint(1) NOT NULL DEFAULT '0',
-  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `status` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -208,11 +235,11 @@ INSERT INTO `ewaste_donations` (`id`, `name`, `email`, `phone`, `donor_type`, `p
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -227,9 +254,9 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 DROP TABLE IF EXISTS `gallery_categories`;
 CREATE TABLE IF NOT EXISTS `gallery_categories` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `sort_order` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -257,9 +284,9 @@ INSERT INTO `gallery_categories` (`id`, `name`, `slug`, `description`, `is_activ
 DROP TABLE IF EXISTS `highlights`;
 CREATE TABLE IF NOT EXISTS `highlights` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -274,8 +301,8 @@ CREATE TABLE IF NOT EXISTS `highlights` (
 DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `queue` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `attempts` tinyint UNSIGNED NOT NULL,
   `reserved_at` int UNSIGNED DEFAULT NULL,
   `available_at` int UNSIGNED NOT NULL,
@@ -292,18 +319,45 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 
 DROP TABLE IF EXISTS `job_batches`;
 CREATE TABLE IF NOT EXISTS `job_batches` (
-  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_jobs` int NOT NULL,
   `pending_jobs` int NOT NULL,
   `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `failed_job_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cancelled_at` int DEFAULT NULL,
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE IF NOT EXISTS `locations` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `location`, `created_at`, `updated_at`) VALUES
+(1, 'Sharjah', '2026-02-26 05:56:59', '2026-02-26 05:56:59'),
+(2, 'Dubai', '2026-02-26 05:57:14', '2026-02-26 05:57:14'),
+(3, 'Ajman', '2026-02-26 05:57:56', '2026-02-26 05:57:56'),
+(4, 'Abu Dhabi', '2026-02-26 05:58:10', '2026-02-26 05:58:10'),
+(5, 'Ras Al Khaimah', '2026-02-26 05:58:50', '2026-02-26 05:58:50'),
+(6, 'Umm Al Quwain', '2026-02-27 02:30:36', '2026-02-27 02:30:36');
 
 -- --------------------------------------------------------
 
@@ -314,10 +368,10 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -350,7 +404,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2025_10_17_095553_add_phonenumber_to_orders_table', 1),
 (25, '2025_10_18_054105_add_amount_to_transactions_table', 1),
 (26, '2025_10_18_061712_create_projects_table', 1),
-(27, '2025_11_15_225805_add_message_to_orders_table', 2);
+(27, '2025_11_15_225805_add_message_to_orders_table', 2),
+(28, '2026_02_25_022048_create_services_table', 3),
+(29, '2026_02_25_142510_create_multiple_post_images_table', 4),
+(30, '2026_02_25_133221_create_contact_requests_table', 5),
+(31, '2026_02_26_052042_create_locations_table', 6),
+(32, '2026_02_26_120305_add_text_fields_to_services_table', 7);
 
 -- --------------------------------------------------------
 
@@ -361,7 +420,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 DROP TABLE IF EXISTS `multiple_images`;
 CREATE TABLE IF NOT EXISTS `multiple_images` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `program_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -372,26 +431,62 @@ CREATE TABLE IF NOT EXISTS `multiple_images` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `multiple_post_images`
+--
+
+DROP TABLE IF EXISTS `multiple_post_images`;
+CREATE TABLE IF NOT EXISTS `multiple_post_images` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `post_id` bigint UNSIGNED NOT NULL,
+  `image_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `multiple_post_images_post_id_foreign` (`post_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `multiple_post_images`
+--
+
+INSERT INTO `multiple_post_images` (`id`, `post_id`, `image_name`, `created_at`, `updated_at`) VALUES
+(1, 103, '1772029810_mail.jpg', '2026-02-25 09:00:10', '2026-02-25 09:00:10'),
+(2, 103, '1772029810_callusnew.jpg', '2026-02-25 09:00:10', '2026-02-25 09:00:10'),
+(3, 106, '1772088290_5thimage.jpg', '2026-02-26 01:14:50', '2026-02-26 01:14:50'),
+(4, 107, '1772088483_3rdimage.jpg', '2026-02-26 01:18:03', '2026-02-26 01:18:03'),
+(5, 108, '1772089033_blog3 (2).jpg', '2026-02-26 01:27:13', '2026-02-26 01:27:13'),
+(6, 108, '1772089033_2ndblog.jpg', '2026-02-26 01:27:13', '2026-02-26 01:27:13'),
+(7, 110, '1772090486_kochii4.jpg', '2026-02-26 01:51:26', '2026-02-26 01:51:26'),
+(8, 110, '1772090486_kochii.jpg', '2026-02-26 01:51:26', '2026-02-26 01:51:26'),
+(9, 111, '1772093004_1stimage.jpg', '2026-02-26 02:33:24', '2026-02-26 02:33:24'),
+(10, 111, '1772093004_2ndimage.jpg', '2026-02-26 02:33:24', '2026-02-26 02:33:24'),
+(11, 112, '1772093256_scrap.jpg', '2026-02-26 02:37:36', '2026-02-26 02:37:36'),
+(12, 112, '1772093256_1stimage.jpg', '2026-02-26 02:37:37', '2026-02-26 02:37:37'),
+(13, 112, '1772093257_5thimage.jpg', '2026-02-26 02:37:37', '2026-02-26 02:37:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `razorpay_order_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `razorpay_payment_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `razorpay_signature` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `razorpay_order_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `razorpay_payment_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `razorpay_signature` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `amount` decimal(10,2) NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `donor_type` enum('Individual/Residential','Association/Education','Institution/Corporate/Commercial','Establishment') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `preferred_cause` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `donor_type` enum('Individual/Residential','Association/Education','Institution/Corporate/Commercial','Establishment') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `preferred_cause` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gdpr_consent` tinyint(1) NOT NULL DEFAULT '0',
-  `order_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `payment_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phonenumber` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci,
+  `order_status` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `payment_status` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phonenumber` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -445,8 +540,8 @@ CREATE TABLE IF NOT EXISTS `order_items` (
 
 DROP TABLE IF EXISTS `password_reset_tokens`;
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -460,10 +555,10 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `post_category_id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '0',
@@ -475,7 +570,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   UNIQUE KEY `posts_slug_unique` (`slug`),
   KEY `posts_post_category_id_foreign` (`post_category_id`),
   KEY `posts_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -487,10 +582,6 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_category_id`,
 (4, 'ENVED FOUNDATION', 'enved-foundation', '<p>We believe environmental responsibility should be simple, accessible, and community-led. Enved Foundation exists to help people make choices that protect the planet.</p>', 'posts/1763742692.png', 14, 1, 0, '2025-11-08 10:31:11', '2025-11-21 16:31:32', 0, NULL),
 (5, 'When Communities Act, The Earth Heals.', 'when-communities-act-the-earth-heals', 'Promoting sustainable energy solutions and environmental awareness for a cleaner, healthier planet.', 'posts/1762617951.jpg', 1, 1, 0, '2025-11-08 10:35:51', '2025-11-20 17:01:39', 0, NULL),
 (6, 'Protect the Planet. Empower the Future.', 'protect-the-planet-empower-the-future', 'Join our mission to recycle, reuse, and responsibly manage electronic waste for a sustainable future.', 'posts/1762618518.jpg', 1, 1, 0, '2025-11-08 10:45:18', '2025-11-20 17:01:08', 0, NULL),
-(7, 'Sustainable Living  Awareness', 'sustainable-living-awareness', '<p>We help communities understand sustainable options and adopt smarter everyday habits.</p>', 'posts/1765313459.png', 3, 1, 0, '2025-11-08 13:15:35', '2025-12-09 20:50:59', 0, NULL),
-(8, 'E-Waste Reduction', 'e-waste-reduction', '<p>From collection drives to education programmes, we simplify responsible disposal for families, schools, and offices.</p>', 'posts/1765313512.png', 3, 1, 0, '2025-11-08 13:19:22', '2025-12-09 20:51:52', 0, NULL),
-(9, 'Eco-Conscious Education', 'eco-conscious-education', '<p>We teach children the science, responsibility, and joy of protecting our planet.</p>', 'posts/1765313535.png', 3, 1, 0, '2025-11-08 13:22:12', '2025-12-09 20:52:15', 0, NULL),
-(10, 'A Community Built on Action', 'a-community-built-on-action', '<p>Enved Foundation is a sustainability foundation in India built on a simple belief: every child deserves to inherit a cleaner, greener planet. The organisation began with a group of fathers who looked at the growing pile of e-waste, pollution, and disappearing green spaces and asked a difficult question &mdash; what kind of earth are we leaving behind for our children?</p>\r\n<p>&nbsp;Instead of waiting for change, we chose to create it.</p>\r\n<p>The name&nbsp;Enved comes from the words environment and education, the two pillars that shape every initiative we run. We believe awareness is the first step toward responsibility, and responsibility is the only path to long-term sustainability. By educating communities, schools, families, and neighbourhoods, Enved Foundation works to turn sustainable practices into everyday habits.</p>\r\n<p>&nbsp;Our motto, Empowering Sustainable Futures, reflects this mission. Whether it&rsquo;s responsible e-waste management, environmental awareness sessions, green campus programmes, or community-led initiatives, we focus on actionable, measurable impact. Every activity is designed to make sustainability accessible, practical, and rooted in the real world.</p>\r\n<p>Today,&nbsp;Enved Foundation continues to grow as a trusted sustainability foundation in India, bringing people together to protect the environment for the generations that follow. What started as a promise from a couple of fathers has evolved into a movement committed to creating a future where conscious choices become second nature and communities lead the way to a cleaner tomorrow.</p>\r\n<p>Enved Foundation exists for one purpose: to build a planet our children will be proud to inherit and inspired to protect.</p>', 'posts/1763215526.jpg', 2, 1, 1, '2025-11-08 13:31:58', '2025-11-22 14:21:40', 0, NULL),
 (11, 'Asha Menon', 'asha-menon', 'The ENVED Foundation team conducted an incredible awareness session at our school. Our students now understand the importance of energy conservation and e-waste recycling. Their approach is inspiring and educational', 'posts/1762636120.png', 8, 1, 0, '2025-11-08 15:36:43', '2025-11-08 15:38:40', 0, NULL),
 (12, 'Rahul Krishnan', 'rahul-krishnan', 'Volunteering with ENVED Foundation opened my eyes to how small actions can create big environmental impacts. The Green Campus Challenge made me feel proud to be part of a change-making community.', 'posts/1762636212.png', 8, 1, 0, '2025-11-08 15:40:12', '2025-11-08 15:40:12', 0, NULL),
 (13, 'Dr. Sneha Varghese', 'dr-sneha-varghese', 'I truly admire ENVED Foundation’s commitment to sustainable energy awareness. Their projects are well-organized and focused on long-term environmental benefits rather than just short-term campaigns', 'posts/1762636308.png', 8, 1, 0, '2025-11-08 15:41:31', '2025-11-08 15:41:48', 0, NULL),
@@ -538,9 +629,7 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_category_id`,
 (66, 'ENVED Foundation | Sustainability & Environmental Education', 'enved-foundation-sustainability-environmental-education', NULL, 'posts/1764005599.png', 23, 2, 0, '2025-11-24 17:33:19', '2025-11-24 17:33:19', NULL, NULL),
 (67, 'Youtube', 'youtube', '<p>https://youtube.com</p>', 'posts/1764023404.png', 13, 2, 0, '2025-11-24 22:23:08', '2025-11-24 22:30:04', NULL, NULL),
 (68, 'A Community Built on Action', 'a-community-built-on-action-2', '<p>Enved Foundation is more than an NGO. It&rsquo;s a growing movement of people who believe environmental awareness should start young, grow consistently, and reshape how communities live.</p>\r\n<p>We work across schools, neighbourhoods, and local governing bodies to run awareness programmes, e-waste drives, green campaigns, and sustainability education initiatives.<br><br></p>\r\n<p>What keeps us going is the Native American proverb, <em>We do not inherit the Earth from our ancestors; we borrow it from our children.</em></p>', 'posts/1765403780.jpg', 24, 2, 0, '2025-11-24 22:49:54', '2025-12-10 21:56:20', NULL, NULL),
-(69, 'Simple Everyday Sustainability Practices', 'simple-everyday-sustainability-practices', '<p>Living sustainably doesn\'t require drastic lifestyle changes. Here are five simple practices you can start today:</p>\r\n<p><strong>1. Reduce Single-Use Plastics</strong><br>Carry reusable bags, water bottles, and containers. This small change can prevent hundreds of plastic items from entering landfills each year.</p>\r\n<p><strong>2. Conserve Water</strong><br>Fix leaky taps, take shorter showers, and collect rainwater for plants. Every drop counts in our journey toward water conservation.</p>\r\n<p><strong>3. Practice Mindful Energy Use</strong><br>Turn off lights when leaving rooms, unplug electronics when not in use, and opt for natural lighting during daytime hours.</p>\r\n<p><strong>4. Support Local and Seasonal</strong><br>Buy local produce to reduce carbon footprint from transportation and enjoy fresher, seasonal foods.</p>\r\n<p><strong>5. Start Composting</strong><br>Convert kitchen waste into nutrient-rich compost for your plants while reducing landfill waste.</p>\r\n<p>Small consistent actions create significant environmental impact over time. Start with one practice today and gradually incorporate more into your routine.</p>', 'posts/1764039608.jpg', 25, 2, 0, '2025-11-25 03:00:08', '2025-11-25 03:00:08', NULL, NULL),
-(70, 'E-Waste Management Guide', 'e-waste-management-guide', '<p>Electronic waste is one of the fastest-growing waste streams. Here\'s how to manage it responsibly:</p>\r\n<p><strong>What is E-Waste?</strong><br>E-waste includes discarded electronic devices like mobile phones, computers, televisions, and household appliances.</p>\r\n<p><strong>Why Proper Disposal Matters</strong></p>\r\n<ul>\r\n<li>\r\n<p>Prevents toxic materials from contaminating soil and water</p>\r\n</li>\r\n<li>\r\n<p>Conserves valuable resources through recycling</p>\r\n</li>\r\n<li>\r\n<p>Reduces environmental pollution</p>\r\n</li>\r\n</ul>\r\n<p><strong>Simple E-Waste Management Steps:</strong></p>\r\n<ol start=\"1\">\r\n<li>\r\n<p><strong>Repair First</strong>: Consider repairing devices before replacement</p>\r\n</li>\r\n<li>\r\n<p><strong>Donate Working Electronics</strong>: Give functional devices to those in need</p>\r\n</li>\r\n<li>\r\n<p><strong>Find Certified Recyclers</strong>: Use authorized e-waste recycling centers</p>\r\n</li>\r\n<li>\r\n<p><strong>Data Security</strong>: Always wipe personal data before disposal</p>\r\n</li>\r\n</ol>\r\n<p><strong>ENVED Foundation\'s Initiative</strong><br>We organize monthly e-waste collection drives across Kochi. Contact us to schedule pickup or visit our collection centers.</p>\r\n<p>Together, we can tackle the e-waste challenge and create a cleaner environment.</p>', 'posts/1764039646.jpg', 25, 2, 0, '2025-11-25 03:00:46', '2025-11-25 03:00:46', NULL, NULL),
-(71, 'Community Gardening Benefits', 'community-gardening-benefits', '<p>Community gardens are transforming urban spaces and bringing people together while promoting sustainability.</p>\r\n<p><strong>Environmental Benefits:</strong></p>\r\n<ul>\r\n<li>\r\n<p>Increases green cover in urban areas</p>\r\n</li>\r\n<li>\r\n<p>Improves air quality through plant respiration</p>\r\n</li>\r\n<li>\r\n<p>Reduces food miles by growing locally</p>\r\n</li>\r\n<li>\r\n<p>Promotes biodiversity in city environments</p>\r\n</li>\r\n</ul>\r\n<p><strong>Social Advantages:</strong></p>\r\n<ul>\r\n<li>\r\n<p>Creates community bonding opportunities</p>\r\n</li>\r\n<li>\r\n<p>Provides educational spaces for children and adults</p>\r\n</li>\r\n<li>\r\n<p>Offers stress relief through gardening activities</p>\r\n</li>\r\n<li>\r\n<p>Builds food security at local level</p>\r\n</li>\r\n</ul>\r\n<p><strong>Getting Started:</strong></p>\r\n<ol start=\"1\">\r\n<li>\r\n<p>Identify unused land in your neighborhood</p>\r\n</li>\r\n<li>\r\n<p>Gather interested community members</p>\r\n</li>\r\n<li>\r\n<p>Plan your garden layout and crops</p>\r\n</li>\r\n<li>\r\n<p>Start small with easy-to-grow vegetables</p>\r\n</li>\r\n</ol>', 'posts/1764039699.jpg', 25, 2, 0, '2025-11-25 03:01:24', '2025-11-25 03:01:39', NULL, NULL),
+(71, 'The Environmental Benefits of Scrap Recycling', 'the-environmental-benefits-of-scrap-recycling', 'Scrap metal recycling offers profound environmental benefits by conserving finite natural resources, significantly reducing energy consumption—such as saving up to 95% of the energy required for producing new aluminum—and minimizing greenhouse gas emissions, pollution, and landfill waste. By reusing existing metals instead of mining virgin ore, this process protects ecosystems from habitat destruction, prevents toxic leaching into soil and water, and supports a sustainable circular economy.', 'posts/1764039699.jpg', 25, 2, 0, '2025-11-25 03:01:24', '2026-02-25 06:41:29', NULL, NULL),
 (72, 'Company', 'company', NULL, 'posts/1769622283.jpeg', 26, 2, 0, '2025-11-26 20:02:42', '2026-01-28 17:44:43', NULL, NULL),
 (73, 'Company', 'company-2', NULL, 'posts/1769622244.jpeg', 26, 2, 0, '2025-11-26 20:03:09', '2026-01-28 17:44:04', NULL, NULL),
 (74, 'Company', 'company-3', NULL, 'posts/1769622176.jpeg', 26, 2, 0, '2025-11-26 20:03:29', '2026-01-28 17:42:56', NULL, NULL),
@@ -555,7 +644,24 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_category_id`,
 (83, 'Company', 'company-10', '<p>Company</p>', 'posts/1769622553.jpeg', 26, 1, 1, '2026-01-28 17:49:13', '2026-01-28 17:49:13', NULL, NULL),
 (84, 'Companies', 'companies', '<p>Companies</p>', 'posts/1769623064.jpg', 26, 1, 0, '2026-01-28 17:57:44', '2026-01-28 17:57:44', NULL, NULL),
 (85, 'Companies', 'companies-2', '<p>Companies</p>', 'posts/1769623114.jpg', 26, 1, 0, '2026-01-28 17:58:34', '2026-01-28 17:58:34', NULL, NULL),
-(86, 'Turn Your Scrap into Cash', 'turn-your-scrap-into-cash', 'Fast, Reliable, Hassle-Free\r\nScrap Buyers in UAE', 'posts/1771923759.png', 31, 1, 1, '2026-02-24 01:30:52', '2026-02-24 03:32:39', NULL, NULL);
+(86, 'Turn Your Scrap into Cash', 'turn-your-scrap-into-cash', 'Fast, Reliable, Hassle-Free\r\nScrap Buyers in UAE', 'posts/1771923759.png', 31, 1, 1, '2026-02-24 01:30:52', '2026-02-24 03:32:39', NULL, NULL),
+(87, 'COMPETITIVE PRICES', 'competitive-prices', 'Best market rates with transparent pricing.', NULL, 3, 1, 1, '2026-02-25 00:40:12', '2026-02-25 00:40:12', NULL, NULL),
+(88, 'TURNING SCRAP INTO VALUE', 'turning-scrap-into-value', 'Vanguard Metal Scrap Trading LLC is one of the leading metal scrap trading companies in the UAE. We transform scrap metal into value by offering competitive prices, prompt payments, and exceptional service.\r\n\r\nWith years of experience in the industry, we\'ve earned a reputation for reliability, professionalism, and top-notch customer care.', 'posts/1772005629.png', 2, 1, 1, '2026-02-25 02:17:09', '2026-02-25 02:17:09', NULL, NULL),
+(89, 'PROMPT PAYMENTS', 'prompt-payments', 'Fast and immediate payments for scrap materials.', NULL, 3, 1, 1, '2026-02-25 02:19:05', '2026-02-25 02:19:05', NULL, NULL),
+(90, 'ECO-FRIENDLY PRACTICES', 'eco-friendly-practices', 'Environmentally responsible recycling processes.', NULL, 3, 1, 1, '2026-02-25 02:19:30', '2026-02-25 02:19:30', NULL, NULL),
+(91, 'Our Mission', 'our-mission', 'At Vanguard, our mission is to contribute to a cleaner, greener planet by recycling scrap metal sustainably.', 'posts/1772014174.png', 32, 1, 0, '2026-02-25 04:05:33', '2026-02-25 04:39:34', NULL, NULL),
+(92, 'Our Vision', 'our-vision', 'To be a trusted leader in sustainable scrap recycling, creating long-term environmental and economic value.', 'posts/1772012160.png', 32, 1, 1, '2026-02-25 04:06:00', '2026-02-25 04:06:00', NULL, NULL),
+(93, 'E-Waste Recycling: Why It Is Important', 'e-waste-recycling-why-it-is-important', 'Old computers, mobile phones, and electronic items contain harmful materials. Proper e-waste recycling prevents environmental damage and health risks. This blog explains why you should never throw electronic waste in regular bins and how we handle it safely.', 'posts/1772021295.jpg', 25, 1, 1, '2026-02-25 06:02:59', '2026-02-25 06:38:15', NULL, NULL),
+(94, 'Turn Your Waste Into Income: Start Selling Scrap Today', 'turn-your-waste-into-income-start-selling-scrap-today', 'Transforming waste into a consistent income stream is a highly achievable goal, allowing you to turn forgotten, unused items in your home or office into immediate financial returns. You can start this process today by sorting and collecting everyday recyclable materials, particularly non-ferrous metals like copper, aluminum, and brass, which are in high demand and yield the highest profit margins. Beyond metals, valuable materials that can be monetized include old newspapers, cardboard boxes, plastic bottles, and electronic waste, often referred to as e-waste. To maximize your earnings, it is crucial to clean and categorize your materials, as sorted and clean scrap always fetches a better price than mixed, dirty trash. You can connect with local recyclers, use online, tech-enabled \"kabadiwala\" services for door-to-door pickup, or sell directly to industrial foundries.', 'posts/1772020292.jpg', 25, 1, 1, '2026-02-25 06:21:32', '2026-02-25 06:21:32', NULL, NULL),
+(95, 'Types of Scrap We Buy and Their Market Value', 'types-of-scrap-we-buy-and-their-market-value', 'We purchase a wide variety of scrap materials such as iron, steel, aluminum, copper, brass, plastic, paper, and electronic waste, and the market value of each material is carefully determined based on factors like current industry demand, global metal price fluctuations, material purity and quality, quantity or weight supplied, and overall recycling potential, ensuring that our customers receive transparent, competitive, and fair pricing that reflects real-time market conditions.', 'posts/1772020845.jpg', 25, 1, 1, '2026-02-25 06:30:45', '2026-02-25 06:30:45', NULL, NULL),
+(96, 'FREE SCRAP PICKUP', 'free-scrap-pickup', 'Fast, hassle-free pickup of scrap metal from your location.', 'posts/1772025508.jpg', 33, 1, 1, '2026-02-25 07:22:09', '2026-02-25 07:48:28', NULL, NULL),
+(97, 'PRECISION WEIGHING', 'precision-weighing', 'Accurate weighing of your scrap with certified industrial scales.', 'posts/1772025327.jpg', 33, 1, 1, '2026-02-25 07:29:26', '2026-02-25 07:45:27', NULL, NULL),
+(98, 'BEST MARKET PRICES', 'best-market-prices', 'Get the highest value for your scrap with our competitive torque titles.', 'posts/1772025189.jpg', 33, 1, 1, '2026-02-25 07:41:37', '2026-02-25 07:43:09', NULL, NULL),
+(99, 'Call Us', 'call-us', '+971  52 149 1001', 'posts/1772026803.jpg', 34, 1, 1, '2026-02-25 08:07:12', '2026-02-25 08:10:03', NULL, NULL),
+(100, 'Mail Us', 'mail-us', 'info@vanguarduae.com', 'posts/1772026986.jpg', 34, 1, 0, '2026-02-25 08:13:06', '2026-02-25 08:13:06', NULL, NULL),
+(101, 'Chat With Us', 'chat-with-us', 'Lets Chat', 'posts/1772027033.jpg', 34, 1, 0, '2026-02-25 08:13:53', '2026-02-25 08:13:53', NULL, NULL),
+(102, 'Address', 'address', 'Dubai, UAE', 'posts/1772027066.jpg', 34, 1, 1, '2026-02-25 08:14:26', '2026-02-25 08:14:26', NULL, NULL),
+(112, 'Scrap Collection Services for Homes and Businesses', 'scrap-collection-services-for-homes-and-businesses', 'Scrap collection services for homes and businesses provide convenient, doorstep pickup for unwanted, recyclable materials like metals, plastics, paper, and e-waste, transforming clutter into cash while supporting environmental sustainability. These services, often booked online or via phone, facilitate the efficient removal of old electronics, appliances, office furniture, and industrial debris from residential homes, commercial offices, and industrial sites. Professional teams typically sort and process materials through eco-friendly recycling methods to reduce landfill waste. In addition to decluttering, these services offer transparent, market-based pricing, allowing customers to receive immediate payment for high-value items like copper, aluminum, and iron. They also provide specialized services such as furniture dismantling, secure data destruction for electronic waste, and large-scale industrial scrap removal to ensure compliance with environmental regulations.', 'posts/1772093256.jpg', 25, 1, 1, '2026-02-26 02:37:36', '2026-02-26 02:37:36', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -566,13 +672,13 @@ INSERT INTO `posts` (`id`, `title`, `slug`, `body`, `image`, `post_category_id`,
 DROP TABLE IF EXISTS `post_categories`;
 CREATE TABLE IF NOT EXISTS `post_categories` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `post_categories_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `post_categories`
@@ -609,7 +715,10 @@ INSERT INTO `post_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`)
 (28, 'Time', 'time', '2025-11-27 15:25:38', '2025-11-27 15:25:38'),
 (29, 'Metal Scrap', 'metal-scrap', '2026-02-23 06:48:01', '2026-02-23 06:48:01'),
 (30, 'Copper Scrap', 'copper-scrap', '2026-02-23 06:48:53', '2026-02-23 06:48:53'),
-(31, 'banner', 'banner', '2026-02-24 01:09:28', '2026-02-24 01:09:28');
+(31, 'banner', 'banner', '2026-02-24 01:09:28', '2026-02-24 01:09:28'),
+(32, 'commitment', 'commitment', '2026-02-25 03:55:47', '2026-02-25 03:55:47'),
+(33, 'diffservice', 'diffservice', '2026-02-25 07:21:27', '2026-02-25 07:21:27'),
+(34, 'contact', 'contact', '2026-02-25 08:04:15', '2026-02-25 08:04:15');
 
 -- --------------------------------------------------------
 
@@ -620,9 +729,9 @@ INSERT INTO `post_categories` (`id`, `name`, `slug`, `created_at`, `updated_at`)
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_category_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -639,8 +748,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 DROP TABLE IF EXISTS `product_categories`;
 CREATE TABLE IF NOT EXISTS `product_categories` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -656,7 +765,7 @@ DROP TABLE IF EXISTS `product_images`;
 CREATE TABLE IF NOT EXISTS `product_images` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint UNSIGNED NOT NULL,
-  `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -672,13 +781,13 @@ CREATE TABLE IF NOT EXISTS `product_images` (
 DROP TABLE IF EXISTS `programs`;
 CREATE TABLE IF NOT EXISTS `programs` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_date` timestamp NULL DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `video_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -702,12 +811,12 @@ INSERT INTO `programs` (`id`, `title`, `created_date`, `start_date`, `end_date`,
 DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_date` date NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -732,7 +841,7 @@ INSERT INTO `projects` (`id`, `title`, `created_date`, `start_date`, `end_date`,
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -757,7 +866,7 @@ DROP TABLE IF EXISTS `role_routes`;
 CREATE TABLE IF NOT EXISTS `role_routes` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_id` bigint UNSIGNED NOT NULL,
-  `route_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `route_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -960,16 +1069,48 @@ INSERT INTO `role_routes` (`id`, `role_id`, `route_name`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `services`
+--
+
+DROP TABLE IF EXISTS `services`;
+CREATE TABLE IF NOT EXISTS `services` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `text3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `title`, `description`, `text1`, `text2`, `text3`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Metal Scrap', 'We specialize in the efficient collection, segregation, and recycling of all types of metal scrap including iron, steel, aluminum, copper, brass, and other industrial metal waste. Our team ensures accurate weight measurement, transparent pricing, and prompt payments to provide maximum value for your scrap materials. With environmentally responsible recycling practices and modern handling equipment, we help reduce landfill waste while promoting sustainable resource reuse. Choosing us means reliable service, fair market rates, quick pickup scheduling, and a commitment to eco-friendly scrap management solutions.', 'Iron Scrap', 'Steel Scrap', 'Mixed Metal Scrap', '1772116790.jpg', '2026-02-26 04:47:56', '2026-02-27 01:55:08'),
+(2, 'Copper Scrap', 'We offer specialized copper scrap collection and recycling services with a strong focus on fair pricing and environmental responsibility. Whether it is copper wires, pipes, sheets, motors, or industrial copper waste, we ensure accurate weight measurement and transparent rate calculation based on current market value. Our experienced team provides quick pickup, safe handling, and immediate payment for your convenience. By choosing us, you partner with a trusted scrap management service that maximizes your returns while supporting sustainable recycling practices and reducing environmental impact.', 'Bare Bright Copper Wire', 'Insulated Copper Cables', 'Copper Pipes & Tubes', '1772117138.jpg', '2026-02-26 04:49:44', '2026-02-27 01:52:15'),
+(6, 'Aluminium Scrap', 'We provide reliable aluminium scrap collection and recycling services with accurate weight measurement and competitive market pricing. Whether it’s aluminium sheets, utensils, window frames, industrial scrap, or extrusion waste, our team ensures safe handling and efficient processing. We offer quick pickup scheduling, transparent transactions, and instant payment to make the process smooth and hassle-free. By choosing us, you benefit from maximum scrap value, eco-friendly recycling practices, and a trusted partner committed to responsible waste management and sustainability.', 'Aluminium Sheets & Plates', 'Aluminium Window Frames & Profiles', 'Aluminium Cans & Containers', '1772117244.jpg', '2026-02-26 09:17:24', '2026-02-27 02:00:53'),
+(7, 'Construction Scrap', 'We provide efficient construction scrap collection and recycling services for building sites, renovation projects, and demolition works. Our team handles a wide variety of construction waste materials such as metal structures, steel bars, pipes, and other reusable scrap generated during construction activities. We ensure proper sorting, accurate weight measurement, and transparent pricing based on current market rates. With our reliable pickup service and prompt payment process, we make construction scrap disposal simple and profitable while promoting environmentally responsible recycling practices.', 'Steel Rods & Rebars', 'Metal Pipes & Fittings', 'Aluminium Frames & Sheets', '1772177373.jpg', '2026-02-27 01:59:33', '2026-02-27 01:59:33'),
+(8, 'Industrial Scrap', 'Our industrial scrap collection services are designed to manage scrap generated from factories, workshops, and manufacturing facilities. We collect and recycle various types of industrial waste materials including metal parts, machinery scrap, and production leftovers. Our experienced team ensures safe handling, proper weighing, and fair market pricing for every transaction. With quick pickup and instant payment, we help businesses efficiently dispose of industrial scrap while supporting sustainable recycling and reducing environmental impact.', 'Machine Parts Scrap', 'Factory Metal Waste', 'Industrial Equipment Scrap', '1772177417.jpg', '2026-02-27 02:00:17', '2026-02-27 02:00:17'),
+(9, 'Electronic Scrap', 'We offer professional electronic scrap collection and recycling services for homes, offices, and industrial facilities. Electronic waste contains valuable materials such as copper, aluminium, and other recyclable components that can be safely recovered through proper recycling processes. Our team ensures secure handling, accurate weight measurement, and transparent pricing based on current scrap market rates. With quick pickup services and immediate payment, we make it easy for businesses and individuals to dispose of old electronic equipment while supporting environmentally responsible recycling and reducing harmful electronic waste.', 'Old Computers & Laptops', 'Electronic Circuit Boards', 'Wires, Chargers & Power Supplies', '1772177868.jpg', '2026-02-27 02:07:48', '2026-02-27 02:07:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
@@ -981,7 +1122,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('pl87cKX6Qt6jQRj2uHpkPFAcbnm9y9GCakpNbLpY', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiT0NCTmRzNlJMY3dyRGpkWnd3VjBIc3RZWUtqa0tuRHhxVTZGNEtQcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTc3MTkxNDY5NTt9fQ==', 1771933830);
+('oR2XwuDoy08I4m7IQwiZDrWJVlk1N8w2EyZGE1gR', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMzh2RTJvb0dnZ2FLaTNVczJwUURoVkNOVXo3SmQ2Z0wwVUpnYm1DbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb250YWN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcyMDgzNjkxO319', 1772102425);
 
 -- --------------------------------------------------------
 
@@ -992,13 +1133,13 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 DROP TABLE IF EXISTS `support_messages`;
 CREATE TABLE IF NOT EXISTS `support_messages` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('new','in_progress','resolved','closed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
-  `admin_notes` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('new','in_progress','resolved','closed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
+  `admin_notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1023,7 +1164,7 @@ INSERT INTO `support_messages` (`id`, `name`, `email`, `phone`, `subject`, `mess
 DROP TABLE IF EXISTS `timings`;
 CREATE TABLE IF NOT EXISTS `timings` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -1050,9 +1191,9 @@ INSERT INTO `timings` (`id`, `title`, `created_at`, `updated_at`) VALUES
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE IF NOT EXISTS `transactions` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `from` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `to` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `transaction_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `from` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `to` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transaction_code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount` decimal(10,2) NOT NULL DEFAULT '0.00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1083,16 +1224,16 @@ INSERT INTO `transactions` (`id`, `from`, `to`, `transaction_code`, `amount`, `c
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `cover_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profile_image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `cover_image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role_id` bigint UNSIGNED DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1104,7 +1245,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `profile_image`, `location`, `description`, `cover_image`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Shafi MC', 'iamshafimc@gmail.com', NULL, '$2y$12$i0ogXuIXO2FTrpyNZHj4P.H2.6TM1hBK65cabPD8E2BqUw7S1IO6.', 'uploads/profiles/1763338952_profile_user.jpg', 'Trivandrum', NULL, NULL, 1, NULL, NULL, '2025-11-20 22:00:57'),
+(1, 'Shafi MC', 'iamshafimc@gmail.com', NULL, '$2y$12$i0ogXuIXO2FTrpyNZHj4P.H2.6TM1hBK65cabPD8E2BqUw7S1IO6.', 'uploads/profiles/1763338952_profile_user.jpg', 'Trivandrum', NULL, NULL, 1, 'T8Lhmfyw9F7IqlOhT7Pvk5ZZM3Y5Wc2zyckAZV0dR5Y3O9eCF4lgBpRAdtiL', NULL, '2025-11-20 22:00:57'),
 (2, 'Admin Enved', 'envedonline@gmail.com', NULL, '$2y$12$GOfEwSR1zKYh.tdp50IFMuSNh2T4/qV3o.Jd5vwEgw6JcVyZbnzW6', NULL, NULL, NULL, NULL, 1, NULL, '2025-11-21 20:50:20', '2025-11-21 20:50:20');
 
 -- --------------------------------------------------------
@@ -1116,22 +1257,22 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `pr
 DROP TABLE IF EXISTS `volunteers`;
 CREATE TABLE IF NOT EXISTS `volunteers` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `location` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `preferred_causes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `additional_info` text COLLATE utf8mb4_unicode_ci,
-  `availability` enum('weekdays','weekends','both','flexible') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `additional_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `availability` enum('weekdays','weekends','both','flexible') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `gdpr_consent` tinyint(1) NOT NULL DEFAULT '0',
   `marketing_consent` tinyint(1) NOT NULL DEFAULT '0',
-  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `status` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `volunteers_email_index` (`email`),
   KEY `volunteers_status_index` (`status`)
-) ;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `volunteers`
@@ -1147,31 +1288,6 @@ INSERT INTO `volunteers` (`id`, `name`, `email`, `phone`, `location`, `preferred
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `event_multiple_images`
---
-ALTER TABLE `event_multiple_images`
-  ADD CONSTRAINT `event_multiple_images_event_id_foreign` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `multiple_images`
---
-ALTER TABLE `multiple_images`
-  ADD CONSTRAINT `multiple_images_program_id_foreign` FOREIGN KEY (`program_id`) REFERENCES `programs` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_post_category_id_foreign` FOREIGN KEY (`post_category_id`) REFERENCES `post_categories` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `posts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `products`
