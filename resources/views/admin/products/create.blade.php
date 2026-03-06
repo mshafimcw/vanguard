@@ -15,6 +15,16 @@
             <label>Description</label>
             <textarea name="description" class="form-control">{{ old('description') }}</textarea>
         </div>
+         <div class="mb-3">
+            <label>Bar Code</label>
+            <input type="text" name="barcode" class="form-control" value="{{ old('barcode') }}">
+            @error('barcode')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
+        <div class="mb-3">
+            <label>Serial number</label>
+            <input type="text" name="serial_number" class="form-control" value="{{ old('serial_number') }}">
+            @error('serial_number')<div class="text-danger">{{ $message }}</div>@enderror
+        </div>
         <div class="mb-3">
             <label>Category</label>
             <select name="product_category_id" class="form-control">

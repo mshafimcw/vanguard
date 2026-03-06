@@ -7,62 +7,76 @@ use Illuminate\Support\Facades\Session;
 
 class CaptchaController extends Controller
 {
-    public function generate(Request $request)
-    {
-        // Generate new captcha always when refreshed
-        if ($request->has('refresh') || $request->has('id')) {
+	public function generate(Request $request)
+	{
+		// If refresh button clicked → generate new
+		if ($request->has('refresh') || $request->has('id')) {
 
-            $code = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZ23456789"), 0, 6);
-            Session::put('scrap_captcha', $code);
-        } else {
+			$code = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZ23456789"), 0, 6);
 
-            if (!Session::has('scrap_captcha')) {
-                $code = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZ23456789"), 0, 6);
-                Session::put('scrap_captcha', $code);
-            } else {
-                $code = Session::get('scrap_captcha');
-            }
-        }
+			Session::put('captcha_code', $code);
+		} else {
 
-        // Create Image
-        $width = 180;
-        $height = 60;
+			// First time load → create only if not exists
+			if (!Session::has('captcha_code')) {
 
-        $image = imagecreatetruecolor($width, $height);
+				$code = substr(str_shuffle("ABCDEFGHJKLMNPQRSTUVWXYZ23456789"), 0, 6);
 
-        $bgColor = imagecolorallocate($image, 255, 255, 255);
-        imagefill($image, 0, 0, $bgColor);
+				Session::put('captcha_code', $code);
+			} else {
 
-        $fontPath = public_path('fonts/Arial.ttf');
-        $fontSize = 24;
+				// VERY IMPORTANT: reuse same captcha
+				$code = Session::get('captcha_code');
+			}
+		}
 
-        for ($i = 0; $i < strlen($code); $i++) {
 
-            $angle = rand(-25, 25);
-            $x = 20 + ($i * 25);
-            $y = rand(35, 45);
+		// CREATE IMAGE
 
-            $textColor = imagecolorallocate($image, 0, 0, 0);
+		$width = 180;
+		$height = 60;
 
-            imagettftext(
-                $image,
-                $fontSize,
-                $angle,
-                $x,
-                $y,
-                $textColor,
-                $fontPath,
-                $code[$i]
-            );
-        }
+		$image = imagecreatetruecolor($width, $height);
 
-        Session::save();
+		$bgColor = imagecolorallocate($image, 255, 255, 255);
+		imagefill($image, 0, 0, $bgColor);
 
-        ob_start();
-        imagepng($image);
-        $imageData = ob_get_clean();
-        imagedestroy($image);
+		$fontPath = public_path('fonts/Arial.ttf');
 
-        return response($imageData)->header('Content-Type', 'image/png');
-    }
+		$fontSize = 24;
+
+		for ($i = 0; $i < strlen($code); $i++) {
+
+			$angle = rand(-25, 25);
+
+			$x = 20 + ($i * 25);
+
+			$y = rand(35, 45);
+
+			$textColor = imagecolorallocate($image, 0, 0, 0);
+
+			imagettftext(
+				$image,
+				$fontSize,
+				$angle,
+				$x,
+				$y,
+				$textColor,
+				$fontPath,
+				$code[$i]
+			);
+		}
+
+		\Session::save(); // ADD THIS LINE
+
+		ob_start();
+
+		imagepng($image);
+
+		$imageData = ob_get_clean();
+
+		imagedestroy($image);
+
+		return response($imageData)->header('Content-Type', 'image/png');
+	}
 }

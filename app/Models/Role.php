@@ -25,7 +25,7 @@ class Role extends Model
     /**
      * Relationship: A role can have many allowed routes.
      */
-   public function routes()
+    public function routes()
     {
         return $this->hasMany(RoleRoute::class);
     }

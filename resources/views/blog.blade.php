@@ -1,247 +1,86 @@
 @extends('layouts.main')
 
 @section('content')
+<div class="blog-page">
+    <div class="container">
 
-	
-	<!-- ================= HERO ================= -->
-    <div class="container-fluid py-5 mb-5 hero-header wow fadeIn">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-center text-lg-start hero-text">
-                    <h1 class="display-1 mb-4">BLOG & INDUSTRY <br>INSIGHTS</h1>
-                    <p class="fs-4">
-                        Stay updated with scrap prices, industry news, <br>metal trends, and recycling insights in UAE.
-                    </p>
+        <form method="GET" action="{{ route('blog.index') }}">
+
+            <div class="row mb-4 mt-4">
+
+                <div class="col-lg-6 mx-auto">
+
+                    <div class="input-group shadow-sm">
+
+                        <input type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search articles..."
+                            value="{{ request('search') }}">
+
+                        <button class="btn btn-primary">
+                            Search
+                            <i class="bi bi-search"></i>
+
+                        </button>
+
+                    </div>
+
                 </div>
+
+            </div>
+
+        </form>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="page-title" style="margin-top: 50px;">Latest from Our Blog</h1>
             </div>
         </div>
-    </div>
 
-	<!-- ================= BLOG SECTION ================= -->
-    <div class="blog-wrapper">
-
-        <!-- RECENT POSTS -->
-        <section class="blog-section">
-            <div class="blog-container">
-
-                <h1 class="blog-heading">
-                    Recent <span>Posts</span>
-                </h1>
-
-                <div class="swiper recentSwiper">
-                    <div class="swiper-wrapper">
-
-                        <div class="swiper-slide">
-                            <div class="recent-layout">
-
-                                <!-- LEFT IMAGE -->
-                                <div class="recent-image">
-                                    <img src="img/money.png" alt="Blog Image">
-                                </div>
-
-                                <!-- RIGHT CONTENT -->
-                                <div class="recent-content">
-                                    <div class="recent-meta">
-                                        <span>22 July 2024</span>
-                                        <span>• 4 min</span>
-                                    </div>
-
-                                    <h2>How Remote Work Drastically Improved My Design Skills</h2>
-
-                                    <p>
-                                        Remote work has drastically improved my design skills by giving me
-                                        the freedom to experiment, focus, and learn at my own pace.
-                                        Without the daily commute and office distractions, I found more
-                                        time for deep, uninterrupted work.
-                                    </p>
-
-                                    <div class="recent-tags">
-                                        <span>Design</span>
-                                        <span>Product</span>
-                                        <span>Freelance</span>
-                                    </div>
-
-                                    <a href="#" class="recent-btn">Read Article →</a>
-                                </div>
-
+        <div class="row">
+            @forelse($blogs as $blog)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="{{ route('blog.show', $blog->slug) }}" class="blog-card-link" style="text-decoration: none; color: inherit;">
+                    <div class="blog-card">
+                        @if($blog->image)
+                        <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" class="img-fluid">
+                        @endif
+                        <div class="blog-content">
+                            <h3>{{ $blog->title }}</h3>
+                            <div class="blog-meta">
+                                <span>
+                                    <i class="bi bi-calendar"></i> {{ $blog->created_at->format('M d, Y') }}
+                                </span>
+                                @if($blog->author)
+                                <span>
+                                    <i class="bi bi-person"></i> {{ Str::limit($blog->author->name, 15) }}
+                                </span>
+                                @endif
                             </div>
+                            <p>{{ Str::limit(strip_tags($blog->body), 120) }}</p>
+                            <span class="btn-primary">
+                                Read More <i class="bi bi-arrow-right"></i>
+                            </span>
                         </div>
-
-                        <div class="swiper-slide">
-                            <div class="recent-layout">
-
-                                <!-- LEFT IMAGE -->
-                                <div class="recent-image">
-                                    <img src="img/metting.png" alt="Blog Image">
-                                </div>
-
-                                <!-- RIGHT CONTENT -->
-                                <div class="recent-content">
-                                    <div class="recent-meta">
-                                        <span>22 July 2024</span>
-                                        <span>• 4 min</span>
-                                    </div>
-
-                                    <h2>How Remote Work Drastically Improved My Design Skills</h2>
-
-                                    <p>
-                                        Remote work has drastically improved my design skills by giving me
-                                        the freedom to experiment, focus, and learn at my own pace.
-                                        Without the daily commute and office distractions, I found more
-                                        time for deep, uninterrupted work.
-                                    </p>
-
-                                    <div class="recent-tags">
-                                        <span>Design</span>
-                                        <span>Product</span>
-                                        <span>Freelance</span>
-                                    </div>
-
-                                    <a href="#" class="recent-btn">Read Article →</a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="recent-layout">
-
-                                <!-- LEFT IMAGE -->
-                                <div class="recent-image">
-                                    <img src="img/money.png" alt="Blog Image">
-                                </div>
-
-                                <!-- RIGHT CONTENT -->
-                                <div class="recent-content">
-                                    <div class="recent-meta">
-                                        <span>22 July 2024</span>
-                                        <span>• 4 min</span>
-                                    </div>
-
-                                    <h2>How Remote Work Drastically Improved My Design Skills</h2>
-
-                                    <p>
-                                        Remote work has drastically improved my design skills by giving me
-                                        the freedom to experiment, focus, and learn at my own pace.
-                                        Without the daily commute and office distractions, I found more
-                                        time for deep, uninterrupted work.
-                                    </p>
-
-                                    <div class="recent-tags">
-                                        <span>Design</span>
-                                        <span>Product</span>
-                                        <span>Freelance</span>
-                                    </div>
-
-                                    <a href="#" class="recent-btn">Read Article →</a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="recent-layout">
-
-                                <!-- LEFT IMAGE -->
-                                <div class="recent-image">
-                                    <img src="img/metting.png" alt="Blog Image">
-                                </div>
-
-                                <!-- RIGHT CONTENT -->
-                                <div class="recent-content">
-                                    <div class="recent-meta">
-                                        <span>22 July 2024</span>
-                                        <span>• 4 min</span>
-                                    </div>
-
-                                    <h2>How Remote Work Drastically Improved My Design Skills</h2>
-
-                                    <p>
-                                        Remote work has drastically improved my design skills by giving me
-                                        the freedom to experiment, focus, and learn at my own pace.
-                                        Without the daily commute and office distractions, I found more
-                                        time for deep, uninterrupted work.
-                                    </p>
-
-                                    <div class="recent-tags">
-                                        <span>Design</span>
-                                        <span>Product</span>
-                                        <span>Freelance</span>
-                                    </div>
-
-                                    <a href="#" class="recent-btn">Read Article →</a>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-
                     </div>
-
-                    <div class="swiper-pagination"></div>
-                      <div class="recent-prev"></div>
-                    <div class="recent-next"></div>
-
+                </a>
+            </div>
+            @empty
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No blog posts found. Check back soon!
                 </div>
             </div>
-        </section>
-        <div class="section-divider"></div>
-        <!-- WEEKLY MOST READ -->
-        <section class="blog-section weekly-section">
-            <div class="blog-container">
+            @endforelse
+        </div>
 
-                <h2 class="blog-heading">
-                    Weekly <span>Most Read 🔥</span>
-                </h2>
-
-                <div class="weekly-grid">
-
-                    <div class="weekly-card"><img src="img/money.png">
-                        <div class="weekly-overlay">
-                            <h4>Current Scrap Metal Market Trends in UAE</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/metting.png">
-                        <div class="weekly-overlay">
-                            <h4>Top Tips for Selling Your Scrap Metal Quickly</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/money.png">
-                        <div class="weekly-overlay">
-                            <h4>Maximizing Profit: Practices for Sorting and Selling Scrap</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/metting.png">
-                        <div class="weekly-overlay">
-                            <h4>How the UAE Leads in Metal Recycling Innovations</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/metal.png">
-                        <div class="weekly-overlay">
-                            <h4>Guide to Identifying High-Value Scrap</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/money.png">
-                        <div class="weekly-overlay">
-                            <h4>Industrial Scrap Collection Process</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/metting.png">
-                        <div class="weekly-overlay">
-                            <h4>Why Copper Scrap Has High Market Demand</h4>
-                        </div>
-                    </div>
-                    <div class="weekly-card"><img src="img/metal.png">
-                        <div class="weekly-overlay">
-                            <h4>Recycling’s Impact on UAE Sustainability Goals</h4>
-                        </div>
-                    </div>
-
-                </div>
+        @if($blogs->hasPages())
+        <div class="row">
+            <div class="col-12">
+                {{ $blogs->links('pagination::bootstrap-4') }}
             </div>
-        </section>
-
+        </div>
+        @endif
     </div>
-
-
+</div>
 @endsection

@@ -1,178 +1,163 @@
 @extends('layouts.main')
 
 @section('content')
-    @if (session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
-    @php
-        $captcha_id = uniqid();
-    @endphp
-    @foreach ($banner as $banners)
-        <div class="container-fluid py-5 mb-5 hero-header wow fadeIn"
-            style="background-image: url('{{ asset($banners->image) }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;">
-
-            <div class="container py-5">
-                <div class="row align-items-center">
-
-                    <div class="col-lg-6 text-center text-lg-start hero-text">
-
-                        <h1 class="display-1 mb-4">
-                            {!! $banners->title !!}
-                        </h1>
-
-                        <p class="fs-4">
-                            {!! $banners->body !!}
-                        </p>
-
-                    </div>
-
-                    <div class="hero-cta">
-
-                        <a href="#price" class="btn-price">
-                            Get My Price
-                        </a>
-
-                        <a href="tel:+971521491001" class="btn-call-dark">
-                            <i class="bi bi-telephone-fill"></i>
-                            Call Now +971 52 149 1001
-                        </a>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    @endforeach
-    <!-- Hero End -->
-
-    <section class="scrap-section">
-        <div class="container">
-            <!-- COMMON HEADING -->
-            <div class="section-header">
-                <h2 class="section-title">WHY CHOOSE <span>VANGUARD?</span></h2>
-                <p class="section-subtitle">
-                    We make scraps with the best experience — we never guarantee your
-                    igo, direct terms of printing or priority max cash.
-                </p>
-            </div>
-
-            <!-- TWO-COLUMN LAYOUT -->
-            <div class="scrap-container">
-                <!-- LEFT: CARDS GRID -->
-                <div class="scrap-left">
-                    <div class="scrap-items">
-
-                        @foreach ($services as $service)
-                            <div class="scrap-card"
-                                style="background-image: url('{{ asset('uploads/services/' . $service->image) }}');">
+    <main>
+        <style>
 
 
+        </style>
+        <!-- Hero Area Start-->
+        <div class="slider-area hero-overly" style="background-image: url('{{ asset($slider->image) }}');">
+            <div class="single-slider hero-overly slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-9">
 
-                                <h3>{{ $service->title }}</h3>
-
-
-                                <a href="{{ route('servicedetails', $service->id) }}" class="btn-sell">View Details</button>
-                                </a>
-
+                            <!-- Hero Caption -->
+                            <div class="hero__caption">
+                                <span>{{ $slider->title }}</span>
                             </div>
-                        @endforeach
 
-                    </div>
-                </div>
-
-                <!-- RIGHT: FORM -->
-                <div class="scrap-right">
-                    <div class="scrap-form">
-                        <h3>
-                            Get Your <span class="orange-text">Scrap's</span> <br />Value
-                            <span class="orange-text">Instantly</span>
-                        </h3>
-                        <form action="{{ route('scrap-request.store') }}" method="POST">
-
-                            @csrf
-
-                            <input type="text" name="full_name" placeholder="Full Name *" required>
-
-
-                            <input type="tel" name="phone" placeholder="Phone Number *" required>
-
-
-                            <input type="email" name="email" placeholder="Email">
-
-
-                            <select name="location" required>
-                                <option value="">Select Location</option>
-
-                                @foreach ($locations as $location)
-                                    <option value="{{ $location->location }}">
-                                        {{ $location->location }}
-                                    </option>
-                                @endforeach
-                            </select>
-
-
-                            {{-- Dynamic scrap type --}}
-                            <select name="scrap_type[]" multiple required>
-
-                                @foreach ($services as $service)
-                                    <option value="{{ $service->title }}">
-
-                                        {{ $service->title }}
-
-                                    </option>
-                                @endforeach
-
-                            </select>
-
-
-                            <textarea name="details"></textarea>
-
-                            <div style="margin-top:15px;">
-
-                                <label>Enter Captcha *</label>
-
-                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-
-                                    <img id="captchaImage" src="{{ route('scrap.captcha') }}"
-                                        style="height:45px; border-radius:6px; border:1px solid #ccc;">
-
-                                    <button type="button" onclick="refreshCaptcha()"
-                                        style="height:45px; width:45px; border:none; cursor:pointer;">
-                                        ↻
-                                    </button>
-
+                            <!-- Hero form -->
+                            <form class="search-box" method="GET" action="{{ route('home.directorylisting') }}">
+                                <div class="input-form">
+                                    <input name="search" type="text" placeholder="What are you looking for?"
+                                        value="{{ request('search') }}">
                                 </div>
 
-                                <input type="text" name="captcha" placeholder="Enter Captcha *" required>
+                                <!-- 🔽 ENHANCED LOCATION SELECT WITH SELECT2 -->
+                                <div class="select-form">
+                                    <select name="location" id="homelocation" class="form-control">
 
-                                @error('captcha')
-                                    <div style="color:red;">{{ $message }}</div>
-                                @enderror
+                                        <option value="">All Locations</option>
 
-                            </div>
-                            <button type="submit" class="btn-get-price">
 
-                                Get My Price
 
-                            </button>
+                                    </select>
+                                </div>
 
-                        </form>
+                                <div class="search-form">
+                                    <input type="submit" class="searchsubmit" value="Search">
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <script>
-        function refreshCaptcha() {
-            let id = "{{ $captcha_id }}";
-            document.getElementById('captchaImage').src =
-                "{{ route('scrap.captcha') }}?id=" + id + "&" + new Date().getTime();
-        }
-    </script>
+        <!-- Hero Area End -->
+
+        <!-- Popular Locations Start -->
+        <div class="popular-location section-padding30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center mb-80">
+                            <span style="font-size:35px">Recent Profiles</span>
+                            <h2 style="font-size:20px">{{ $profiledescription->title }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    @foreach ($users->take(6) as $user)
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-location mb-30">
+                                <a href="{{ route('userdetails.show', $user->slug) }}">
+                                    <div class="location-img">
+                                        <img src="{{ asset($user->profile_image) }}" style="height:300px"
+                                            class="img-fluid rounded">
+                                    </div>
+                                </a>
+                                <div class="location-details">
+                                    <h2 class="mb-2" style="color:white">{{ $user->name }}</h2>
+                                    <a href="{{ route('location.show', $user->location->slug) }}"
+                                        class="location-btn mt-2 d-inline-block">
+                                        {{ $user->location ? $user->location->name : 'No Location' }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <a href="{{ route('home.directorylisting') }}" class="loadmoreprofiles">Load more</a>
+        </div>
+        <!-- Popular Locations End -->
+
+        <!-- Services Area Start -->
+        <div class="services-area pt-150 pb-150 section-bg"
+            style="background-image: url('{{ asset('assets/img/gallery/section_bg02.jpg') }}');">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle section-tittle2 text-center mb-80">
+                            <span style="font-size:30px">How It Works</span>
+                            <p style="color:white; font-size:20px">{{ $howitworksdescription->title }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between">
+                    @foreach ($howitworks as $howitwork)
+                        <div class="col-lg-3 col-md-6">
+                            <div class="single-services text-center mb-50">
+                                <div class="step-number rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm"
+                                    style="font-size:24px;color:#4fc3fe;background:#444744;width:60px;height:60px;">
+                                    {{ $loop->iteration }}
+                                </div>
+                                <div class="services-cap">
+                                    <h5>{{ $howitwork->title }}</h5>
+                                    <p>{{ $howitwork->body }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- Services Area End -->
+
+        <!-- Categories Area Start -->
+        <div class="categories-area section-padding30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center ">
+                            <span>WHY US!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    @foreach ($faq as $index => $faqs)
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="single-cat text-center mb-50">
+                                <div class="cat-cap">
+                                    <h5>{{ $faqs->title }}</h5>
+                                    <p>{{ $faqs->body }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- Categories Area End -->
+
+    </main>
+
+    <!-- jQuery FIRST, then Select2 CSS and JS 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    Select2 CSS 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JS
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	-->
 @endsection

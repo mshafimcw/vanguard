@@ -29,6 +29,13 @@
             @endif
         </div>
 
+        @if($post->highlighted_image)
+        <div class="highlighted-image">
+            <img src="{{ $post->highlighted_image_url }}" alt="{{ $post->title }}" class="img-fluid">
+        </div>
+    @endif
+
+
         <div class="card-footer text-end">
             <a href="{{ route('admin.page.index', $slug) }}" class="btn btn-secondary">Back</a>
             <a href="{{ route('admin.page.edit', $post->id) }}" class="btn btn-primary">Edit</a>

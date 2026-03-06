@@ -29,7 +29,9 @@ class ProductController extends Controller
             'description'         => 'nullable|string',
             'image'               => 'nullable|image|max:2048',
             'product_category_id' => 'required|exists:product_categories,id',
-            'gallery.*'           => 'nullable|image|max:2048'
+            'gallery.*'           => 'nullable|image|max:2048',
+            'barcode'             => 'nullable|string',
+            'serial_number'         => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
@@ -79,7 +81,10 @@ class ProductController extends Controller
             'description'         => 'nullable|string',
             'image'               => 'nullable|image|max:2048',
             'product_category_id' => 'required|exists:product_categories,id',
-              'gallery.*'          => 'nullable|image|max:2048'
+              'gallery.*'          => 'nullable|image|max:2048',
+              'barcode'=> 'nullable|string',
+              'serial_number'=> 'nullable|string'
+              
         ]);
 
         if ($request->hasFile('image')) {

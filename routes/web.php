@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\EventImageController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\UserController;
@@ -9,118 +12,68 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\WarrantyRegistrationController;
-use App\Http\Controllers\admin\WarrantyController;
+use App\Http\Controllers\Admin\WarrantyController;
+use App\Http\Controllers\Admin\VariationController;
+
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\ProgramController;
-use App\Http\Controllers\Admin\MultipleImageController;
-use App\Http\Controllers\Admin\EventController;
-use App\Http\Controllers\Admin\EventMultipleImageController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\OrderItemController;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Auth\LoginController;
+
+use App\Http\Controllers\Admin\LocationsController;
+
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DonationController;
+use App\Http\Controllers\Auth\LoginController;
+
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\EventBookingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserDetailsController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\SupportController;
-use App\Http\Controllers\Admin\GalleryCategoryController;
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\AllRegisterController;
-use App\Http\Controllers\EwasteDonationController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\MoneyDonationController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\ContactRequestController;
-use App\Http\Controllers\ScrapRequestController;
-use App\Http\Controllers\Admin\AdminScrapRequestController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\CaptchaController;
+use App\Http\Controllers\LocationController;
+use App\Models\Location;
+use App\Models\User;
+use Illuminate\Support\Str;
 
 
-Route::get('/admin/donations/export', [DonationReportController::class, 'export'])->name('admin.donations.export');
+Route::get('/generate-user-slugs', function () {
 
+    $users = User::all();
 
-// // routes/web.php
+    foreach ($users as $user) {
+        $user->slug = Str::slug($user->name);
+        $user->save();
+    }
 
-// Frontend routes
-Route::get('/blogs', [App\Http\Controllers\HomeController::class, 'blogs'])->name('home.blogs');
-
-Route::get('/blog/{id}', [HomeController::class, 'blogDetails'])->name('blogs.details');
-
-Route::get('/time', [HomeController::class, 'donationtime'])->name('home.time');
-
-Route::get('/join-our-mission', [AllRegisterController::class, 'showVolunteerForm'])->name('volunteer.register.form');
-Route::post('/join-our-mission', [AllRegisterController::class, 'registerVolunteer'])->name('volunteer.register');
-
-
-// E-Waste Donation Routes (Public)
-Route::get('/donate-ewaste', [EwasteDonationController::class, 'showDonationForm'])->name('ewaste.donate.form');
-Route::post('/donate-ewaste', [EwasteDonationController::class, 'registerDonation'])->name('ewaste.donate');
-
-Route::get('/donate-money', [MoneyDonationController::class, 'showDonationForm'])->name('money.donate.form');
-Route::post('/donate-money/create-order', [MoneyDonationController::class, 'createOrder'])->name('money.donate.create-order');
-Route::post('/donate-money/verify-payment', [MoneyDonationController::class, 'verifyPayment'])->name('money.donate.verify-payment');
-//Route::post('/contact', [App\Http\Controllers\SupportController::class, 'store'])->name('contact.submit');
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::get('/money-donations', [MoneyDonationController::class, 'index'])->name('money-donations.index');
-    Route::get('/money-donations/{order}', [MoneyDonationController::class, 'show'])->name('money-donations.show');
-    Route::get('/money-donations/export', [MoneyDonationController::class, 'exportDonations'])->name('money-donations.export');
-    Route::get('/money-donations/statistics', [MoneyDonationController::class, 'getStatistics'])->name('money-donations.statistics');
-
-    Route::resource('gallery-categories', GalleryCategoryController::class);
-
-
-
-    Route::get('/volunteers', [AllRegisterController::class, 'index'])->name('volunteers.index');
-    Route::get('/volunteers/{volunteer}', [AllRegisterController::class, 'show'])->name('volunteers.show');
-    Route::put('/volunteers/{volunteer}/status', [AllRegisterController::class, 'updateStatus'])->name('volunteers.status');
-    Route::get('/volunteers/export', [AllRegisterController::class, 'exportVolunteers'])->name('volunteers.export');
-    Route::get('/volunteers/statistics', [AllRegisterController::class, 'getStatistics'])->name('volunteers.statistics');
-    Route::delete('/volunteers/{volunteer}', [AllRegisterController::class, 'destroy'])->name('volunteers.destroy');
-
-    // E-Waste Donation Management Routes
-    Route::get('/ewaste-donations', [EwasteDonationController::class, 'index'])->name('ewaste-donations.index');
-    Route::get('/ewaste-donations/{ewasteDonation}', [EwasteDonationController::class, 'show'])->name('ewaste-donations.show');
-    Route::put('/ewaste-donations/{ewasteDonation}/status', [EwasteDonationController::class, 'updateStatus'])->name('ewaste-donations.status');
-    Route::get('/ewaste-donations/export', [EwasteDonationController::class, 'exportDonations'])->name('ewaste-donations.export');
-    Route::get('/ewaste-donations/statistics', [EwasteDonationController::class, 'getStatistics'])->name('ewaste-donations.statistics');
-    Route::delete('/ewaste-donations/{ewasteDonation}', [EwasteDonationController::class, 'destroy'])->name('ewaste-donations.destroy');
+    return "Slugs generated successfully!";
 });
+Route::get('/generate-location-slugs', function () {
 
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    // Support Messages
-    Route::get('/support', [App\Http\Controllers\Admin\SupportController::class, 'index'])->name('support.index');
-    Route::get('/support/{support}', [App\Http\Controllers\Admin\SupportController::class, 'show'])->name('support.show');
-    Route::get('/support/{support}/edit', [App\Http\Controllers\Admin\SupportController::class, 'edit'])->name('support.edit');
-    Route::put('/support/{support}', [App\Http\Controllers\Admin\SupportController::class, 'update'])->name('support.update');
-    Route::delete('/support/{support}', [App\Http\Controllers\Admin\SupportController::class, 'destroy'])->name('support.destroy');
-    Route::get('/support-stats', [App\Http\Controllers\Admin\SupportController::class, 'stats'])->name('support.stats');
+    $locations = Location::all();
 
-    Route::get('users/create', [UserController::class, 'create'])->name('users.create'); // Show create form
-    Route::post('users', [UserController::class, 'store'])->name('users.store'); // Handle create form submission
+    foreach ($locations as $location) {
+        $location->slug = Str::slug($location->name);
+        $location->save();
+    }
 
-    Route::get('users',       [UserController::class, 'index'])->name('users.index');
-    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
-    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    return "Slugs generated successfully!";
 });
+Route::get('/captcha-image', [CaptchaController::class, 'generate'])->name('captcha.image');
 
+Route::get('/captcha', [CaptchaController::class, 'generate'])->name('captcha');
 
-Route::get('/support', [SupportController::class, 'index'])->name('support');
-Route::post('/support', [SupportController::class, 'store'])->name('support.submit');
+Route::get('/captcha-generate', [CaptchaController::class, 'generate'])
+    ->name('captcha.generate');
 
+Route::get('/location/{slug}', [LocationController::class, 'show'])
+    ->name('location.show');
 
-// API routes (optional)
-Route::get('/api/support-messages', [SupportController::class, 'getMessages']);
-
-
+Route::prefix('admin')->name('admin.')->group(function () {});
 
 Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-
+    Route::prefix('analytics')->name('analytics.')->group(function () {
+        Route::get('/dashboard', [AnalyticsController::class, 'dashboard'])->name('dashboard');
+        Route::get('/chart-data', [AnalyticsController::class, 'getChartData'])->name('chart');
+    });
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
     Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
@@ -130,71 +83,119 @@ Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->gr
     Route::post('roles/{role}/routes', [RoleController::class, 'updateRoutes'])->name('roles.update_routes');
 
     Route::put('roles/{role}/update-name', [RoleController::class, 'updateName'])->name('admin.roles.update_name');
-});
-Route::get('/projects', [HomeController::class, 'projects'])->name('projects.list');
-Route::get('/projects/{id}/details', [HomeController::class, 'projectDetails'])->name('projects.details');
 
-Route::post('/donate/store', [DonationController::class, 'store'])->name('donate.store');
+
+
+    Route::resource('events', EventController::class);
+    // Route::delete('event-images/{id}', [EventImageController::class, 'destroy'])->name('event_images.destroy');
+
+    Route::resource('locations', LocationsController::class);
+    Route::resource('ads', AdsController::class);
+    Route::get('contact-messages', [ContactController::class, 'index'])
+        ->name('contact_messages.index');
+
+    //Route::get('/maintenance/{maintenance}', [MaintenanceController::class, 'show'])->name('maintenance.show');
+    Route::get('/', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    // you can keep adding more admin routes here
+    // Route::get('/users', [UserController::class, 'index']);
+
+    // routes/web.php
+
+    Route::resource('post-categories', PostCategoryController::class);
+    Route::resource('posts', PostController::class);
+
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create'); // Show create form
+    Route::post('users', [UserController::class, 'store'])->name('users.store'); // Handle create form submission
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::post('users/{id}/approve', [UserController::class, 'approve'])->name('users.approve');
+    Route::post('users/{id}/approve-profile-update', [UserController::class, 'approveProfileUpdate'])
+        ->name('users.approveProfileUpdate');
+    Route::resource('product-categories', ProductCategoryController::class);
+    Route::resource('products', ProductController::class);
+    Route::post('/users/{user}/unapprove', [UserController::class, 'unapprove'])->name('users.unapprove');
+
+    // OR for toggle route (Option 1)
+    Route::post('/users/{user}/toggle-approval', [UserController::class, 'toggleApproval'])->name('admin.users.toggle-approval');
+    Route::post('/admin/users/{id}/approve', [App\Http\Controllers\Auth\UserController::class, 'approve'])
+        ->name('admin.users.approve');
+    Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('page/{slug}', [PageController::class, 'create'])->name('page.create');
+    Route::post('page', [PageController::class, 'store'])->name('page.store');
+    Route::get('pageview/{id}', [PageController::class, 'show'])->name('page.show');
+    Route::get('pagelist/{slug}', [PageController::class, 'index'])->name('page.index');
+
+    Route::get('pageedit/{id}', [PageController::class, 'edit'])->name('page.edit');
+    Route::put('pageupdate/{id}', [PageController::class, 'update'])->name('page.update');
+    Route::delete('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
+    Route::post('page/{id}/approve', [PageController::class, 'approve'])->name('page.approve');
+});
+
+// Frontend blog routes
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
 
 Route::get('/signup', [RegisterController::class, 'show'])->name('signup');
 Route::post('/signup', [RegisterController::class, 'register'])->name('signup.post');
+Route::get('/signup-success', function () {
+    return view('auth.signupsuccess');
+})->name('signupsuccess');
 
-
+// Login and Logout
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Profile Page (only for authenticated users)
+// Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware('auth')->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
+Route::post('/profile/gallery-upload', [ProfileController::class, 'ajaxGalleryUpload'])
+    ->name('profile.gallery.upload');
+Route::post('/profile/image-update', [ProfileController::class, 'ajaxImageUpdate'])->middleware('auth')
+    ->name('profile.image.update');
+
+// ✅ SETTINGS FIRST
+Route::get('/profile/settings', [ProfileController::class, 'settings'])
+    ->name('profile.settings');
+
+Route::post('/profile/settings/password', [ProfileController::class, 'updatePassword'])
+    ->name('profile.password.update');
+
+// ✅ PUBLIC PROFILE LAST
+Route::get('/profile/{username}', [ProfileController::class, 'publicProfile'])
+    ->name('profile.show');
 
 
-// routes/web.php
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/reports', [ProfileController::class, 'reports'])->name('profile.reports');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-});
+
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
-//Route::get('/services', [HomeController::class, 'services'])->name('home.services');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('home.portfolio');
-
-Route::get('/programs', [HomeController::class, 'programs'])->name('home.programs');
-
-Route::get('/donate/{id}', [HomeController::class, 'donate'])->name('home.donate');
-
-
-Route::get('/donate', [DonationController::class, 'showForm'])->name('donate.form');
-Route::post('/donate', [DonationController::class, 'submitDonation'])->name('donate.submit');
-Route::post('/donate/create-order', [DonationController::class, 'createOrder'])->name('donate.create-order');
-Route::post('/donate/verify-payment', [DonationController::class, 'verifyPayment'])->name('donation.verify');
-
-
-// Admin Donation Routes
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/donations', [App\Http\Controllers\Admin\DonationReportController::class, 'index'])->name('admin.donations.index');
-    Route::get('/donations/export', [App\Http\Controllers\Admin\DonationReportController::class, 'export'])->name('admin.donations.export');
-    Route::get('/donations/{id}', [App\Http\Controllers\Admin\DonationReportController::class, 'show'])->name('admin.donations.show');
-});
-// routes/web.php (temporary test route)
-Route::get('/test-razorpay', function () {
-    if (class_exists('Razorpay\Api\Api')) {
-        return "Razorpay class found!";
-    } else {
-        return "Razorpay class NOT found!";
-    }
-});
-Route::get('/projects', [HomeController::class, 'projects'])->name('projects.list');
-Route::get('/projects/{id}/details', [HomeController::class, 'projectDetails'])->name('projects.details');
-
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/furniture', [HomeController::class, 'directorylisting'])->name('home.directorylisting');
+Route::get('/events', [HomeController::class, 'events'])->name('home.events');
 Route::get('/eventsdetails/{id}', [HomeController::class, 'eventsdetails'])->name('events.details');
-Route::get('/programsdetails/{id}', [HomeController::class, 'programsdetails'])->name('programs.details');
+Route::get('/product/{slug}', [HomeController::class, 'productdetail'])->name('home.productdetail');
+Route::get('/ajax-locations', [HomeController::class, 'searchLocations'])->name('ajax.locations');
+Route::get('/locations-search', [LocationController::class, 'search'])
+    ->name('locations.search');
 
 
 
-Route::post('/book-event', [EventBookingController::class, 'store'])->name('book.event');
+Route::get('/search', [UserController::class, 'search'])->name('user.search');
+//Route::get('/users', [UserController::class, 'directoryListing'])->name('users.index');
 
+
+Route::get('/events/{id}', [HomeController::class, 'eventsdetails'])->name('events.details');
 
 /*  Route::get('/services', 'App\Http\Controllers\HomeController@services')->name('home.services');
  Route::get('/gallery', 'App\Http\Controllers\HomeController@gallery')->name('home.gallery');
@@ -206,182 +207,28 @@ Route::post('/book-event', [EventBookingController::class, 'store'])->name('book
 
 */
 
-Route::prefix('admin')->middleware(['auth', 'route.access'])->group(function () {
-    Route::get('user/change-password', [UserController::class, 'showChangePasswordForm'])->name('admin.user.change-password.form');
-    Route::post('user/change-password', [UserController::class, 'changePassword'])->name('admin.user.change-password');
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions'); // Create this view
+})->name('terms-and-conditions');
+
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy'); // Create this view
+})->name('privacy-policy');
+
+// Route::get('/userdetails/{id}', [UserDetailsController::class, 'show'])->name('userdetails.show');
+Route::get('furniture/{user:slug}', [UserDetailsController::class, 'show'])
+    ->name('userdetails.show');
+
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    Route::get('/variations', [VariationController::class, 'index'])->name('variations.index');
+    Route::get('/variations/create', [VariationController::class, 'create'])->name('variations.create');
+    Route::post('/variations/store', [VariationController::class, 'store'])->name('variations.store');
+    Route::get('/variations/{id}/edit', [VariationController::class, 'edit'])->name('variations.edit');
+    Route::put('/variations/{id}', [VariationController::class, 'update'])->name('variations.update');
+    Route::delete('/variations/{id}', [VariationController::class, 'destroy'])->name('variations.destroy');
 });
 
 
-
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-
-    //Route::get('/maintenance/{maintenance}', [MaintenanceController::class, 'show'])->name('maintenance.show');
-    Route::get('/', [DashboardController::class, 'index'])
-        ->name('dashboard');
-
-
-    Route::get('/dashboard/stats', [DashboardController::class, 'getStats'])->name('dashboard.stats');
-    Route::get('/dashboard/activity', [DashboardController::class, 'getRecentActivity'])->name('dashboard.activity');
-    Route::get('/dashboard/status-distribution', [DashboardController::class, 'getDonationStatusDistribution'])->name('dashboard.status-distribution');
-
-
-    // you can keep adding more admin routes here
-    // Route::get('/users', [UserController::class, 'index']);
-
-    // routes/web.php
-
-    Route::resource('orders', OrderController::class);
-    Route::resource('orderitems', OrderItemController::class);
-    Route::resource('transactions', TransactionController::class);
-    Route::resource('projects', ProjectController::class);
-
-    Route::resource('post-categories', PostCategoryController::class);
-    Route::resource('posts', PostController::class);
-
-
-
-    Route::get('users',       [UserController::class, 'index'])->name('users.index');
-    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
-    Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
-
-
-    Route::resource('product-categories', ProductCategoryController::class);
-    Route::resource('products', ProductController::class);
-
-    Route::get('page/{slug}', [PageController::class, 'create'])->name('page.create');
-    Route::post('page', [PageController::class, 'store'])->name('page.store');
-    Route::get('pageview/{id}', [PageController::class, 'show'])->name('page.show');
-    Route::get('pagelist/{slug}', [PageController::class, 'index'])->name('page.index');
-
-    Route::get('pageedit/{id}', [PageController::class, 'edit'])->name('page.edit');
-    Route::put('pageupdate/{id}', [PageController::class, 'update'])->name('page.update');
-    Route::post('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
-    Route::delete('pagedelete/{id}', [PageController::class, 'destroy'])->name('page.destroy');
-});
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::resource('programs', ProgramController::class);
-});
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::resource('programs', ProgramController::class);
-});
-
-Route::post('programs/{program}/images', [MultipleImageController::class, 'store'])->name('admin.programs.images.store');
-
-//Route::resource('events', EventController::class)->names('admin.events');
-
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::resource('events', EventController::class)->names('admin.events');
-    // other admin routes...
-});
-
-Route::post('events/{event}/images', [EventMultipleImageController::class, 'store'])
-    ->name('admin.events.images.store');
-
-
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::resource('highlights', App\Http\Controllers\Admin\HighlightController::class);
-});
-
-
-
-
-
-Route::get('/events', [App\Http\Controllers\HomeController::class, 'showEvents'])->name('events');
-
-// Route::get('/events', [EventController::class, 'index'])->name('events.index');
-// Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
-
-
-Route::prefix('admin')->middleware(['auth', 'route.access'])->name('admin.')->group(function () {
-    Route::resource('events', EventController::class);
-});
-
-// Add this route for image uploads
-Route::post('/admin/upload-image', function (Request $request) {
-    $request->validate([
-        'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
-
-    if ($request->hasFile('file')) {
-        $path = $request->file('file')->store('uploads', 'public');
-        return response()->json([
-            'location' => asset('storage/' . $path)
-        ]);
-    }
-
-    return response()->json(['error' => 'Upload failed'], 500);
-})->name('admin.upload.image');
-Route::get('/cancellation-and-refunds', [PagesController::class, 'cancellationAndRefunds'])->name('cancellation-and-refunds');
-Route::get('/termsandconditions', [PagesController::class, 'termsandconditions'])->name('termsandconditions');
-Route::get('/shipping', [PagesController::class, 'shipping'])->name('shipping');
-Route::get('/privacy', [PagesController::class, 'privacy'])->name('privacy');
-
-
-Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/services', function () {
-//     return view('services');
-// });
-
-
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    Route::resource('services', ServiceController::class);
-});
-
-Route::get('/services', [HomeController::class, 'services']);
-
-
-
-// Use HomeController to display the page (it has the contact data from posts)
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('locations', LocationController::class);
-});
-// Use ContactRequestController to save form data to contact_requests table
-Route::post('/contact', [ContactRequestController::class, 'store'])->name('contact.store');
-
-// Admin routes for contact requests
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/contact-requests', [ContactRequestController::class, 'index'])->name('contact-requests.index');
-    Route::delete('/contact-requests/{id}', [ContactRequestController::class, 'destroy'])->name('contact-requests.destroy');
-});
-
-Route::post('/scrap-request', [ScrapRequestController::class, 'store'])
-    ->name('scrap-request.store');
-
-
-Route::get(
-    '/admin/scrap-requests',
-    [AdminScrapRequestController::class, 'index']
-)
-    ->name('admin.scrap_requests.index');
-
-
-Route::delete(
-    '/admin/scrap-requests/{id}',
-    [AdminScrapRequestController::class, 'destroy']
-)
-    ->name('admin.scrap_requests.destroy');
-
-
-Route::get(
-    '/admin/scrap-requests/{id}',
-    [AdminScrapRequestController::class, 'show']
-)
-    ->name('admin.scrap_requests.show');
-
-Route::get('/servicedetails/{id}', [HomeController::class, 'serviceDetails'])
-    ->name('servicedetails');
-
-
-Route::get('/scrap-captcha', [CaptchaController::class, 'generate'])
-    ->name('scrap.captcha');

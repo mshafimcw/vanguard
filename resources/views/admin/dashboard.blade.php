@@ -1,376 +1,420 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Dashboard')
-
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
+<div class="container-fluid">
+    <!--begin::Row-->
+    <div class="row">
+        <!--begin::Col-->
+        <div class="col-lg-3 col-6">
+            <!--begin::Small Box Widget 1-->
+            <div class="small-box text-bg-primary">
+                <div class="inner">
+                    <h3>{{ $totalUsers ?? '0' }}</h3>
+                    <p>Total Users</p>
+                </div>
+                <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
+                </svg>
+                <a href="{{ route('admin.users.index') }}" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+                    View All Users <i class="bi bi-link-45deg"></i>
+                </a>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </div>
+            <!--end::Small Box Widget 1-->
         </div>
+        <!--end::Col-->
+        <div class="col-lg-3 col-6">
+            <!--begin::Small Box Widget 2-->
+            <div class="small-box text-bg-success">
+                <div class="inner">
+                    <h3>{{ $newUsersLastMonth ?? '0' }}</h3>
+                    <p>New Users (Last 30 Days)</p>
+                </div>
+                <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122z"></path>
+                </svg>
+                <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+                    View Details <i class="bi bi-link-45deg"></i>
+                </a>
+            </div>
+            <!--end::Small Box Widget 2-->
+        </div>
+        <!--end::Col-->
+        <div class="col-lg-3 col-6">
+            <!--begin::Small Box Widget 3-->
+            <div class="small-box text-bg-warning">
+                <div class="inner">
+                    <h3>{{ $activeUsers ?? '0' }}</h3>
+                    <p>Active Users</p>
+                </div>
+                <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"></path>
+                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="#" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    View Active <i class="bi bi-link-45deg"></i>
+                </a>
+            </div>
+            <!--end::Small Box Widget 3-->
+        </div>
+        <!--end::Col-->
+        <div class="col-lg-3 col-6">
+            <!--begin::Small Box Widget 4-->
+            <div class="small-box text-bg-info">
+                <div class="inner">
+                    <h3>{{ $usersToday ?? '0' }}</h3>
+                    <p>New Users Today</p>
+                </div>
+                <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
+                    View Today <i class="bi bi-link-45deg"></i>
+                </a>
+            </div>
+            <!--end::Small Box Widget 4-->
+        </div>
+        <!--end::Col-->
     </div>
-</div>
-
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>₹{{ number_format($donationStats['totalAmount'], 2) }}</h3>
-                        <p>Total Donations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-donate"></i>
-                    </div>
-                    <a href="{{ route('admin.donations.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>{{ $userStats['totalUsers'] }}</h3>
-                        <p>Total Users</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>₹{{ number_format($donationStats['todayAmount'], 2) }}</h3>
-                        <p>Today's Collection</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-calendar-day"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>₹{{ number_format($donationStats['monthAmount'], 2) }}</h3>
-                        <p>Monthly Collection</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-        </div>
-        <!-- /.row -->
-
-        <!-- Donation Status Row -->
-        <div class="row">
-            <div class="col-lg-4 col-6">
-                <div class="small-box" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
-                    <div class="inner">
-                        <h3>{{ $donationStats['successfulCount'] }}</h3>
-                        <p>Successful Donations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-6">
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>{{ $donationStats['pendingCount'] }}</h3>
-                        <p>Pending Donations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-6">
-                <div class="small-box bg-secondary">
-                    <div class="inner">
-                        <h3>{{ $donationStats['failedCount'] }}</h3>
-                        <p>Failed Donations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-times-circle"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Charts and Activity Row -->
-        <div class="row">
-            <!-- Monthly Chart -->
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <h3 class="card-title">Monthly Donations Trend</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
+    <!--end::Row-->
+    
+    <!--begin::Row-->
+    <div class="row">
+        <!-- Start col -->
+        <div class="col-lg-8 connectedSortable">
+            <!-- User Registration Chart -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">User Registration Statistics</h3>
+                    <div class="card-tools">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-tool dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="bi bi-calendar"></i> Time Range
                             </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" onclick="updateChartData('7days')">Last 7 Days</a>
+                                <a class="dropdown-item" href="#" onclick="updateChartData('30days')">Last 30 Days</a>
+                                <a class="dropdown-item" href="#" onclick="updateChartData('3months')">Last 3 Months</a>
+                                <a class="dropdown-item" href="#" onclick="updateChartData('6months')">Last 6 Months</a>
+                                <a class="dropdown-item" href="#" onclick="updateChartData('year')">This Year</a>
+                            </div>
                         </div>
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                            <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                            <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                        </button>
                     </div>
-                    <div class="card-body">
-                        <div class="chart">
-                            <canvas id="monthlyDonationsChart" height="250" style="height: 250px;"></canvas>
+                </div>
+                <div class="card-body">
+                    <canvas id="userRegistrationChart" height="250"></canvas>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-end">
+                                <span class="description-percentage text-success"><i class="bi bi-arrow-up"></i> {{ $growthRate ?? '0' }}%</span>
+                                <h5 class="description-header">{{ $totalUsers ?? '0' }}</h5>
+                                <span class="description-text">TOTAL USERS</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-end">
+                                <span class="description-percentage text-warning"><i class="bi bi-arrow-right"></i> {{ $avgMonthly ?? '0' }}</span>
+                                <h5 class="description-header">{{ $avgDaily ?? '0' }}</h5>
+                                <span class="description-text">AVG DAILY REGISTRATION</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-end">
+                                <span class="description-percentage text-success"><i class="bi bi-arrow-up"></i> {{ $monthlyGrowth ?? '0' }}%</span>
+                                <h5 class="description-header">{{ $newUsersLastMonth ?? '0' }}</h5>
+                                <span class="description-text">LAST MONTH</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                                <span class="description-percentage text-danger"><i class="bi bi-arrow-down"></i> {{ $churnRate ?? '0' }}%</span>
+                                <h5 class="description-header">{{ $inactiveUsers ?? '0' }}</h5>
+                                <span class="description-text">INACTIVE USERS</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Recent Activity -->
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <h3 class="card-title">Recent Activity</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="products-list product-list-in-card pl-2 pr-2" id="recentActivity">
-                            <li class="item">
-                                <div class="product-info">
-                                    <span class="product-title">Loading activities...</span>
-                                    <span class="product-description">Just now</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!-- /.card -->
         </div>
+        <!-- /.Start col -->
 
-        <!-- Recent Donations Table -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Recent Donations</h3>
-                        <div class="card-tools">
-                            <span class="badge badge-primary">{{ $donationStats['totalDonations'] }} total donations</span>
-                        </div>
+        <!-- Start col -->
+        <div class="col-lg-4 connectedSortable">
+            <!-- Recent Users -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Registrations</h3>
+                    <div class="card-tools">
+                        <span class="badge bg-danger">{{ $recentUsers->count() ?? '0' }} New Users</span>
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                            <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                            <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                        </button>
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        @if($recentDonations->count() > 0)
-                        <table class="table table-hover text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Donor Name</th>
-                                    <th>Email</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($recentDonations as $donation)
-                                <tr>
-                                    <td><code>#{{ Str::limit($donation->id, 8) }}</code></td>
-                                    <td>{{ $donation->name ?? 'Anonymous' }}</td>
-                                    <td>{{ $donation->email_id }}</td>
-                                    <td class="text-success font-weight-bold">₹{{ number_format($donation->amount, 2) }}</td>
-                                    <td>
-                                        <span class="badge 
-                                            @if($donation->order_status == 'completed') badge-success
-                                            @elseif($donation->order_status == 'pending') badge-warning
-                                            @else badge-danger
-                                            @endif">
-                                            {{ ucfirst($donation->order_status) }}
-                                        </span>
-                                    </td>
-                                    <td>{{ $donation->created_at->format('M d, Y') }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-primary" 
-                                                    data-toggle="modal" 
-                                                    data-target="#donationModal{{ $donation->id }}">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <a href="{{ route('admin.donations.show', $donation->id) }}" class="btn btn-sm btn-info">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @else
-                        <div class="text-center py-5">
-                            <i class="fas fa-inbox fa-3x text-muted"></i>
-                            <h5 class="text-muted mt-3">No donations found</h5>
-                            <p class="text-muted">No donations have been made yet.</p>
-                        </div>
-                        @endif
-                    </div>
-                    <!-- /.card-body -->
-                    @if($recentDonations->count() > 0)
-                    <div class="card-footer clearfix">
-                        <div class="float-left">
-                            <span class="text-muted">
-                                Showing {{ $recentDonations->firstItem() }} to {{ $recentDonations->lastItem() }} of {{ $recentDonations->total() }} results
-                            </span>
-                        </div>
-                        <div class="float-right">
-                            {{ $recentDonations->links() }}
-                        </div>
-                    </div>
-                    @endif
                 </div>
-                <!-- /.card -->
+                <div class="card-body p-0">
+                    <ul class="users-list clearfix">
+                        @foreach($recentUsers as $user)
+                        <li>
+                            <img  width="20px"  src="{{ $user->profile_image ?? asset('assets/img/default-avatar.png') }}" alt="User Image">
+                            <a class="users-list-name" href="{{ route('admin.users.show', $user->id) }}">{{ $user->name }}</a>
+                            <span class="users-list-date">{{ $user->created_at->diffForHumans() }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{{ route('admin.users.index') }}">View All Users</a>
+                </div>
             </div>
+            <!-- /.card -->
+
+            <!-- User Activity -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="card-title">User Activity</h3>
+                </div>
+                <div class="card-body">
+                    <div class="progress-group">
+                        Active Users
+                        <span class="float-end"><b>{{ $activeUsers ?? '0' }}</b>/{{ $totalUsers ?? '0' }}</span>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-primary" style="width: {{ $totalUsers > 0 ? ($activeUsers / $totalUsers * 100) : 0 }}%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        Verified Users
+                        <span class="float-end"><b>{{ $verifiedUsers ?? '0' }}</b>/{{ $totalUsers ?? '0' }}</span>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-success" style="width: {{ $totalUsers > 0 ? ($verifiedUsers / $totalUsers * 100) : 0 }}%"></div>
+                        </div>
+                    </div>
+                   
+                    <div class="progress-group">
+                        New Users This Month
+                        <span class="float-end"><b>{{ $newUsersLastMonth ?? '0' }}</b></span>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-info" style="width: {{ min(100, ($newUsersLastMonth / max(1, $totalUsers)) * 100) }}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.Start col -->
     </div>
-    <!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+    <!-- /.row -->
 
-<!-- Donation Detail Modals -->
-@foreach($recentDonations as $donation)
-<div class="modal fade" id="donationModal{{ $donation->id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Donation Details - #{{ $donation->id }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <table class="table table-borderless">
-                            <tr>
-                                <td><strong>Order ID:</strong></td>
-                                <td><code>#{{ $donation->id }}</code></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Donor Name:</strong></td>
-                                <td>{{ $donation->name ?? 'Anonymous' }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Email:</strong></td>
-                                <td>{{ $donation->email_id }}</td>
-                            </tr>
-                        </table>
+    <!--begin::Row-->
+    <div class="row">
+        <div class="col-12">
+            <!-- User List Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">User Registration List</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <table class="table table-borderless">
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
                             <tr>
-                                <td><strong>Amount:</strong></td>
-                                <td class="text-success font-weight-bold">₹{{ number_format($donation->amount, 2) }}</td>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Registered</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($users as $user)
                             <tr>
-                                <td><strong>Status:</strong></td>
+                                <td>{{ $user->id }}</td>
                                 <td>
-                                    <span class="badge 
-                                        @if($donation->order_status == 'completed') badge-success
-                                        @elseif($donation->order_status == 'pending') badge-warning
-                                        @else badge-danger
-                                        @endif">
-                                        {{ ucfirst($donation->order_status) }}
-                                    </span>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ $user->profile_image ?? asset('assets/img/default-avatar.png') }}" width="30px" class="img-circle mr-2" alt="User Image">
+                                        <div>
+                                            <div class="font-weight-bold">{{ $user->name }}</div>
+                                            <small class="text-muted">{{ '@' . $user->username }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    @if($user->email_verified_at)
+                                        <span class="badge bg-success">Verified</span>
+                                    @else
+                                        <span class="badge bg-warning">Pending</span>
+                                    @endif
+                                    
+                                    @if($user->is_active)
+                                        <span class="badge bg-primary">Active</span>
+                                    @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                    @endif
+                                </td>
+                                <td>{{ $user->created_at->format('M d, Y') }}</td>
+                               <td>
+    @if($user->last_login_at)
+        {{ \Carbon\Carbon::parse($user->last_login_at)->diffForHumans() }}
+    @else
+        Never
+    @endif
+</td>
+                
+                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-sm btn-info">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="confirmDelete({{ $user->id }})">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><strong>Date:</strong></td>
-                                <td>{{ $donation->created_at->format('F j, Y g:i A') }}</td>
-                            </tr>
-                        </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer clearfix">
+                    {{ $users->links() }}
+                    <div class="float-right">
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i> Add New User
+                        </a>
                     </div>
                 </div>
-                @if($donation->address)
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <strong>Address:</strong>
-                        <p class="mt-1 mb-0">{{ $donation->address }}</p>
-                    </div>
-                </div>
-                @endif
             </div>
-            <div class="modal-footer">
-                <a href="{{ route('admin.donations.show', $donation->id) }}" class="btn btn-primary">
-                    <i class="fas fa-info-circle mr-1"></i> Full Details
-                </a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            <!-- /.card -->
         </div>
     </div>
+    <!-- /.row -->
 </div>
-@endforeach
 @endsection
 
-@section('scripts')
+@push('styles')
+<style>
+.users-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.users-list > li {
+    width: 25%;
+    float: left;
+    padding: 10px;
+    text-align: center;
+}
+.users-list > li img {
+    border-radius: 50%;
+    max-width: 100%;
+    height: auto;
+}
+.users-list-name,
+.users-list-date {
+    display: block;
+}
+.users-list-name {
+    font-weight: 600;
+    color: #495057;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.users-list-date {
+    color: #6c757d;
+    font-size: 12px;
+}
+.progress-group {
+    margin-bottom: 1rem;
+}
+.description-block {
+    padding: 0 1rem;
+}
+.description-block .description-header {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+.description-block .description-text {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.description-block .description-percentage {
+    font-size: 12px;
+    font-weight: 600;
+}
+</style>
+@endpush
+
+@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Monthly Donations Chart
-    const monthlyCtx = document.getElementById('monthlyDonationsChart').getContext('2d');
-    const monthlyChart = new Chart(monthlyCtx, {
+// Initialize user registration chart
+let userChart;
+
+function initUserChart() {
+    const ctx = document.getElementById('userRegistrationChart').getContext('2d');
+    
+    // Sample data - Replace with actual data from your controller
+    const data = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+            label: 'User Registrations',
+            data: [65, 59, 80, 81, 56, 55, 40, 45, 50, 60, 70, 75],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true
+        }]
+    };
+
+    const config = {
         type: 'line',
-        data: {
-            labels: @json($monthlyDonations['months']),
-            datasets: [{
-                label: 'Monthly Donations (₹)',
-                data: @json($monthlyDonations['amounts']),
-                borderColor: '#007bff',
-                backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
-            }]
-        },
+        data: data,
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     grid: {
-                        color: 'rgba(0,0,0,0.1)'
+                        drawBorder: false
                     },
                     ticks: {
-                        callback: function(value) {
-                            return '₹' + value.toLocaleString();
-                        }
+                        stepSize: 20
                     }
                 },
                 x: {
@@ -380,56 +424,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-    });
+    };
 
-    // Load Recent Activity
-    loadRecentActivity();
+    userChart = new Chart(ctx, config);
+}
 
-    function loadRecentActivity() {
-        fetch("{{ route('admin.dashboard.activity') }}")
-            .then(response => response.json())
-            .then(data => {
-                const activityContainer = document.getElementById('recentActivity');
-                activityContainer.innerHTML = '';
-                
-                data.forEach(activity => {
-                    const activityItem = document.createElement('li');
-                    activityItem.className = 'item';
-                    
-                    let activityText = '';
-                    let activityDesc = '';
-                    
-                    if (activity.type === 'user_registration') {
-                        activityText = `<strong>${activity.name}</strong> registered`;
-                        activityDesc = activity.time;
-                    } else {
-                        activityText = `<strong>${activity.donor_name}</strong> donated ${activity.amount}`;
-                        activityDesc = `${activity.time} - ${activity.status}`;
-                    }
-                    
-                    activityItem.innerHTML = `
-                        <div class="product-info">
-                            <span class="product-title">${activityText}</span>
-                            <span class="product-description">${activityDesc}</span>
-                        </div>
-                    `;
-                    
-                    activityContainer.appendChild(activityItem);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading activity:', error);
-            });
-    }
+function updateChartData(range) {
+    // Fetch new data based on selected range
+    fetch(`/admin/dashboard/user-stats?range=${range}`)
+        .then(response => response.json())
+        .then(data => {
+            userChart.data.labels = data.labels;
+            userChart.data.datasets[0].data = data.values;
+            userChart.update();
+        });
+}
 
-    // Export functionality
-    const exportBtn = document.getElementById('exportBtn');
-    if (exportBtn) {
-        exportBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = "{{ route('admin.donations.export') }}";
+function confirmDelete(userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        // Implement delete functionality
+        fetch(`/admin/users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                location.reload();
+            }
         });
     }
+}
+
+// Initialize chart when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initUserChart();
 });
 </script>
-@endsection
+@endpush

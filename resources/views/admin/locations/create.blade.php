@@ -1,34 +1,17 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container card card-primary p-3">
-
-        <h1>Create Location</h1>
-
-        <form action="{{ route('admin.locations.store') }}" method="POST">
-
-            @csrf
-
-            {{-- LOCATION NAME --}}
-            <div class="mb-3">
-                <label>Location Name</label>
-                <input type="text"
-                       name="location"
-                       value="{{ old('location') }}"
-                       class="form-control">
-
-                @error('location')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-
-            <button class="btn btn-success">Save</button>
-
-            <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary">
-                Cancel
-            </a>
-
-        </form>
-
-    </div>
+<div class="container">
+    <h2>Add Location</h2>
+    <form action="{{ route('admin.locations.store') }}" method="POST">
+        @csrf
+        <div class="form-group mb-3">
+            <label>Location Name</label>
+            <input type="text" name="name" class="form-control" required>
+            @error('name') <small class="text-danger">{{ $message }}</small> @enderror
+        </div>
+        <button class="btn btn-success">Save</button>
+        <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary">Back</a>
+    </form>
+</div>
 @endsection

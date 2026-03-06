@@ -1,196 +1,233 @@
 @extends('layouts.main')
 
-@section('title', 'Events')
-
- @php
-    $banner = App\Http\Controllers\HomeController::getpbanner();
-    @endphp
-
 @section('content')
 
-<section class="page-banner">
+<main>
 
-            <div class="image-layer" style="background-image:url({{ asset( $banner) }});"></div>
-
-
-    <div class="banner-inner">
-
-        <div class="auto-container">
-
-            <div class="inner-container clearfix">
-
-                <h1>Events List View</h1>
-
-                <div class="page-nav">
-
-                    <ul class="bread-crumb clearfix">
-
-                        <li><a href="index.html">Home</a></li>
-
-                        <li class="active">Events</li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-<div class="sidebar-page-container">
-
-    <div class="auto-container">
-
-        <div class="row clearfix">
-
-
-
-            <!--Content Side-->
-
-            <div class="content-side col-lg-12 col-md-12 col-sm-12">
-
-                <div class="content-inner">
-
-                    <div class="event-filters-box">
-
-                        <!-- <form method="post" action="events-list.html"> -->
-
-                        <!-- <div class="outer clearfix"> -->
-
-                        <!-- <div class="form-group category">
-
-                                            <div class="field-inner">
-
-                                                <select name="subject" class="custom-select-box" id="ui-id-1" style="display: none;">
-
-                                                <option>All Categories</option>
-
-                                                <option>Celebrations</option>
-
-                                                <option>Conference</option>
-
-                                                <option>Tourist Guide</option>
-
-                                            </select><span tabindex="0" id="ui-id-1-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="ui-id-1-menu" aria-haspopup="true" class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">All Categories</span></span>
-
-                                            </div>
-
-                                        </div> -->
-
-                        <!-- <div class="form-group location">
-
-                                            <div class="field-inner">
-
-                                                <select name="subject" class="custom-select-box" id="ui-id-2" style="display: none;">
-
-                                                <option>All Locations</option>
-
-                                                <option>USA</option>
-
-                                                <option>Canada</option>
-
-                                                <option>China</option>
-
-                                            </select><span tabindex="0" id="ui-id-2-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="ui-id-2-menu" aria-haspopup="true" class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">All Locations</span></span>
-
-                                            </div>
-
-                                        </div> -->
-
-                        <!-- <button type="submit" class="theme-btn btn-style-one"><span class="btn-title">Explore <span class="icon flaticon-search"></span></span></button> -->
-
-                        <!-- </div> -->
-
-                        <!-- </form> -->
-
+        <!-- Hero Start-->
+        <div class="hero-area3 hero-overly2 d-flex align-items-center " style="background: url('{{ asset($banner->image) }}')">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <div class="hero-cap text-center pt-50 pb-20">
+                            <h2>EVENTS</h2>
+                        </div>
+                       
                     </div>
-
-                    <div class="events-list">
-
-                        <!--Event Block-->
-                        @foreach($events as $event)
-                        <div class="event-block">
-                            <div class="inner-box">
-                                <div class="content-box">
-
-
-                                    <div class="date-box">
-                                        <div class="date">
-                                            <span class="day">{{ \Carbon\Carbon::parse($event->created_date)->format('d') }}</span>
-                                            <span class="month">{{ \Carbon\Carbon::parse($event->created_date)->format('F') }}</span>
+                </div>
+            </div>
+        </div>
+        <!--Hero End -->
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Directory</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .listing-area {
+            padding: 60px 0;
+        }
+        
+        .count {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .single-listing {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .single-listing:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .list-img {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .list-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .single-listing:hover .list-img img {
+            transform: scale(1.05);
+        }
+        
+        .list-caption {
+            padding: 20px;
+        }
+        
+        .list-caption span {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .list-caption h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .list-caption h3 a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .list-caption h3 a:hover {
+            color: #007bff;
+        }
+        
+        .list-caption p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .list-footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .list-footer li {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .pagination-area {
+            margin-top: 40px;
+        }
+        
+        .pagination {
+            justify-content: center;
+        }
+        
+        .page-item.active .page-link {
+            background-color: #D0A04F;
+            border-color: #D0A04F;
+        }
+        
+        .page-link {
+            color: #007bff;
+            border-radius: 6px;
+            margin: 0 5px;
+            padding: 8px 15px;
+        }
+        
+        .page-link:hover {
+            color: #0056b3;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .list-footer ul {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- listing Area Start -->
+    <div class="listing-area pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Right content - centered -->
+                <div class="col-xl-10 col-lg-10 col-md-10">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            
+                        </div>
+                    </div>
+                    <!-- listing Details Start-->
+                    <div class="listing-details-area">
+                        <div class="container">
+                            <div class="row">
+                                @foreach($events as $event)
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="single-listing mb-30">
+                                        <div class="event-image">
+                                            @if($event->image)
+                                            <img src="{{ asset('storage/'.$event->image) }}"  alt="{{ $event->title }}">
+                                            @else
+                                            <div class="no-img">No Image</div>
+                                            @endif
                                         </div>
-                                    </div>
-
-
-                                    <div class="content">
-
-
-                                        <div class="cat-info">
-                                            <a href="#">{{ $event->name }}</a>
+                                        <div class="list-caption">
+                                            <h2>{{ $event->title }}</h2>
+                                            <h5><a href="listing_details.html">Date: {{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</a></h5>
+                                            <p> Location: {{ $event->location }}</p>
+                                            <div class="list-footer">
+                                                <ul>
+                                                    <li><i class="fas fa-phone"></i>{{ \Illuminate\Support\Str::limit($event->description, 80) }}</li>
+                                                    <a href="{{ route('events.details', $event->id) }}" class="details-btn btn btn-primary">View Details</a>
+                                                </ul>
+                                            </div>
                                         </div>
-
-
-                                        <h3>
-                                            <a href="event-details.html">{{ $event->name }}</a>
-                                        </h3>
-
-
-                                        <div class="location">
-                                            {{ $event->description }}
-                                        </div>
-
-
-                                        <div class="event-image" style="margin-top: 10px;">
-                                            <img src="{{ asset('images/f2.jpg') }}" alt="Event Image"
-                                                style="width: 100%; max-width: 300px; height: auto; border-radius: 8px;">
-                                        </div>
-
-
-                                        <div class="read-more" style="margin-top: 10px;">
-                                            <a href="{{ route('events.details', ['id' => $event->id]) }}">Read More</a>
-                                        </div>
-
                                     </div>
                                 </div>
+                                @endforeach
+                                
+                                
+                               
+                               
                             </div>
                         </div>
-                        @endforeach
-
-                        <br><br>
-                        <!--Pagination-->
-
-                        <div class="pagination-box text-right">
-
-                            <ul class="styled-pagination">
-
-                                <li class="prev"><a href="#"><span class="icon flaticon-arrows-1"></span> Prev</a></li>
-
-                                <li><a href="#" class="active">1</a></li>
-
-                                <li><a href="#">2</a></li>
-
-                                <li class="next"><a href="#">Next <span class="icon flaticon-right-2"></span></a></li>
-
-                            </ul>
-
-                        </div>
-
                     </div>
-
-                </div>
-
-
-
-                <!--Sidebar Side-->
-
-
-
-            </div>
-
+                    <!-- listing Details End -->
+                    <!--Pagination Start  -->
+                    <div class="col-12 mt-4 text-center">
+        <div class="custom-pagination d-flex justify-content-center align-items-center">
+            {{ $events->links('pagination::bootstrap-4') }}
         </div>
-
     </div>
-    @endsection
+                    <!--Pagination End  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- listing-area Area End -->
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+    </main>
+
+@endsection

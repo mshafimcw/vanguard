@@ -1,147 +1,157 @@
-@extends('layouts.main')
-
-@section('content')
-    @if (session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
-    @endif
-    @php
-        $captcha_id = uniqid();
-    @endphp
-    <!-- ================= HERO ================= -->
-    <div class="container-fluid hero-header py-5">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-center text-lg-start hero-text">
-                    <h1 class="display-1 mb-4 text-white">Contact Us</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= CONTACT INFO CARDS ================= -->
-    <div class="contact-info-wrapper">
-        <div class="container">
-            <div class="row">
-                @foreach ($contact as $item)
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                        <div class="info-card d-flex align-items-start">
-
-                            <div class="info-icon me-3">
-                                <img src="{{ asset($item->image) }}" alt="{{ $item->title }}" width="30">
-                            </div>
-
-                            <div>
-                                <h5>{{ $item->title }}</h5>
-                                <p>{!! $item->body !!}</p>
-                            </div>
-
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= CONTACT SECTION ================= -->
-    <section class="contact-section">
-
-        <!-- FULL WIDTH MAP -->
-        <div class="map-background">
-            <iframe src="https://www.google.com/maps?q=Dubai,UAE&output=embed" allowfullscreen="" loading="lazy">
-            </iframe>
-        </div>
-
-        <!-- FORM OVERLAY -->
-        <div class="contact-overlay">
-            <div class="container">
-                <div class="contact-card">
-
-                    <h2 class="section-title">Get In Touch</h2>
+ @extends('layouts.main')
 
 
+ @section('content')
+ <main>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+     <!-- Hero Start-->
+     <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center "
+         style="background-image:url('{{ asset($slider->image) }}')">
+         <div class="container">
+             <div class="row">
+                 <div class="col-xl-12">
+                     <div class="hero-cap text-center pt-50">
+                         <h2>Contact Us</h2>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!--Hero End -->
+     <!-- ================ contact section start ================= -->
 
-                    <form class="contact-form" method="POST" action="{{ route('contact.store') }}">
-                        @csrf
 
-                        <div class="mb-3">
-                            <input type="text" name="name" placeholder="Your Name" value="{{ old('name') }}"
-                                class="form-control @error('name') is-invalid @enderror" required>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+     <section class="contact-section">
+         <div class="container">
+             <div class="d-block mb-5 pb-4">
 
-                        <div class="mb-3">
-                            <input type="email" name="email" placeholder="Your Email" value="{{ old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror" required>
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
 
-                        <div class="mb-3">
-                            <input type="text" name="subject" placeholder="Subject" value="{{ old('subject') }}"
-                                class="form-control @error('subject') is-invalid @enderror" required>
-                            @error('subject')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                 <div class="row">
+                     <div class="col-12">
+                         <h2 class="contact-title">Get in Touch</h2>
+                     </div>
+                     <div class="col-lg-8">
+                         <form action="/contact-submit" method="post">
 
-                        <div class="mb-3">
-                            <textarea name="message" rows="5" placeholder="Message"
-                                class="form-control @error('message') is-invalid @enderror" required>{{ old('message') }}</textarea>
-                            @error('message')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div style="margin-top:15px;">
+                             @csrf
+                             <div class="row">
+                                 <div class="col-12">
+                                     <div class="form-group">
+                                         <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
+                                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Write your notes or questions here'"
+                                             placeholder=" Write your notes or questions here"></textarea>
+                                     </div>
+                                 </div>
+                                 <div class="col-sm-6">
+                                     <div class="form-group">
+                                         <input class="form-control valid" name="name" id="name" type="text"
+                                             onfocus="this.placeholder = ''"
+                                             onblur="this.placeholder = 'Enter your name'"
+                                             placeholder="Enter your name">
+                                     </div>
+                                 </div>
+                                 <div class="col-sm-6">
+                                     <div class="form-group">
+                                         <input class="form-control valid" name="email" id="email" type="email"
+                                             onfocus="this.placeholder = ''"
+                                             onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                     </div>
+                                 </div>
+                                 <div class="col-12">
+                                     <div class="form-group">
+                                         <input class="form-control" name="subject" id="subject" type="text"
+                                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
+                                             placeholder="Enter Subject">
+                                     </div>
+                                 </div>
 
-                            <label>Enter Captcha *</label>
 
-                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                                 {{-- IMAGE CAPTCHA START --}}
+                                 <div class="mb-3">
 
-                                <img id="captchaImage" src="{{ route('scrap.captcha') }}"
-                                    style="height:45px; border-radius:6px; border:1px solid #ccc;">
+                                     <div class="d-flex align-items-center">
 
-                                <button type="button" onclick="refreshCaptcha()"
-                                    style="height:45px; width:45px; border:none; cursor:pointer;">
-                                    ↻
-                                </button>
+                                         <img id="captchaImage"
+                                             src="{{ route('captcha.image') }}"
+                                             style="height:50px;border:1px solid #ccc;border-radius:5px;">
 
-                            </div>
+                                         <button type="button"
+                                             onclick="refreshCaptcha()"
+                                             class="btn btn-light ms-2">
+                                             ↻
+                                         </button>
 
-                            <input type="text" name="captcha" placeholder="Enter Captcha *" required>
+                                     </div>
 
-                            @error('captcha')
-                                <div style="color:red;">{{ $message }}</div>
-                            @enderror
+                                     <input type="text"
+                                         name="captcha"
+                                         class="form-control mt-2"
+                                         placeholder="Enter Captcha"
+                                         required>
 
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                    </form>
+                                 </div>
+                                 {{-- IMAGE CAPTCHA END --}}
+                             </div>
 
-                </div>
-            </div>
-        </div>
 
-    </section>
-    <script>
-        function refreshCaptcha() {
-            let id = "{{ $captcha_id }}";
-            document.getElementById('captchaImage').src =
-                "{{ route('scrap.captcha') }}?id=" + id + "&" + new Date().getTime();
-        }
-    </script>
-@endsection
+
+                             <div class="form-group mt-3">
+                                 <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                             </div>
+                         </form>
+                         @if (session('success'))
+                         <div id="success-alert">
+                             <div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+                                 {{ session('success') }}
+                             </div>
+                         </div>
+                         <script>
+                             setTimeout(function() {
+                                 var alert = document.getElementById('success-alert');
+                                 if (alert) {
+                                     alert.style.display = 'none';
+                                 }
+                             }, 3500);
+                         </script>
+                         @endif
+                     </div>
+                     <div class="col-lg-3 offset-lg-1">
+                         <div class="media contact-info">
+                             <span class="contact-info__icon"><i class="ti-home"></i></span>
+                             <div class="media-body">
+                                 <h3>Address</h3>
+                                 <p>{{ $address->body }}</p>
+
+                             </div>
+                         </div>
+                         <div class="media contact-info">
+                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                             <div class="media-body">
+                                 <h3>Phone</h3>
+                                 <p>{{ $phone->title }}</p>
+
+                             </div>
+                         </div>
+                         <div class="media contact-info">
+                             <span class="contact-info__icon"><i class="ti-email"></i></span>
+                             <div class="media-body">
+                                 <h3>{{ $email->title }}</h3>
+                                 <p>Send us your query anytime!</p>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+     </section>
+     <!-- ================ contact section end ================= -->
+
+ </main>
+
+ <script>
+     function refreshCaptcha() {
+
+         document.getElementById('captchaImage').src =
+             "{{ route('captcha.image') }}?id=" + new Date().getTime();
+     }
+ </script>
+ @endsection

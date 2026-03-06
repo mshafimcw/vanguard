@@ -9,17 +9,16 @@ class Event extends Model
 {
     use HasFactory;
 
+    // Allow mass assignment for these fields
     protected $fillable = [
-        'name',
-        'image',
+        'title',
         'description',
-        'created_date',
-        
-
+        'event_date',
+        'location',
+        'image',
     ];
-
-    public function multipleImages()
+    public function images()
     {
-        return $this->hasMany(EventMultipleImage::class);
+        return $this->hasMany(EventImage::class);
     }
 }

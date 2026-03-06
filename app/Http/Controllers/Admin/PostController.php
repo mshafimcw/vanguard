@@ -8,7 +8,6 @@ use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\GalleryCategory;
 
 class PostController extends Controller
 {
@@ -21,117 +20,108 @@ class PostController extends Controller
     public function create()
     {
         $categories = PostCategory::pluck('name', 'id');
-
-        $galleryCategories = GalleryCategory::pluck('name', 'id');
-
-        return view('admin.posts.create', compact(
-            'categories',
-            'galleryCategories'
-        ));
+        return view('admin.posts.create', compact('categories'));
     }
-
+    
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'body'              => 'nullable|string',
-            'post_category_id'  => 'required|exists:post_categories,id',
-            'image'             => 'nullable|image|max:10240',
-            'published'         => 'sometimes',
-            'featured'          => 'nullable|boolean',
-            'gallery_category_id'  => 'gallery_category_id',
-        ]);
+       
+                 
+                    $validated = $request->validate([
+                        'title'            => 'required|string|max:255',
+                        'body'             => 'nullable|string',
+                        'post_category_id' => 'required|exists:post_categories,id',
+                        'image'            => 'nullable|image|max:2048', // 2MB
+                        'published' => 'sometimes', 
+                        'body'=>'sometimes'
+                    ]);
 
-        // slug
-        $slug = Str::slug($validated['title']);
-        $original = $slug;
-        $count = 2;
-        while (Post::where('slug', $slug)->exists()) {
-            $slug = $original . '-' . $count++;
-        }
-        $validated['slug'] = $slug;
+                    // slug
+                    $slug = Str::slug($validated['title']);
+                    $original = $slug; $count = 2;
+                    while (Post::where('slug', $slug)->exists()) {
+                        $slug = $original . '-' . $count++;
+                    }
+                    $validated['slug'] = $slug;
 
-        // image upload
-        if ($request->hasFile('image')) {
-            $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('posts'), $filename);
-            $validated['image'] = 'posts/' . $filename;
-        }
+                    // image upload
+                    if ($request->hasFile('image')) {
+                         $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
 
-        $validated['published'] = $request->has('published');
-        $validated['featured'] = $request->boolean('featured');
+                        // Move the file directly into  <project>/public/posts
+                        $request->file('image')->move(public_path('posts'), $filename);
 
-        $validated['user_id']   = auth()->id();
+                        // store the relative path (so asset() works)
+                        $validated['image'] = 'posts/' . $filename;
+                    }
 
-        Post::create($validated);
+                    $validated['published'] = $request->has('published');
+                    $validated['user_id']   = auth()->id();
+                  
+                    Post::create($validated);
 
-        return redirect()->route('admin.posts.index')
-            ->with('success', 'Post created successfully.');
+                    return redirect()->route('admin.posts.index')
+                                    ->with('success', 'Post created successfully.');
+                         
     }
 
     public function edit(Post $post)
     {
         $categories = PostCategory::pluck('name', 'id');
-        $gallerycategories = GalleryCategory::pluck('name', 'id'); // Add this line
-
-        return view('admin.posts.edit', compact('post', 'categories', 'gallerycategories'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
+
     public function update(Request $request, Post $post)
     {
-        \Log::info('=== UPDATE METHOD START ===');
-        \Log::info('Request data:', $request->all());
-
+       // try {
         $validated = $request->validate([
-            'title'             => 'required|string|max:255',
-            'body'              => 'nullable|string',
-            'post_category_id'  => 'required|exists:post_categories,id',
-            'gallery_category_id' => 'nullable|exists:gallery_categories,id',
-            'image'             => 'nullable|image|max:10240',
-            'published'         => 'sometimes',
-            'featured'          => 'nullable|boolean',
+            'title'            => 'required|string|max:255',
+            'body'             => 'nullable|string',
+            'post_category_id' => 'required|exists:post_categories,id',
+            'image'            => 'nullable|image|max:2048',
+            'published'        => 'sometimes',
         ]);
 
-        \Log::info('Validated data:', $validated);
-        \Log::info('Gallery category ID from request: ' . $request->gallery_category_id);
-        \Log::info('Gallery category ID from validated: ' . ($validated['gallery_category_id'] ?? 'NULL'));
-
-        // Generate new slug if title changes
+        // new slug if title changes
         if ($post->title !== $validated['title']) {
             $slug = Str::slug($validated['title']);
-            $original = $slug;
-            $count = 2;
+            $original = $slug; $count = 2;
             while (Post::where('slug', $slug)->where('id', '!=', $post->id)->exists()) {
                 $slug = $original . '-' . $count++;
             }
             $validated['slug'] = $slug;
         }
 
-        // Handle image upload
+        // image replace
         if ($request->hasFile('image')) {
             if ($post->image && Storage::disk('public')->exists($post->image)) {
                 Storage::disk('public')->delete($post->image);
             }
             $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('posts'), $filename);
-            $validated['image'] = 'posts/' . $filename;
+
+                        // Move the file directly into  <project>/public/posts
+                        $request->file('image')->move(public_path('posts'), $filename);
+
+                        // store the relative path (so asset() works)
+                        $validated['image'] = 'posts/' . $filename;
         }
 
-        // Handle checkbox values
         $validated['published'] = $request->has('published');
-        $validated['featured'] = $request->boolean('featured');
-
-        // Handle gallery_category_id - set to null if empty
-        $validated['gallery_category_id'] = $request->filled('gallery_category_id') ? $request->gallery_category_id : null;
-
-        \Log::info('Final data to update:', $validated);
 
         $post->update($validated);
 
-        \Log::info('Post after update - gallery_category_id: ' . $post->fresh()->gallery_category_id);
-        \Log::info('=== UPDATE METHOD END ===');
+    //    } catch (\Throwable $e) {
+    // write to storage/logs/laravel.log
+//    dd([
+//         'message' => $e->getMessage(),
+//         'file'    => $e->getFile(),
+//         'line'    => $e->getLine(),
+//         'trace'   => $e->getTraceAsString(),
+//     ]);
+// }
 
         return redirect()->route('admin.posts.index')
-            ->with('success', 'Post updated successfully.');
+                         ->with('success', 'Post updated successfully.');
     }
 
     public function destroy(Post $post)

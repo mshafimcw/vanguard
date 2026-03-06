@@ -17,21 +17,10 @@
             <select name="post_category_id" class="form-control">
                 <option value="">-- select --</option>
                 @foreach($categories as $id => $name)
-                <option value="{{ $id }}" {{ old('post_category_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
+                    <option value="{{ $id }}" {{ old('post_category_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
                 @endforeach
             </select>
             @error('post_category_id') <small class="text-danger">{{ $message }}</small> @enderror
-        </div>
-
-        <div class="mb-3">
-            <label>Gallery Category</label>
-            <select name="gallery_category_id" class="form-control">
-                <option value="">-- select gallery category --</option>
-                @foreach($galleryCategories as $id => $name)
-                <option value="{{ $id }}" {{ old('gallery_category_id') == $id ? 'selected' : '' }}>{{ $name }}</option>
-                @endforeach
-            </select>
-            @error('gallery_category_id') <small class="text-danger">{{ $message }}</small> @enderror
         </div>
 
         <div class="mb-3">
@@ -46,14 +35,8 @@
         </div>
 
         <div class="form-check mb-3">
-            <input type="checkbox" name="published" class="form-check-input" id="published" {{ old('published') ? 'checked' : '' }}>
+            <input type="checkbox" name="published" class="form-check-input" id="published">
             <label class="form-check-label" for="published">Publish</label>
-        </div>
-
-        <div class="form-check mb-3">
-            <input type="checkbox" name="featured" value="1" class="form-check-input" id="featured"
-                {{ old('featured', isset($post) ? $post->featured : false) ? 'checked' : '' }}>
-            <label class="form-check-label" for="featured">Featured</label>
         </div>
 
         <button class="btn btn-success">Save</button>

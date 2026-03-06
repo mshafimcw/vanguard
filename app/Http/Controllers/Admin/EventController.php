@@ -4,20 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Models\EventMultipleImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-// ...namespace and use statements...
-
 class EventController extends Controller
 {
-    public function index()
-    
+    public function index(Request $request)
     {
-        $events = Event::all();
+        $query = Event::query(); 
+
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        $events = $query->paginate(10); 
         return view('admin.events.index', compact('events'));
     }
+
 
     public function create()
     {
@@ -26,37 +33,37 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:250',
-            'description' => 'nullable|string|max:2500',
-            'image' => 'nullable|image|max:2048',
-            'created_date' => 'nullable|date',
-            'multiple_images.*' => 'image|max:2048',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'description' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
+        $data = $request->only(['title', 'event_date', 'description', 'location']);
+        $event = Event::create($data);
+
+        // Handle single event image
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('event_images', 'public');
-            $validated['image'] = $path;
+            $path = $request->file('image')->store('events', 'public');
+            $event->update(['image' => $path]);
         }
 
-        $event = Event::create($validated);
-
-        if ($request->hasFile('multiple_images')) {
-            foreach ($request->file('multiple_images') as $file) {
-                $filePath = $file->store('event_multiple_images', 'public');
-                EventMultipleImage::create([
-                    'name' => $filePath,
-                    'event_id' => $event->id,
-                ]);
+        // Handle multiple gallery images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('event_gallery', 'public');
+                $event->images()->create(['path' => $path]);
             }
         }
 
-        return redirect()->route('admin.events.index')->with('success', 'Event created!');
+        return redirect()->route('admin.events.index')->with('success', 'Event and images created successfully.');
     }
 
-    public function show($id)
+    public function show(Event $event)
     {
-        $event = Event::with('multipleImages')->findOrFail($id);
         return view('admin.events.show', compact('event'));
     }
 
@@ -67,53 +74,69 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:250',
-            'description' => 'nullable|string|max:2500',
-            'image' => 'nullable|image|max:2048',
-            'created_date' => 'nullable|date',
-            'multiple_images.*' => 'image|max:2048',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'description' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
+
+        $data = $request->only(['title', 'event_date', 'description', 'location']);
+
 
         if ($request->hasFile('image')) {
             if ($event->image && Storage::disk('public')->exists($event->image)) {
                 Storage::disk('public')->delete($event->image);
             }
-            $path = $request->file('image')->store('event_images', 'public');
-            $validated['image'] = $path;
+            $path = $request->file('image')->store('events', 'public');
+            $data['image'] = $path;
         }
 
-        $event->update($validated);
+        $event->update($data);
 
-        if ($request->hasFile('multiple_images')) {
-            foreach ($request->file('multiple_images') as $file) {
-                $filePath = $file->store('event_multiple_images', 'public');
-                EventMultipleImage::create([
-                    'name' => $filePath,
-                    'event_id' => $event->id,
-                ]);
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $imageId) {
+                $image = $event->images()->find($imageId);
+                if ($image) {
+                    if (Storage::disk('public')->exists($image->path)) {
+                        Storage::disk('public')->delete($image->path);
+                    }
+                    $image->delete();
+                }
             }
         }
 
-        return redirect()->route('admin.events.index')->with('success', 'Event updated!');
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('event_gallery', 'public');
+                $event->images()->create(['path' => $path]);
+            }
+        }
+
+        return redirect()->route('admin.events.index')->with('success', 'Event updated successfully.');
     }
+
 
     public function destroy(Event $event)
     {
+        // Delete single event image
         if ($event->image && Storage::disk('public')->exists($event->image)) {
             Storage::disk('public')->delete($event->image);
         }
 
-        foreach ($event->multipleImages as $multipleImage) {
-            if (Storage::disk('public')->exists($multipleImage->name)) {
-                Storage::disk('public')->delete($multipleImage->name);
+        // Delete all gallery images
+        foreach ($event->images as $img) {
+            if ($img->path && Storage::disk('public')->exists($img->path)) {
+                Storage::disk('public')->delete($img->path);
             }
-            $multipleImage->delete();
+            $img->delete();
         }
 
         $event->delete();
 
-        return redirect()->route('admin.events.index')->with('success', 'Event deleted!');
+        return redirect()->route('admin.events.index')->with('success', 'Event deleted successfully.');
     }
 }
-    

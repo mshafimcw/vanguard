@@ -1,62 +1,67 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Post;
+use App\Models\PostCategory;
 class LocationController extends Controller
 {
-    public function index()
-    {
-        $locations = Location::all();
-        return view('admin.locations.index', compact('locations'));
-    }
+   public function show(Request $request, $slug)
+{
+        
+		$location = Location::where('slug', $slug)->firstOrFail();
+		
+		$users = User::where('is_approved', 1)
+		->where('location_id', $location->id);
 
-    public function create()
-    {
-        return view('admin.locations.create');
-    }
+		// 🔍 Name Search
+		if ($request->filled('search')) {
+			$users->where('name', 'LIKE', '%' . $request->search . '%');
+		}
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'location' => 'required|string|max:255'
-        ]);
+		// 📍 Location Filter ✅ FIXED
+		if ($request->filled('location')) {
+			$users->where('location', $request->location);
+		}
 
-        Location::create($request->only('location'));
+		$users = $users->orderBy('id', 'desc')->paginate(12)->withQueryString();
 
-        return redirect()->route('admin.locations.index')
-            ->with('success', 'Location created successfully.');
-    }
+		$latestProfiles = User::where('is_approved', 1)
+			->orderBy('id', 'desc')
+			->limit(5)
+			->get();
 
-    public function show(Location $location)
-    {
-        return view('admin.locations.show', compact('location'));
-    }
+		$locations = Location::orderBy('name')->get();
 
-    public function edit(Location $location)
-    {
-        return view('admin.locations.edit', compact('location'));
-    }
+		$bannerCategory = PostCategory::where('slug', 'banner')->first();
+		$banner = $bannerCategory
+			? Post::where('post_category_id', $bannerCategory->id)->first()
+			: null;
 
-    public function update(Request $request, Location $location)
-    {
-        $request->validate([
-            'location' => 'required|string|max:255'
-        ]);
+		return view('location.show', compact(
+			'users',
+			'latestProfiles',
+			'locations',
+			'banner',
+			'location'
+		));
+	}
 
-        $location->update($request->only('location'));
+public function search(Request $request)
+{
+    $search = $request->search;
 
-        return redirect()->route('admin.locations.index')
-            ->with('success', 'Location updated successfully.');
-    }
+    $locations = Location::query()
+        ->when($search, function ($query) use ($search) {
+            $query->where('name', 'LIKE', "%{$search}%");
+        })
+        ->limit(20)
+        ->get(['id', 'name']);
 
-    public function destroy(Location $location)
-    {
-        $location->delete();
-
-        return redirect()->route('admin.locations.index')
-            ->with('success', 'Location deleted successfully.');
-    }
+    return response()->json($locations);
 }
+
+}
+?>

@@ -14,6 +14,9 @@ class Product extends Model
         'description',
         'image',
         'product_category_id',
+         'barcode',
+          'serial_number'
+         
     ];
 
     public function category()
@@ -24,4 +27,10 @@ class Product extends Model
 {
     return $this->hasMany(ProductImage::class);
 }
+
+public function variations()
+{
+    return $this->hasMany(\App\Models\Variation::class, 'product_id');
+}
+
 }

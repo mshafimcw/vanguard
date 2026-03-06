@@ -17,35 +17,24 @@ class Post extends Model
         'slug',
         'body',
         'image',
+        'highlighted_image',
         'post_category_id',
         'user_id',
         'published',
-        'featured',
-     'gallery_category_id',
     ];
 
-    /**
-     * Get the gallery category that owns the post.
-     */
-    public function galleryCategory()
-    {
-        return $this->belongsTo(GalleryCategory::class);
-    }
 
-    /**
-     * Scope posts by gallery category
-     */
-    public function scopeByGalleryCategory($query, $categoryId)
-    {
-        return $query->where('gallery_category_id', $categoryId);
-    }
     /**
      * Casts for specific columns.
      */
     protected $casts = [
         'published' => 'boolean',
-        'featured' => 'boolean',
     ];
+
+     public function getIsAboutPageAttribute()
+    {
+        return $this->category_slug === 'abouts';
+    }
 
     /**
      * Relationship: Post belongs to a category.

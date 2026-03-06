@@ -3,23 +3,28 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Location;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register(): void
     {
-        //
+        // Make the project root the "public" directory
+        $this->app->bind('path.public', function () {
+            return base_path();
+        });
     }
 
+
+    /**
+     * Bootstrap any application services.
+     */
     public function boot(): void
     {
-        if (Schema::hasTable('locations')) {
-            View::share('locations', Location::orderBy('id', 'desc')->get());
-        }
+        $this->app->bind('path.public', function () {
+        return base_path();   // root instead of /public
+    });
     }
-
-    
 }

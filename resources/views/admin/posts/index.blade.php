@@ -6,7 +6,7 @@
     <a href="{{ route('admin.posts.create') }}" class="btn btn-primary mb-3">New Post</a>
 
     @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     <table class="table table-bordered">
@@ -16,36 +16,32 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Published</th>
-                <th>Featured</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($posts as $post)
+        @forelse($posts as $post)
             <tr>
                 <td>
                     @if($post->image)
-                    <img src="{{ asset('storage/'.$post->image) }}" width="60">
+                        <img src="{{ asset('storage/'.$post->image) }}" width="60">
                     @endif
                 </td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->category->name ?? '-' }}</td>
                 <td>{{ $post->published ? 'Yes' : 'No' }}</td>
-                <td>{{ $post->featured ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('admin.posts.destroy', $post) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Delete this post?')">
+                          onsubmit="return confirm('Delete this post?')">
                         @csrf @method('DELETE')
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>
-            @empty
-            <tr>
-                <td colspan="6" class="text-center">No posts yet.</td>
-            </tr>
-            @endforelse
+        @empty
+            <tr><td colspan="5" class="text-center">No posts yet.</td></tr>
+        @endforelse
         </tbody>
     </table>
 
